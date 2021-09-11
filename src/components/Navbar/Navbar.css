@@ -1,0 +1,18 @@
+li {
+  list-style: none;
+}
+ul {
+  display: flex;
+}
+.link {
+  text-decoration: none;
+  padding: 0 10px;
+  color: #333333;
+  text-decoration: none;
+  transition: color 0.3s linear;
+  -webkit-transition: color 0.3s linear;
+  -moz-transition: color 0.3s linear;
+}
+.link:hover {
+  color: orange;
+}

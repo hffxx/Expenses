@@ -1,23 +1,41 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
+import { Container, AppBar, Typography, Grow, Grid } from "@material-ui/core";
+import useStyles from "./styles";
+
+import Navbar from "./components/Navbar/Navbar";
+import AddExpensePage from "./components/AddExpense";
+import EditExpensePage from "./components/EditExpense";
+import ExpenseDashboardPage from "./components/ExpenseDashboard";
+import HelpPage from "./components/HelpPage";
+import NotFoundPage from "./components/NotFoundPage";
 
 function App() {
+  const classes = useStyles();
+  const handleClick = () => {
+    console.log("redirect to main page");
+  };
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <BrowserRouter>
+        <AppBar className={classes.appBar} position="static" color="inherit">
+          <Typography
+            className={classes.heading}
+            variant="h2"
+            onClick={handleClick}
+          >
+            Expenses
+          </Typography>
+          <Navbar />
+        </AppBar>
+        <Switch>
+          <Route exact path="/" component={ExpenseDashboardPage} />
+          <Route path="/create" component={AddExpensePage} />
+          <Route path="/edit" component={EditExpensePage} />
+          <Route path="/help" component={HelpPage} />
+          <Route component={NotFoundPage} />
+        </Switch>
+      </BrowserRouter>
     </div>
   );
 }
