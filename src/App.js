@@ -1,5 +1,5 @@
 import "./App.css";
-import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { Container, AppBar, Typography, Grow, Grid } from "@material-ui/core";
 import useStyles from "./styles";
 
@@ -12,8 +12,9 @@ import NotFoundPage from "./components/NotFoundPage";
 
 function App() {
   const classes = useStyles();
+
   const handleClick = () => {
-    console.log("redirect to main page");
+    console.log("test");
   };
   return (
     <div className="App">
