@@ -18,5 +18,4 @@ const mapStateToProps = (state) => {
     visibleExpenses: getVisibleExpenses(state.expenses, state.filters),
   };
 };
-
 export default connect(mapStateToProps)(ExpenseList);
