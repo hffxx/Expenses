@@ -1,6 +1,6 @@
 import uuid from "uuid";
 
-const addExpense = ({
+export const addExpense = ({
   description = "",
   note = "",
   amount = 0,
@@ -15,5 +15,3 @@ const addExpense = ({
     createdAt,
   },
 });
-
-export default addExpense;

@@ -20,4 +20,10 @@ export default makeStyles(() => ({
   image: {
     marginLeft: "15px",
   },
+  container: {
+    margin: "20px 10px",
+  },
+  formControl: {
+    minWidth: 120,
+  },
 }));
