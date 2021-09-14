@@ -14,7 +14,7 @@ function ExpenseListItem({ description, amount, createdAt, id, dispatch }) {
         variant="contained"
         color="secondary"
         startIcon={<DeleteIcon />}
-        onClick={() => dispatch(removeExpense({ id }))}
+        onClick={() => dispatch(removeExpense(id))}
       >
         Delete
       </Button>
