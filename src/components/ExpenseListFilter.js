@@ -6,13 +6,14 @@ import {
   Select,
   MenuItem,
 } from "@material-ui/core";
-import { connect } from "react-redux";
+import { connect, useSelector } from "react-redux";
 import { setTextFilter } from "../redux/actions/filterActions/setTextFilter";
 import { sortByAmount } from "../redux/actions/filterActions/sortByAmount";
 import { sortByDate } from "../redux/actions/filterActions/sortByDate";
 import useStyles from "../styles";
 
-function ExpenseListFilter({ filters, dispatch }) {
+function ExpenseListFilter({ dispatch }) {
+  const filters = useSelector((state) => state.filters);
   const classes = useStyles();
   return (
     <div>
@@ -44,10 +45,5 @@ function ExpenseListFilter({ filters, dispatch }) {
     </div>
   );
 }
-const mapStateToProps = (state) => {
-  return {
-    filters: state.filters,
-  };
-};
 
-export default connect(mapStateToProps)(ExpenseListFilter);
+export default connect()(ExpenseListFilter);
