@@ -7,7 +7,7 @@ function ExpenseForm() {
   const [expense, setExpense] = useState({
     description: "",
     note: "",
-    amount: 0,
+    amount: undefined,
   });
 
   const dispatch = useDispatch();
