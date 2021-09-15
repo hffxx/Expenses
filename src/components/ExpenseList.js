@@ -1,5 +1,5 @@
 import React from "react";
-import { connect, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import ExpenseListItem from "./ExpenseListItem";
 import getVisibleExpenses from "../redux/selectors/expenses";
 
@@ -16,7 +16,7 @@ function ExpenseList() {
   );
 }
 
-export default connect()(ExpenseList);
+export default ExpenseList;
 
 /* stare podejscie =>  
 

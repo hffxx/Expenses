@@ -1,4 +1,10 @@
+import ExpenseForm from "./ExpenseForm";
+
 const AddExpensePage = () => {
-  return <div>AddExpensePage</div>;
+  return (
+    <div>
+      <ExpenseForm />
+    </div>
+  );
 };
 export default AddExpensePage;

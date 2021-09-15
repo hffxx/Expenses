@@ -1,9 +1,10 @@
 import React from "react";
-import { connect } from "react-redux";
+import { useDispatch } from "react-redux";
 import { removeExpense } from "../redux/actions/expensesActions/removeExpense";
 import { Button } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
-function ExpenseListItem({ description, amount, createdAt, id, dispatch }) {
+function ExpenseListItem({ description, amount, createdAt, id }) {
+  const dispatch = useDispatch();
   return (
     <div>
       <h1>{description}</h1>
@@ -22,4 +23,4 @@ function ExpenseListItem({ description, amount, createdAt, id, dispatch }) {
   );
 }
 
-export default connect()(ExpenseListItem);
+export default ExpenseListItem;
