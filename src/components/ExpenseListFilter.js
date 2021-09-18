@@ -62,7 +62,7 @@ function ExpenseListFilter() {
           renderInput={(params) => <TextField {...params} />}
         />
         <DatePicker
-          label="end Date"
+          label="End Date"
           value={date.endDate}
           onChange={(newEndDate) => {
             setDate({ ...date, endDate: newEndDate });
