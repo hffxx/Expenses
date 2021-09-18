@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addExpense } from "../redux/actions/expensesActions/addExpense";
 import { useHistory } from "react-router";
-import moment from "moment";
 
 function ExpenseForm() {
   const [expense, setExpense] = useState({
@@ -15,9 +14,6 @@ function ExpenseForm() {
   const history = useHistory();
 
   // const regex = /^\d*(\.\d{0,2})?$/;
-
-  const now = moment();
-  console.log(now.format("MMM Do YYYY"));
 
   const handleAddExpense = (e) => {
     e.preventDefault();
