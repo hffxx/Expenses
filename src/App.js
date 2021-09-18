@@ -13,7 +13,6 @@ import NotFoundPage from "./components/NotFoundPage";
 function App() {
   const classes = useStyles();
   const title = "Expenses";
-  const test = console.log("test");
   return (
     <div className="App">
       <BrowserRouter>
