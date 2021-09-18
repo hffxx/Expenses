@@ -2,16 +2,22 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addExpense } from "../redux/actions/expensesActions/addExpense";
 import { useHistory } from "react-router";
+import moment from "moment";
 
 function ExpenseForm() {
   const [expense, setExpense] = useState({
     description: "",
     note: "",
-    amount: undefined,
+    amount: 0,
   });
 
   const dispatch = useDispatch();
   const history = useHistory();
+
+  // const regex = /^\d*(\.\d{0,2})?$/;
+
+  const now = moment();
+  console.log(now.format("MMM Do YYYY"));
 
   const handleAddExpense = (e) => {
     e.preventDefault();
@@ -23,24 +29,32 @@ function ExpenseForm() {
       window.alert("Invalid data");
     }
   };
+
+  const handleAddAmount = (e) => {
+    setExpense({ ...expense, amount: e.target.value });
+  };
+  const handleDescription = (e) => {
+    setExpense({ ...expense, description: e.target.value });
+  };
+  const handleNote = (e) => {
+    setExpense({ ...expense, note: e.target.value });
+  };
   return (
     <div>
       <form onSubmit={handleAddExpense}>
         <input
           placeholder="Description"
           type="text"
-          onChange={(e) =>
-            setExpense({ ...expense, description: e.target.value })
-          }
+          onChange={(e) => handleDescription(e)}
         ></input>
         <input
           placeholder="Amount"
           type="number"
-          onChange={(e) => setExpense({ ...expense, amount: e.target.value })}
+          onChange={(e) => handleAddAmount(e)}
         ></input>
         <textarea
           placeholder="add a note for your expense"
-          onChange={(e) => setExpense({ ...expense, note: e.target.value })}
+          onChange={(e) => handleNote(e)}
         ></textarea>
         <button>Add Expense</button>
       </form>

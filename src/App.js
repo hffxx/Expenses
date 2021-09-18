@@ -14,18 +14,11 @@ function App() {
   const classes = useStyles();
   const title = "Expenses";
 
-  const handleClick = () => {
-    console.log("test");
-  };
   return (
     <div className="App">
       <BrowserRouter>
         <AppBar className={classes.appBar} position="static" color="inherit">
-          <Typography
-            className={classes.heading}
-            variant="h2"
-            onClick={handleClick}
-          >
+          <Typography className={classes.heading} variant="h2">
             {title}
           </Typography>
           <Navbar />
