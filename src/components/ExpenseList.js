@@ -2,17 +2,18 @@ import React from "react";
 import { useSelector } from "react-redux";
 import ExpenseListItem from "./ExpenseListItem";
 import getVisibleExpenses from "../redux/selectors/expenses";
+import { Container } from "@material-ui/core";
 
 function ExpenseList() {
   const visibleExpenses = useSelector((state) =>
     getVisibleExpenses(state.expenses, state.filters)
   );
   return (
-    <div>
+    <Container>
       {visibleExpenses.map((expense) => (
         <ExpenseListItem key={expense.id} {...expense} />
       ))}
-    </div>
+    </Container>
   );
 }
 
