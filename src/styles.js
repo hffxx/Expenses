@@ -26,4 +26,16 @@ export default makeStyles(() => ({
   formControl: {
     minWidth: 120,
   },
+  card: {
+    padding: "20px",
+    borderRadius: "10px",
+    marginTop: "20px",
+  },
+  filterList: {
+    display: "flex",
+    justifyContent: "space-between",
+  },
+  textFilter: {
+    width: "20rem",
+  },
 }));

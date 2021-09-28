@@ -1,13 +1,17 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { removeExpense } from "../redux/actions/expensesActions/removeExpense";
-import { Button } from "@material-ui/core";
+import { Button, Card } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
+import EditIcon from "@material-ui/icons/Edit";
+import useStyles from "../styles";
+
 function ExpenseListItem({ description, amount, createdAt, id, note }) {
   const createdAtFormatted = createdAt.format("MMM Do, YYYY");
   const dispatch = useDispatch();
+  const classes = useStyles();
   return (
-    <div>
+    <Card className={classes.card} variant="outlined">
       <h1>{description}</h1>
       <h2>
         Amount: {amount} PLN - Created at: {createdAtFormatted}
@@ -21,7 +25,10 @@ function ExpenseListItem({ description, amount, createdAt, id, note }) {
       >
         Delete
       </Button>
-    </div>
+      <Button variant="contained" color="primary" startIcon={<EditIcon />}>
+        Edit
+      </Button>
+    </Card>
   );
 }
 

@@ -5,6 +5,7 @@ import {
   FormControl,
   Select,
   MenuItem,
+  Container,
 } from "@material-ui/core";
 import { useSelector } from "react-redux";
 import { setTextFilter } from "../redux/actions/filterActions/setTextFilter";
@@ -26,8 +27,9 @@ function ExpenseListFilter() {
     endDate: moment(),
   });
   return (
-    <div>
+    <Container className={classes.filterList}>
       <TextField
+        className={classes.textFilter}
         id="outlined-basic"
         label="Filter"
         variant="outlined"
@@ -70,7 +72,7 @@ function ExpenseListFilter() {
           renderInput={(params) => <TextField {...params} />}
         />
       </LocalizationProvider>
-    </div>
+    </Container>
   );
 }
 
