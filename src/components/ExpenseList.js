@@ -9,7 +9,7 @@ function ExpenseList() {
     getVisibleExpenses(state.expenses, state.filters)
   );
   return (
-    <Container>
+    <Container maxWidth="md">
       {visibleExpenses.map((expense) => (
         <ExpenseListItem key={expense.id} {...expense} />
       ))}
