@@ -11,12 +11,15 @@ function ExpenseListItem({ description, amount, createdAt, id, note }) {
   const dispatch = useDispatch();
   const classes = useStyles();
   return (
-    <Card className={classes.card} variant="outlined">
+    <Card className={classes.card} variant="elevation" elevation={4}>
       <h1>{description}</h1>
       <h2>
         Amount: {amount} PLN - Created at: {createdAtFormatted}
       </h2>
       <h3>{note}</h3>
+      <Button variant="contained" color="primary" startIcon={<EditIcon />}>
+        Edit
+      </Button>
       <Button
         variant="contained"
         color="secondary"
@@ -24,9 +27,6 @@ function ExpenseListItem({ description, amount, createdAt, id, note }) {
         onClick={() => dispatch(removeExpense(id))}
       >
         Delete
-      </Button>
-      <Button variant="contained" color="primary" startIcon={<EditIcon />}>
-        Edit
       </Button>
     </Card>
   );
