@@ -1,7 +1,7 @@
 export const defaultExpensesState = [];
 export const defaultFilterState = {
   text: "",
-  sortBy: "date",
+  sortBy: "dateNew",
   startDate: undefined,
   endDate: undefined,
 };

@@ -2,16 +2,23 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addExpense } from "../redux/actions/expensesActions/addExpense";
 import { useHistory } from "react-router";
+import LocalizationProvider from "@mui/lab/LocalizationProvider";
+import DateAdapter from "@mui/lab/AdapterMoment";
+import moment from "moment";
+import DatePicker from "@mui/lab/DatePicker";
+import { TextField } from "@material-ui/core";
 
 function ExpenseForm() {
   const [expense, setExpense] = useState({
     description: "",
     note: "",
     amount: 0,
+    createdAt: moment(),
   });
 
   const dispatch = useDispatch();
   const history = useHistory();
+  console.log(expense.createdAt);
 
   // const regex = /^\d*(\.\d{0,2})?$/;
 
@@ -52,6 +59,17 @@ function ExpenseForm() {
           placeholder="add a note for your expense"
           onChange={(e) => handleNote(e)}
         ></textarea>
+
+        <LocalizationProvider dateAdapter={DateAdapter}>
+          <DatePicker
+            label="Date"
+            value={expense.createdAt}
+            onChange={(date) => {
+              setExpense({ ...expense, createdAt: date });
+            }}
+            renderInput={(params) => <TextField {...params} />}
+          />
+        </LocalizationProvider>
         <button>Add Expense</button>
       </form>
     </div>

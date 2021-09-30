@@ -5,13 +5,14 @@ import {
   FormControl,
   Select,
   MenuItem,
-  Container,
   Paper,
 } from "@material-ui/core";
 import { useSelector } from "react-redux";
 import { setTextFilter } from "../redux/actions/filterActions/setTextFilter";
-import { sortByAmount } from "../redux/actions/filterActions/sortByAmount";
-import { sortByDate } from "../redux/actions/filterActions/sortByDate";
+import { sortByAmountHigh } from "../redux/actions/filterActions/sortByAmountHigh";
+import { sortByAmountLow } from "../redux/actions/filterActions/sortByAmountLow";
+import { sortByDateNew } from "../redux/actions/filterActions/sortByDateNew";
+import { sortByDateOld } from "../redux/actions/filterActions/sortByDateOld";
 import useStyles from "../styles";
 import DatePicker from "@mui/lab/DatePicker";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
@@ -44,15 +45,21 @@ function ExpenseListFilter() {
           label="SortBy"
           value={filters.sortBy}
           onChange={(e) => {
-            if (e.target.value === "date") {
-              dispatch(sortByDate(e.target.value));
-            } else if (e.target.value === "amount") {
-              dispatch(sortByAmount(e.target.value));
+            if (e.target.value === "dateNew") {
+              dispatch(sortByDateNew(e.target.value));
+            } else if (e.target.value === "dateOld") {
+              dispatch(sortByDateOld(e.target.value));
+            } else if (e.target.value === "amountHigh") {
+              dispatch(sortByAmountHigh(e.target.value));
+            } else if (e.target.value === "amountLow") {
+              dispatch(sortByAmountLow(e.target.value));
             }
           }}
         >
-          <MenuItem value="date">Date</MenuItem>
-          <MenuItem value="amount">Amount</MenuItem>
+          <MenuItem value="dateNew">Date Newest</MenuItem>
+          <MenuItem value="dateOld">Date Oldest</MenuItem>
+          <MenuItem value="amountHigh">Amount Highest</MenuItem>
+          <MenuItem value="amountLow">Amount Lowest</MenuItem>
         </Select>
       </FormControl>
       <LocalizationProvider dateAdapter={DateAdapter}>

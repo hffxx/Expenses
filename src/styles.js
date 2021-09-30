@@ -45,6 +45,6 @@ export default makeStyles(() => ({
     borderRadius: "10px",
   },
   textFilter: {
-    width: "25rem",
+    width: "20rem",
   },
 }));
