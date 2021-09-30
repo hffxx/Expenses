@@ -1,6 +1,6 @@
 import "./App.css";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import { AppBar, Typography } from "@material-ui/core";
+import { AppBar, Typography, Container } from "@material-ui/core";
 import useStyles from "./styles";
 
 import Navbar from "./components/Navbar/Navbar";
@@ -14,7 +14,7 @@ function App() {
   const classes = useStyles();
   const title = "Expenses";
   return (
-    <div className="App">
+    <Container>
       <BrowserRouter>
         <AppBar className={classes.appBar} position="static" color="inherit">
           <Typography className={classes.heading} variant="h2">
@@ -30,7 +30,7 @@ function App() {
           <Route component={NotFoundPage} />
         </Switch>
       </BrowserRouter>
-    </div>
+    </Container>
   );
 }
 

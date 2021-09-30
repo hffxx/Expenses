@@ -1,10 +1,10 @@
 import uuid from "uuid";
-import moment from "moment";
 
 export const addExpense = ({
   description = "",
   note = "",
   amount = 0,
+  createdAt = undefined,
 } = {}) => ({
   type: "ADD_EXPENSE",
   expense: {
@@ -12,6 +12,6 @@ export const addExpense = ({
     description,
     note,
     amount,
-    createdAt: moment(),
+    createdAt,
   },
 });
