@@ -71,7 +71,7 @@ function ExpenseListFilter() {
           value={date.startDate}
           onChange={(newStartDate) => {
             setDate({ ...date, startDate: newStartDate });
-            dispatch(setStartDate(date.startDate));
+            dispatch(setStartDate(newStartDate.valueOf()));
           }}
           renderInput={(params) => <TextField {...params} />}
         />
@@ -80,7 +80,7 @@ function ExpenseListFilter() {
           value={date.endDate}
           onChange={(newEndDate) => {
             setDate({ ...date, endDate: newEndDate });
-            dispatch(setEndDate(date.endDate));
+            dispatch(setEndDate(newEndDate.valueOf()));
           }}
           renderInput={(params) => <TextField {...params} />}
         />

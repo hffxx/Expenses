@@ -1,4 +1,4 @@
-export const setStartDate = (startDate = undefined) => ({
+export const setStartDate = (startDate) => ({
   type: "SET_START_DATE",
   startDate,
 });
