@@ -5,9 +5,11 @@ import { Button, Card } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
 import useStyles from "../styles";
+import moment from "moment";
 
 function ExpenseListItem({ description, amount, createdAt, id, note }) {
-  const createdAtFormatted = createdAt.format("MMM Do, YYYY");
+  const createdAtFormatted = moment(createdAt).format("MM/DD/YYYY");
+  console.log(createdAtFormatted);
   const dispatch = useDispatch();
   const classes = useStyles();
   return (

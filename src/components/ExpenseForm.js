@@ -15,7 +15,8 @@ function ExpenseForm({ handleClose }) {
     description: "",
     note: "",
     amount: 0,
-    createdAt: moment(),
+    todayDate: moment(),
+    createdAt: moment().valueOf(),
   });
 
   const dispatch = useDispatch();
@@ -84,9 +85,9 @@ function ExpenseForm({ handleClose }) {
           <LocalizationProvider dateAdapter={DateAdapter}>
             <DatePicker
               label="Date"
-              value={expense.createdAt}
+              value={expense.todayDate}
               onChange={(date) => {
-                setExpense({ ...expense, createdAt: date });
+                setExpense({ ...expense, createdAt: date.valueOf() });
               }}
               renderInput={(params) => <TextField {...params} />}
             />
