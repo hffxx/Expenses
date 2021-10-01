@@ -4,11 +4,6 @@ export const MenuItems = [
     url: "/",
   },
   {
-    title: "Add Expense",
-    url: "/create",
-  },
-
-  {
     title: "Edit Expense",
     url: "/edit",
   },

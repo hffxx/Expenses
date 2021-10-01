@@ -13,6 +13,8 @@ import { sortByAmountHigh } from "../redux/actions/filterActions/sortByAmountHig
 import { sortByAmountLow } from "../redux/actions/filterActions/sortByAmountLow";
 import { sortByDateNew } from "../redux/actions/filterActions/sortByDateNew";
 import { sortByDateOld } from "../redux/actions/filterActions/sortByDateOld";
+import { setStartDate } from "../redux/actions/filterActions/setStartDate";
+import { setEndDate } from "../redux/actions/filterActions/setEndDate";
 import useStyles from "../styles";
 import DatePicker from "@mui/lab/DatePicker";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
@@ -28,6 +30,7 @@ function ExpenseListFilter() {
     startDate: moment(),
     endDate: moment(),
   });
+  console.log(filters);
   return (
     <Paper className={classes.filterList} variant="elevation" elevation={4}>
       <TextField
@@ -68,6 +71,7 @@ function ExpenseListFilter() {
           value={date.startDate}
           onChange={(newStartDate) => {
             setDate({ ...date, startDate: newStartDate });
+            dispatch(setStartDate(date.startDate));
           }}
           renderInput={(params) => <TextField {...params} />}
         />
@@ -76,6 +80,7 @@ function ExpenseListFilter() {
           value={date.endDate}
           onChange={(newEndDate) => {
             setDate({ ...date, endDate: newEndDate });
+            dispatch(setEndDate(date.endDate));
           }}
           renderInput={(params) => <TextField {...params} />}
         />
