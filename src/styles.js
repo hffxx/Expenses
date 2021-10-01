@@ -47,4 +47,7 @@ export default makeStyles(() => ({
   textFilter: {
     width: "20rem",
   },
+  inputModal: {
+    margin: "5px",
+  },
 }));
