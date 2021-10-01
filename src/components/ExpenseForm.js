@@ -8,7 +8,7 @@ import moment from "moment";
 import DatePicker from "@mui/lab/DatePicker";
 import { TextField } from "@material-ui/core";
 
-function ExpenseForm() {
+function ExpenseForm({ handleClose }) {
   const [expense, setExpense] = useState({
     description: "",
     note: "",
@@ -17,7 +17,7 @@ function ExpenseForm() {
   });
 
   const dispatch = useDispatch();
-  const history = useHistory();
+  // const history = useHistory();
   console.log(expense.createdAt);
 
   // const regex = /^\d*(\.\d{0,2})?$/;
@@ -27,7 +27,8 @@ function ExpenseForm() {
     const { description, amount } = expense;
     if (description && amount) {
       dispatch(addExpense(expense));
-      history.push("/");
+      // history.push("/");
+      handleClose();
     } else {
       window.alert("Invalid data");
     }
