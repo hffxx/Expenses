@@ -51,12 +51,7 @@ function ExpenseForm({ handleClose }) {
       <Typography gutterBottom variant="h3" align="center">
         Add Expense
       </Typography>
-      <Grid
-        container
-        align="center"
-        justifyContent="center"
-        className={classes.modal}
-      >
+      <Grid container alignItems="center" justifyContent="center">
         <Grid item lg={6} className={classes.inputModal}>
           <TextField
             label="Description"
@@ -71,6 +66,7 @@ function ExpenseForm({ handleClose }) {
             placeholder="Enter an Amount"
             variant="outlined"
             onChange={(e) => handleAddAmount(e)}
+            type="number"
           ></TextField>
         </Grid>
         <Grid item lg={6} className={classes.inputModal}>
