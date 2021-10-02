@@ -34,7 +34,6 @@ function ExpenseListFilter() {
   return (
     <Paper className={classes.filterList} variant="elevation" elevation={4}>
       <TextField
-        className={classes.textFilter}
         id="outlined-basic"
         label="Filter"
         variant="outlined"
