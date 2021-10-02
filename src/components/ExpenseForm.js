@@ -21,7 +21,6 @@ function ExpenseForm({ handleClose }) {
 
   const dispatch = useDispatch();
   const history = useHistory();
-  console.log(expense);
   const classes = useStyles();
 
   // const regex = /^\d*(\.\d{0,2})?$/;
