@@ -41,7 +41,7 @@ export default makeStyles(() => ({
   filterList: {
     display: "flex",
     justifyContent: "space-between",
-    padding: "22px",
+    padding: "27px",
     borderRadius: "10px",
   },
   inputModal: {

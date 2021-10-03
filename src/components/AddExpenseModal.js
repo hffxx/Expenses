@@ -24,7 +24,7 @@ function AddExpenseModal() {
   return (
     <div>
       <Button onClick={handleOpen} variant="outlined" color="success">
-        Add Expense
+        Add Balance
       </Button>
       <Modal
         open={open}

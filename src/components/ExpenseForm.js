@@ -2,11 +2,17 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addExpense } from "../redux/actions/expensesActions/addExpense";
 import { useHistory } from "react-router";
-import LocalizationProvider from "@mui/lab/LocalizationProvider";
+import { LocalizationProvider } from "@mui/lab";
 import DateAdapter from "@mui/lab/AdapterMoment";
 import moment from "moment";
 import DatePicker from "@mui/lab/DatePicker";
-import Button from "@mui/material/Button";
+import {
+  Button,
+  Radio,
+  RadioGroup,
+  FormControl,
+  FormControlLabel,
+} from "@mui/material";
 import { Typography, TextField, Grid } from "@material-ui/core";
 import useStyles from "../styles";
 
@@ -17,6 +23,7 @@ function ExpenseForm({ handleClose }) {
     amount: 0,
     todayDate: moment(),
     createdAt: moment().valueOf(),
+    expenseType: "bill",
   });
 
   const dispatch = useDispatch();
@@ -24,6 +31,7 @@ function ExpenseForm({ handleClose }) {
   const classes = useStyles();
 
   // const regex = /^\d*(\.\d{0,2})?$/;
+  console.log(expense);
 
   const handleAddExpense = () => {
     const { description, amount } = expense;
@@ -37,7 +45,7 @@ function ExpenseForm({ handleClose }) {
   };
 
   const handleAddAmount = (e) => {
-    setExpense({ ...expense, amount: e.target.value });
+    setExpense({ ...expense, amount: Number(e.target.value) });
   };
   const handleDescription = (e) => {
     setExpense({ ...expense, description: e.target.value });
@@ -45,10 +53,17 @@ function ExpenseForm({ handleClose }) {
   const handleNote = (e) => {
     setExpense({ ...expense, note: e.target.value });
   };
+  const handleExpenseType = (e) => {
+    setExpense({
+      ...expense,
+      expenseType: e.target.value,
+    });
+  };
+
   return (
     <Grid container align="center" justifyContent="center" spacing={2}>
       <Typography gutterBottom variant="h3" align="center">
-        Add Expense
+        Add Balance
       </Typography>
       <Grid container alignItems="center" justifyContent="center">
         <Grid item lg={6} className={classes.inputModal}>
@@ -56,7 +71,7 @@ function ExpenseForm({ handleClose }) {
             label="Description"
             placeholder="Enter an Description"
             variant="outlined"
-            onChange={(e) => handleDescription(e)}
+            onChange={handleDescription}
           ></TextField>
         </Grid>
         <Grid item lg={6} className={classes.inputModal}>
@@ -64,7 +79,7 @@ function ExpenseForm({ handleClose }) {
             label="Amount"
             placeholder="Enter an Amount"
             variant="outlined"
-            onChange={(e) => handleAddAmount(e)}
+            onChange={handleAddAmount}
             type="number"
           ></TextField>
         </Grid>
@@ -73,8 +88,26 @@ function ExpenseForm({ handleClose }) {
             label="Note"
             placeholder="Enter a Note"
             variant="outlined"
-            onChange={(e) => handleNote(e)}
+            onChange={handleNote}
           ></TextField>
+        </Grid>
+        <Grid item lg={6} className={classes.inputModal}>
+          <FormControl component="fieldset">
+            <RadioGroup
+              row
+              aria-label="expenseType"
+              name="row-radio-buttons-group"
+              value={expense.expenseType}
+              onChange={handleExpenseType}
+            >
+              <FormControlLabel value="bill" control={<Radio />} label="Bill" />
+              <FormControlLabel
+                value="earning"
+                control={<Radio />}
+                label="Earning"
+              />
+            </RadioGroup>
+          </FormControl>
         </Grid>
         <Grid item lg={6} className={classes.inputModal}>
           <LocalizationProvider dateAdapter={DateAdapter}>
@@ -90,7 +123,7 @@ function ExpenseForm({ handleClose }) {
         </Grid>
         <Grid item lg={6} className={classes.inputModal}>
           <Button onClick={handleAddExpense} variant="contained">
-            Add Expense
+            Add Balance
           </Button>
         </Grid>
       </Grid>

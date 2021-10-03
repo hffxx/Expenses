@@ -9,7 +9,7 @@ const style = {
     display: "flex",
     flexDirection: "column",
     left: "0px",
-    borderRadius: "15px",
+    borderRadius: "10px",
     justifyContent: "center",
     alignItems: "center",
     padding: "10px",
@@ -23,16 +23,24 @@ const SideMenu = ({ classes }) => {
   const visibleExpenses = useSelector((state) =>
     getVisibleExpenses(state.expenses, state.filters)
   );
-  const total = visibleExpenses.reduce(
-    (a, { amount }) => a + Number(amount),
-    0
-  );
+
+  const total = visibleExpenses
+    .map((expense) => {
+      if (expense.expenseType === "bill") {
+        return -expense.amount;
+      } else if (expense.expenseType === "earning") {
+        return expense.amount;
+      } else {
+        return (expense.amount = undefined);
+      }
+    })
+    .reduce((a, amount) => a + amount, 0);
 
   return (
     <Paper className={classes.sideMenu} variant="elevation" elevation={4}>
       <AddExpenseModal />
-      <Typography className={classes.item}>
-        Total Spendings: {total} PLN
+      <Typography variant="h6" className={classes.item}>
+        Balance: {total} PLN
       </Typography>
     </Paper>
   );
