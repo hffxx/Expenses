@@ -1,5 +1,4 @@
 import Modal from "@mui/material/Modal";
-import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import React from "react";
@@ -24,7 +23,9 @@ function AddExpenseModal() {
   const handleClose = () => setOpen(false);
   return (
     <div>
-      <button onClick={handleOpen}>Add Expense Modal</button>
+      <Button onClick={handleOpen} variant="outlined" color="success">
+        Add Expense
+      </Button>
       <Modal
         open={open}
         onClose={handleClose}

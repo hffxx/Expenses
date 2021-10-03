@@ -4,7 +4,7 @@ import { AppBar, Typography, Container } from "@material-ui/core";
 import useStyles from "./styles";
 
 import Navbar from "./components/Navbar/Navbar";
-import EditExpensePage from "./components/EditExpense";
+import LoginPage from "./components/LoginPage";
 import ExpenseDashboardPage from "./components/ExpenseDashboard";
 import HelpPage from "./components/HelpPage";
 import NotFoundPage from "./components/NotFoundPage";
@@ -23,7 +23,7 @@ function App() {
         </AppBar>
         <Switch>
           <Route exact path="/" component={ExpenseDashboardPage} />
-          <Route path="/edit" component={EditExpensePage} />
+          <Route path="/edit" component={LoginPage} />
           <Route path="/help" component={HelpPage} />
           <Route component={NotFoundPage} />
         </Switch>
