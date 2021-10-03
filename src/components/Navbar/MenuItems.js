@@ -10,6 +10,6 @@ export const MenuItems = [
   },
   {
     title: "Login",
-    url: "/edit",
+    url: "/login",
   },
 ];

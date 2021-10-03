@@ -14,9 +14,8 @@ function ExpenseListItem({ description, amount, createdAt, id, note }) {
   return (
     <Card className={classes.card} variant="elevation" elevation={4}>
       <h1>{description}</h1>
-      <h2>
-        Amount: {amount} PLN - Created at: {createdAtFormatted}
-      </h2>
+      <h2>Date: {createdAtFormatted}</h2>
+      <h2>Amount: {amount} PLN</h2>
       <h3>{note}</h3>
       <Button variant="contained" color="primary" startIcon={<EditIcon />}>
         Edit
