@@ -30,7 +30,6 @@ function ExpenseListFilter() {
     startDate: moment(),
     endDate: moment(),
   });
-  console.log(filters);
   return (
     <Paper className={classes.filterList} variant="elevation" elevation={4}>
       <TextField

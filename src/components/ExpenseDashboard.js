@@ -1,6 +1,6 @@
 import ExpenseList from "./ExpenseList";
 import ExpenseListFilter from "./ExpenseListFilter";
-import { Container, Grid } from "@material-ui/core";
+import { Grid } from "@material-ui/core";
 import React from "react";
 import SideMenu from "./SideMenu";
 import { withStyles } from "@material-ui/core/styles";
