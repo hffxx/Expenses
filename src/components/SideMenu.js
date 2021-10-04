@@ -1,10 +1,10 @@
 import React from "react";
-import { withStyles } from "@material-ui/core/styles";
 import { Paper } from "@material-ui/core";
 import AddExpenseModal from "./AddExpenseModal";
 import TotalBalance from "./TotalBalance";
+import { makeStyles } from "@mui/styles";
 
-const style = {
+const useStyles = makeStyles({
   sideMenu: {
     display: "flex",
     flexDirection: "column",
@@ -17,9 +17,10 @@ const style = {
   item: {
     padding: "10px",
   },
-};
+});
 
-const SideMenu = ({ classes }) => {
+const SideMenu = () => {
+  const classes = useStyles();
   return (
     <Paper className={classes.sideMenu} variant="elevation" elevation={4}>
       <AddExpenseModal />
@@ -28,4 +29,4 @@ const SideMenu = ({ classes }) => {
   );
 };
 
-export default withStyles(style)(SideMenu);
+export default SideMenu;

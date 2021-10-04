@@ -2,9 +2,9 @@ import React from "react";
 import { useSelector } from "react-redux";
 import getVisibleExpenses from "../redux/selectors/expenses";
 import { Typography } from "@material-ui/core";
-import { withStyles } from "@material-ui/core/styles";
+import { makeStyles } from "@mui/styles";
 
-const style = {
+const useStyles = makeStyles({
   total: {
     padding: "10px",
     "& p": {
@@ -17,9 +17,10 @@ const style = {
   balancePlus: {
     color: "green",
   },
-};
+});
 
-function TotalBalance({ classes }) {
+const TotalBalance = () => {
+  const classes = useStyles();
   const visibleExpenses = useSelector((state) =>
     getVisibleExpenses(state.expenses, state.filters)
   );
@@ -37,7 +38,7 @@ function TotalBalance({ classes }) {
 
   return (
     <Typography variant="h6" className={classes.total}>
-      Balance:{" "}
+      {"Balance: "}
       <p
         className={
           total >= 0
@@ -51,6 +52,6 @@ function TotalBalance({ classes }) {
       </p>
     </Typography>
   );
-}
+};
 
-export default withStyles(style)(TotalBalance);
+export default TotalBalance;

@@ -16,35 +16,7 @@ export default makeStyles(() => ({
       cursor: "pointer",
     },
   },
-
-  image: {
-    marginLeft: "15px",
-  },
   container: {
     margin: "15px 0px",
-  },
-  formControl: {
-    minWidth: 120,
-  },
-  card: {
-    padding: "20px",
-    borderRadius: "15px",
-    marginTop: "20px",
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    "& Button": {
-      width: "120px",
-      margin: "5px",
-    },
-  },
-  filterList: {
-    display: "flex",
-    justifyContent: "space-between",
-    padding: "27px",
-    borderRadius: "10px",
-  },
-  inputModal: {
-    margin: "5px",
   },
 }));
