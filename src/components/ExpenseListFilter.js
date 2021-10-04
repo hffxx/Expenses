@@ -80,7 +80,7 @@ const ExpenseListFilter = () => {
           value={date.startDate}
           onChange={(newStartDate) => {
             setDate({ ...date, startDate: newStartDate });
-            dispatch(setStartDate(newStartDate.valueOf()));
+            dispatch(setStartDate(newStartDate.startOf("day").valueOf()));
           }}
           renderInput={(params) => <TextField {...params} />}
           InputProps={{
@@ -93,7 +93,7 @@ const ExpenseListFilter = () => {
           value={date.endDate}
           onChange={(newEndDate) => {
             setDate({ ...date, endDate: newEndDate });
-            dispatch(setEndDate(newEndDate.valueOf()));
+            dispatch(setEndDate(newEndDate.endOf("day").valueOf()));
           }}
           renderInput={(params) => <TextField {...params} />}
         />

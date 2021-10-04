@@ -41,6 +41,7 @@ function ExpenseForm({ handleClose, classes }) {
   // const classes = useStyles();
   const dispatch = useDispatch();
   const history = useHistory();
+  console.log(expense.createdAt);
 
   const handleAddExpense = () => {
     const { description, amount } = expense;
