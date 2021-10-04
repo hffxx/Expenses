@@ -3,7 +3,7 @@ import { MenuItems } from "./MenuItems";
 import { Link } from "react-router-dom";
 import "./Navbar.css";
 
-function Navbar() {
+const Navbar = () => {
   return (
     <div className="navbar">
       <ul>
@@ -19,6 +19,6 @@ function Navbar() {
       </ul>
     </div>
   );
-}
+};
 
 export default Navbar;

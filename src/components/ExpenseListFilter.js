@@ -15,20 +15,31 @@ import { sortByDateNew } from "../redux/actions/filterActions/sortByDateNew";
 import { sortByDateOld } from "../redux/actions/filterActions/sortByDateOld";
 import { setStartDate } from "../redux/actions/filterActions/setStartDate";
 import { setEndDate } from "../redux/actions/filterActions/setEndDate";
-import useStyles from "../styles";
 import DatePicker from "@mui/lab/DatePicker";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import DateAdapter from "@mui/lab/AdapterMoment";
 import { useDispatch } from "react-redux";
-import moment from "moment";
+import { makeStyles } from "@mui/styles";
 
-function ExpenseListFilter() {
+const useStyles = makeStyles({
+  filterList: {
+    display: "flex",
+    justifyContent: "space-between",
+    padding: "27px",
+    borderRadius: "10px",
+  },
+  formControl: {
+    minWidth: 120,
+  },
+});
+
+const ExpenseListFilter = () => {
+  const classes = useStyles();
   const dispatch = useDispatch();
   const filters = useSelector((state) => state.filters);
-  const classes = useStyles();
   const [date, setDate] = useState({
-    startDate: moment(),
-    endDate: moment(),
+    startDate: null,
+    endDate: null,
   });
   return (
     <Paper className={classes.filterList} variant="elevation" elevation={4}>
@@ -72,6 +83,10 @@ function ExpenseListFilter() {
             dispatch(setStartDate(newStartDate.valueOf()));
           }}
           renderInput={(params) => <TextField {...params} />}
+          InputProps={{
+            disableUnderline: false,
+          }}
+          inputVariant="outlined"
         />
         <DatePicker
           label="End Date"
@@ -85,6 +100,6 @@ function ExpenseListFilter() {
       </LocalizationProvider>
     </Paper>
   );
-}
+};
 
 export default ExpenseListFilter;

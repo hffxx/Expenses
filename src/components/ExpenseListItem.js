@@ -4,13 +4,28 @@ import { removeExpense } from "../redux/actions/expensesActions/removeExpense";
 import { Button, Card } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
-import useStyles from "../styles";
 import moment from "moment";
+import { makeStyles } from "@mui/styles";
 
-function ExpenseListItem({ description, amount, createdAt, id, note }) {
+const useStyles = makeStyles({
+  card: {
+    padding: "20px",
+    borderRadius: "10px",
+    marginTop: "20px",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    "& Button": {
+      width: "120px",
+      margin: "5px",
+    },
+  },
+});
+
+const ExpenseListItem = ({ description, amount, createdAt, id, note }) => {
   const createdAtFormatted = moment(createdAt).format("MM/DD/YYYY");
-  const dispatch = useDispatch();
   const classes = useStyles();
+  const dispatch = useDispatch();
   return (
     <Card className={classes.card} variant="elevation" elevation={4}>
       <h1>{description}</h1>
@@ -30,6 +45,6 @@ function ExpenseListItem({ description, amount, createdAt, id, note }) {
       </Button>
     </Card>
   );
-}
+};
 
 export default ExpenseListItem;

@@ -4,7 +4,7 @@ import ExpenseListItem from "./ExpenseListItem";
 import getVisibleExpenses from "../redux/selectors/expenses";
 import { Container } from "@material-ui/core";
 
-function ExpenseList() {
+const ExpenseList = () => {
   const visibleExpenses = useSelector((state) =>
     getVisibleExpenses(state.expenses, state.filters)
   );
@@ -15,7 +15,7 @@ function ExpenseList() {
       ))}
     </Container>
   );
-}
+};
 
 export default ExpenseList;
 

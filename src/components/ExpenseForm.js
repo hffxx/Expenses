@@ -14,9 +14,22 @@ import {
   FormControlLabel,
 } from "@mui/material";
 import { Typography, TextField, Grid } from "@material-ui/core";
-import useStyles from "../styles";
+import { withStyles } from "@material-ui/core/styles";
+// import { makeStyles } from "@mui/styles";
 
-function ExpenseForm({ handleClose }) {
+const style = {
+  inputModal: {
+    margin: "5px",
+  },
+};
+
+// const useStyles = makeStyles({
+//   inputModal: {
+//     margin: "5px",
+//   },
+// });
+
+function ExpenseForm({ handleClose, classes }) {
   const [expense, setExpense] = useState({
     description: "",
     note: "",
@@ -25,13 +38,9 @@ function ExpenseForm({ handleClose }) {
     createdAt: moment().valueOf(),
     expenseType: "bill",
   });
-
+  // const classes = useStyles();
   const dispatch = useDispatch();
   const history = useHistory();
-  const classes = useStyles();
-
-  // const regex = /^\d*(\.\d{0,2})?$/;
-  console.log(expense);
 
   const handleAddExpense = () => {
     const { description, amount } = expense;
@@ -131,4 +140,4 @@ function ExpenseForm({ handleClose }) {
   );
 }
 
-export default ExpenseForm;
+export default withStyles(style)(ExpenseForm);

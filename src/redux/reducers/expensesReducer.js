@@ -1,6 +1,7 @@
 import { defaultExpensesState } from "./defaultExpensesState";
 const expensesReducer = (state = defaultExpensesState, action) => {
   switch (action.type) {
+    // set expense
     case "ADD_EXPENSE":
       return [...state, action.expense];
     case "REMOVE_EXPENSE":

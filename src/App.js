@@ -23,7 +23,7 @@ function App() {
         </AppBar>
         <Switch>
           <Route exact path="/" component={ExpenseDashboardPage} />
-          <Route path="/edit" component={LoginPage} />
+          <Route path="/login" component={LoginPage} />
           <Route path="/help" component={HelpPage} />
           <Route component={NotFoundPage} />
         </Switch>
