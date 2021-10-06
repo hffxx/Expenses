@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import getVisibleExpenses from "../redux/selectors/expenses";
-import { Typography } from "@material-ui/core";
+import { Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 
 const useStyles = makeStyles({

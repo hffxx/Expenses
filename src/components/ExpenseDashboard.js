@@ -1,9 +1,9 @@
 import ExpenseList from "./ExpenseList";
 import ExpenseListFilter from "./ExpenseListFilter";
-import { Grid } from "@material-ui/core";
+import { Grid } from "@mui/material";
 import React from "react";
 import SideMenu from "./SideMenu";
-import { withStyles } from "@material-ui/core/styles";
+import { withStyles } from "@mui/styles";
 
 const style = {
   display: {

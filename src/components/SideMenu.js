@@ -1,5 +1,5 @@
 import React from "react";
-import { Paper } from "@material-ui/core";
+import { Paper } from "@mui/material";
 import AddExpenseModal from "./AddExpenseModal";
 import TotalBalance from "./TotalBalance";
 import { makeStyles } from "@mui/styles";

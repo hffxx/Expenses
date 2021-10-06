@@ -12,9 +12,11 @@ import {
   RadioGroup,
   FormControl,
   FormControlLabel,
+  Typography,
+  TextField,
+  Grid,
 } from "@mui/material";
-import { Typography, TextField, Grid } from "@material-ui/core";
-import { withStyles } from "@material-ui/core/styles";
+import { withStyles } from "@mui/styles";
 // import { makeStyles } from "@mui/styles";
 
 const style = {
