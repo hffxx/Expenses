@@ -37,6 +37,10 @@ const filtersReducer = (state = defaultFilterState, action) => {
         ...state,
         endDate: action.endDate,
       };
+    case "RESET":
+      return {
+        ...defaultFilterState,
+      };
     default:
       return state;
   }

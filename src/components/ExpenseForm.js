@@ -16,22 +16,14 @@ import {
   TextField,
   Grid,
 } from "@mui/material";
-import { withStyles } from "@mui/styles";
-// import { makeStyles } from "@mui/styles";
 
-const style = {
+const styles = {
   inputModal: {
     margin: "5px",
   },
 };
 
-// const useStyles = makeStyles({
-//   inputModal: {
-//     margin: "5px",
-//   },
-// });
-
-function ExpenseForm({ handleClose, classes }) {
+function ExpenseForm({ handleClose }) {
   const [expense, setExpense] = useState({
     description: "",
     note: "",
@@ -40,10 +32,9 @@ function ExpenseForm({ handleClose, classes }) {
     createdAt: moment().valueOf(),
     expenseType: "bill",
   });
-  // const classes = useStyles();
+
   const dispatch = useDispatch();
   const history = useHistory();
-  console.log(expense.createdAt);
 
   const handleAddExpense = () => {
     const { description, amount } = expense;
@@ -71,6 +62,13 @@ function ExpenseForm({ handleClose, classes }) {
       expenseType: e.target.value,
     });
   };
+  const handleDateChange = (date) => {
+    setExpense({
+      ...expense,
+      todayDate: date,
+      createdAt: date.valueOf(),
+    });
+  };
 
   return (
     <Grid container align="center" justifyContent="center" spacing={2}>
@@ -78,7 +76,7 @@ function ExpenseForm({ handleClose, classes }) {
         Add Balance
       </Typography>
       <Grid container alignItems="center" justifyContent="center">
-        <Grid item lg={6} className={classes.inputModal}>
+        <Grid item lg={6} sx={styles.inputModal}>
           <TextField
             label="Description"
             placeholder="Enter an Description"
@@ -86,7 +84,7 @@ function ExpenseForm({ handleClose, classes }) {
             onChange={handleDescription}
           ></TextField>
         </Grid>
-        <Grid item lg={6} className={classes.inputModal}>
+        <Grid item lg={6} sx={styles.inputModal}>
           <TextField
             label="Amount"
             placeholder="Enter an Amount"
@@ -95,7 +93,7 @@ function ExpenseForm({ handleClose, classes }) {
             type="number"
           ></TextField>
         </Grid>
-        <Grid item lg={6} className={classes.inputModal}>
+        <Grid item lg={6} sx={styles.inputModal}>
           <TextField
             label="Note"
             placeholder="Enter a Note"
@@ -103,7 +101,7 @@ function ExpenseForm({ handleClose, classes }) {
             onChange={handleNote}
           ></TextField>
         </Grid>
-        <Grid item lg={6} className={classes.inputModal}>
+        <Grid item lg={6} sx={styles.inputModal}>
           <FormControl component="fieldset">
             <RadioGroup
               row
@@ -121,19 +119,19 @@ function ExpenseForm({ handleClose, classes }) {
             </RadioGroup>
           </FormControl>
         </Grid>
-        <Grid item lg={6} className={classes.inputModal}>
+        <Grid item lg={6} sx={styles.inputModal}>
           <LocalizationProvider dateAdapter={DateAdapter}>
             <DatePicker
               label="Date"
               value={expense.todayDate}
               onChange={(date) => {
-                setExpense({ ...expense, createdAt: date.valueOf() });
+                handleDateChange(date);
               }}
               renderInput={(params) => <TextField {...params} />}
             />
           </LocalizationProvider>
         </Grid>
-        <Grid item lg={6} className={classes.inputModal}>
+        <Grid item lg={6} sx={styles.inputModal}>
           <Button onClick={handleAddExpense} variant="contained">
             Add Balance
           </Button>
@@ -143,4 +141,4 @@ function ExpenseForm({ handleClose, classes }) {
   );
 }
 
-export default withStyles(style)(ExpenseForm);
+export default ExpenseForm;

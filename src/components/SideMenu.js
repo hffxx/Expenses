@@ -1,5 +1,5 @@
 import React from "react";
-import { Paper } from "@mui/material";
+import { Paper, Typography } from "@mui/material";
 import AddExpenseModal from "./AddExpenseModal";
 import TotalBalance from "./TotalBalance";
 
@@ -18,8 +18,9 @@ const styles = {
 const SideMenu = () => {
   return (
     <Paper sx={styles.sideMenu} variant="elevation" elevation={4}>
-      <AddExpenseModal />
+      <Typography variant="h6">Total Balance</Typography>
       <TotalBalance />
+      <AddExpenseModal />
     </Paper>
   );
 };

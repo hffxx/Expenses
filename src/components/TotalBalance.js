@@ -1,15 +1,13 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import getVisibleExpenses from "../redux/selectors/expenses";
-import { Typography } from "@mui/material";
-import { makeStyles } from "@mui/styles";
+import { Container, Typography } from "@mui/material";
 
-const useStyles = makeStyles({
-  total: {
+const styles = {
+  balance: {
+    display: "flex",
+    justifyContent: "center",
     padding: "10px",
-    "& p": {
-      display: "inline",
-    },
   },
   balanceMinus: {
     color: "red",
@@ -17,10 +15,18 @@ const useStyles = makeStyles({
   balancePlus: {
     color: "green",
   },
-});
+};
+const balanceStyle = (total, styles) => {
+  if (total === 0) {
+    return undefined;
+  } else if (total > 0) {
+    return styles.balancePlus;
+  } else if (total < 0) {
+    return styles.balanceMinus;
+  }
+};
 
 const TotalBalance = () => {
-  const classes = useStyles();
   const visibleExpenses = useSelector((state) =>
     getVisibleExpenses(state.expenses, state.filters)
   );
@@ -37,20 +43,11 @@ const TotalBalance = () => {
     .reduce((a, amount) => a + amount, 0);
 
   return (
-    <Typography variant="h6" className={classes.total}>
-      {"Balance: "}
-      <p
-        className={
-          total >= 0
-            ? total === 0
-              ? undefined
-              : classes.balancePlus
-            : classes.balanceMinus
-        }
-      >
+    <Container sx={styles.balance}>
+      <Typography variant="h6" sx={balanceStyle(total, styles)}>
         {total} PLN
-      </p>
-    </Typography>
+      </Typography>
+    </Container>
   );
 };
 

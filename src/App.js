@@ -7,7 +7,7 @@ import ExpenseDashboardPage from "./components/ExpenseDashboard";
 import HelpPage from "./components/HelpPage";
 import NotFoundPage from "./components/NotFoundPage";
 
-const classes = {
+const styles = {
   appBar: {
     flexDirection: "row",
     justifyContent: "space-between",
@@ -23,7 +23,7 @@ const App = () => {
   return (
     <Container>
       <BrowserRouter>
-        <AppBar sx={classes.appBar} position="static" color="inherit">
+        <AppBar sx={styles.appBar} position="static" color="inherit">
           <Typography variant="h2">{title}</Typography>
           <Navbar />
         </AppBar>
