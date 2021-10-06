@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import ExpenseListItem from "./ExpenseListItem";
 import getVisibleExpenses from "../redux/selectors/expenses";
-import { Container } from "@material-ui/core";
+import { Container } from "@mui/material";
 
 const ExpenseList = () => {
   const visibleExpenses = useSelector((state) =>

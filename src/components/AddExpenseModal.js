@@ -4,7 +4,7 @@ import Button from "@mui/material/Button";
 import React, { useState } from "react";
 import ExpenseForm from "../components/ExpenseForm";
 
-const style = {
+const styles = {
   modal: {
     position: "absolute",
     top: "50%",
@@ -34,7 +34,7 @@ const AddExpenseModal = () => {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={style.modal}>
+        <Box sx={styles.modal}>
           <ExpenseForm handleClose={handleClose} />
         </Box>
       </Modal>

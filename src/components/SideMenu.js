@@ -1,10 +1,9 @@
 import React from "react";
-import { Paper } from "@material-ui/core";
+import { Paper, Typography } from "@mui/material";
 import AddExpenseModal from "./AddExpenseModal";
 import TotalBalance from "./TotalBalance";
-import { makeStyles } from "@mui/styles";
 
-const useStyles = makeStyles({
+const styles = {
   sideMenu: {
     display: "flex",
     flexDirection: "column",
@@ -14,17 +13,14 @@ const useStyles = makeStyles({
     alignItems: "center",
     padding: "10px",
   },
-  item: {
-    padding: "10px",
-  },
-});
+};
 
 const SideMenu = () => {
-  const classes = useStyles();
   return (
-    <Paper className={classes.sideMenu} variant="elevation" elevation={4}>
-      <AddExpenseModal />
+    <Paper sx={styles.sideMenu} variant="elevation" elevation={4}>
+      <Typography variant="h6">Total Balance</Typography>
       <TotalBalance />
+      <AddExpenseModal />
     </Paper>
   );
 };

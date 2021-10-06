@@ -1,11 +1,10 @@
 import ExpenseList from "./ExpenseList";
 import ExpenseListFilter from "./ExpenseListFilter";
-import { Grid } from "@material-ui/core";
+import { Grid } from "@mui/material";
 import React from "react";
 import SideMenu from "./SideMenu";
-import { withStyles } from "@material-ui/core/styles";
 
-const style = {
+const styles = {
   display: {
     display: "flex",
     flexDirection: "row",
@@ -14,9 +13,9 @@ const style = {
   },
 };
 
-const ExpenseDashboardPage = ({ classes }) => {
+const ExpenseDashboardPage = () => {
   return (
-    <Grid container className={classes.display} spacing={2}>
+    <Grid container sx={styles.display} spacing={2}>
       <Grid item xs={3}>
         <SideMenu />
       </Grid>
@@ -27,4 +26,4 @@ const ExpenseDashboardPage = ({ classes }) => {
     </Grid>
   );
 };
-export default withStyles(style)(ExpenseDashboardPage);
+export default ExpenseDashboardPage;
