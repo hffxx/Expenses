@@ -7,26 +7,6 @@ const filtersReducer = (state = defaultFilterState, action) => {
         ...state,
         text: action.text,
       };
-    case "SORT_BY_AMOUNT_HIGH":
-      return {
-        ...state,
-        sortBy: "amountHigh",
-      };
-    case "SORT_BY_AMOUNT_LOW":
-      return {
-        ...state,
-        sortBy: "amountLow",
-      };
-    case "SORT_BY_DATE_NEW":
-      return {
-        ...state,
-        sortBy: "dateNew",
-      };
-    case "SORT_BY_DATE_OLD":
-      return {
-        ...state,
-        sortBy: "dateOld",
-      };
     case "SET_START_DATE":
       return {
         ...state,
@@ -40,6 +20,11 @@ const filtersReducer = (state = defaultFilterState, action) => {
     case "RESET":
       return {
         ...defaultFilterState,
+      };
+    case "SET_SORT_BY":
+      return {
+        ...state,
+        sortBy: action.sortBy,
       };
     default:
       return state;

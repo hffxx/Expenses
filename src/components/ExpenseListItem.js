@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { removeExpense } from "../redux/actions/expensesActions/removeExpense";
+import { removeExpense } from "../redux/actions/expensesActions";
 import { Button, Card } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";

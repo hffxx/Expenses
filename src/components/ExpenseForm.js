@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { addExpense } from "../redux/actions/expensesActions/addExpense";
+import { addExpense } from "../redux/actions/expensesActions";
 import { useHistory } from "react-router";
 import { LocalizationProvider } from "@mui/lab";
 import DateAdapter from "@mui/lab/AdapterMoment";
