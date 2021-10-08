@@ -21,7 +21,14 @@ const styles = {
   },
 };
 
-const ExpenseListItem = ({ description, amount, createdAt, id, note }) => {
+const ExpenseListItem = ({
+  description,
+  amount,
+  createdAt,
+  id,
+  note,
+  expenseType,
+}) => {
   const createdAtFormatted = moment(createdAt).format("MM/DD/YYYY");
   const dispatch = useDispatch();
   return (
@@ -30,6 +37,7 @@ const ExpenseListItem = ({ description, amount, createdAt, id, note }) => {
       <h2>Date: {createdAtFormatted}</h2>
       <h2>Amount: {amount} PLN</h2>
       <h3>{note}</h3>
+      <h4>{expenseType}</h4>
       <Button variant="contained" color="primary" startIcon={<EditIcon />}>
         Edit
       </Button>

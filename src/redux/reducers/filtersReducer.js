@@ -1,11 +1,11 @@
-import { defaultFilterState } from "./defaultExpensesState";
+import { defaultFilterState } from "../defaultState/defaultState";
 
 const filtersReducer = (state = defaultFilterState, action) => {
   switch (action.type) {
     case "SET_TEXT_FILTER":
       return {
         ...state,
-        text: action.text,
+        description: action.description,
       };
     case "SET_START_DATE":
       return {
@@ -25,6 +25,11 @@ const filtersReducer = (state = defaultFilterState, action) => {
       return {
         ...state,
         sortBy: action.sortBy,
+      };
+    case "SET_EXPENSES_TYPE":
+      return {
+        ...state,
+        expensesType: action.expensesType,
       };
     default:
       return state;

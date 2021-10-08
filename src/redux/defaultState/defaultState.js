@@ -1,8 +1,8 @@
 export const defaultExpensesState = [];
 export const defaultFilterState = {
-  text: "",
+  description: "",
   sortBy: "",
   startDate: null,
   endDate: null,
-  showExpensesType: "",
+  expensesType: "",
 };

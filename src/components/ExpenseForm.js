@@ -30,7 +30,7 @@ function ExpenseForm({ handleClose }) {
     amount: 0,
     todayDate: moment(),
     createdAt: moment().valueOf(),
-    expenseType: "bill",
+    expenseType: "Bill",
   });
 
   const dispatch = useDispatch();
@@ -110,9 +110,9 @@ function ExpenseForm({ handleClose }) {
               value={expense.expenseType}
               onChange={handleExpenseType}
             >
-              <FormControlLabel value="bill" control={<Radio />} label="Bill" />
+              <FormControlLabel value="Bill" control={<Radio />} label="Bill" />
               <FormControlLabel
-                value="earning"
+                value="Earning"
                 control={<Radio />}
                 label="Earning"
               />
