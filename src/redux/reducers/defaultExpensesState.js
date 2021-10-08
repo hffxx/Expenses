@@ -4,4 +4,5 @@ export const defaultFilterState = {
   sortBy: "",
   startDate: null,
   endDate: null,
+  showExpensesType: "",
 };

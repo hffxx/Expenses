@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import {
   TextField,
   InputLabel,
@@ -8,19 +9,18 @@ import {
   Paper,
   Button,
 } from "@mui/material";
-import { setTextFilter } from "../redux/actions/filterActions/setTextFilter";
-import { sortByAmountHigh } from "../redux/actions/filterActions/sortByAmountHigh";
-import { sortByAmountLow } from "../redux/actions/filterActions/sortByAmountLow";
-import { sortByDateNew } from "../redux/actions/filterActions/sortByDateNew";
-import { sortByDateOld } from "../redux/actions/filterActions/sortByDateOld";
-import { setStartDate } from "../redux/actions/filterActions/setStartDate";
-import { setEndDate } from "../redux/actions/filterActions/setEndDate";
 import DatePicker from "@mui/lab/DatePicker";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import DateAdapter from "@mui/lab/AdapterMoment";
 import { useDispatch } from "react-redux";
-import { reset } from "../redux/actions/filterActions/reset";
 import { defaultFilterState } from "../redux/reducers/defaultExpensesState";
+import {
+  setSortBy,
+  setEndDate,
+  setStartDate,
+  setTextFilter,
+  reset,
+} from "../redux/actions/filterActions";
 
 const styles = {
   filterList: {
@@ -45,6 +45,9 @@ const styles = {
 const ExpenseListFilter = () => {
   const dispatch = useDispatch();
   const [filter, setFilter] = useState(defaultFilterState);
+  const filters = useSelector((state) => state.filters);
+  console.log(filters);
+  console.log(filter);
   return (
     <Paper sx={styles.filterList} variant="elevation" elevation={4}>
       <TextField
@@ -68,16 +71,16 @@ const ExpenseListFilter = () => {
           onChange={(e) => {
             if (e.target.value === "dateNew") {
               setFilter({ ...filter, sortBy: e.target.value });
-              dispatch(sortByDateNew(e.target.value));
+              dispatch(setSortBy(e.target.value));
             } else if (e.target.value === "dateOld") {
               setFilter({ ...filter, sortBy: e.target.value });
-              dispatch(sortByDateOld(e.target.value));
+              dispatch(setSortBy(e.target.value));
             } else if (e.target.value === "amountHigh") {
               setFilter({ ...filter, sortBy: e.target.value });
-              dispatch(sortByAmountHigh(e.target.value));
+              dispatch(setSortBy(e.target.value));
             } else if (e.target.value === "amountLow") {
               setFilter({ ...filter, sortBy: e.target.value });
-              dispatch(sortByAmountLow(e.target.value));
+              dispatch(setSortBy(e.target.value));
             }
           }}
         >
@@ -85,6 +88,31 @@ const ExpenseListFilter = () => {
           <MenuItem value="dateOld">Date Oldest</MenuItem>
           <MenuItem value="amountHigh">Amount Highest</MenuItem>
           <MenuItem value="amountLow">Amount Lowest</MenuItem>
+        </Select>
+      </FormControl>
+      <FormControl variant="outlined" sx={styles.formControl}>
+        <InputLabel id="demo-simple-select-outlined-label">Show</InputLabel>
+        <Select
+          labelId="demo-simple-select-outlined-label"
+          id="demo-simple-select-outlined"
+          label="showExpensesType"
+          value={filter.showExpensesType}
+          onChange={(e) => {
+            if (e.target.value === "all") {
+              setFilter({ ...filter, showExpensesType: e.target.value });
+              // dispatch(sortByDateNew(e.target.value));
+            } else if (e.target.value === "bill") {
+              setFilter({ ...filter, showExpensesType: e.target.value });
+              // dispatch(sortByDateOld(e.target.value));
+            } else if (e.target.value === "earning") {
+              setFilter({ ...filter, showExpensesType: e.target.value });
+              // dispatch(sortByAmountHigh(e.target.value));
+            }
+          }}
+        >
+          <MenuItem value="all">All</MenuItem>
+          <MenuItem value="bill">Bills</MenuItem>
+          <MenuItem value="earning">Earnings</MenuItem>
         </Select>
       </FormControl>
       <LocalizationProvider dateAdapter={DateAdapter}>
