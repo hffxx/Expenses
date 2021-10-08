@@ -1,10 +1,10 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { removeExpense } from "../redux/actions/expensesActions";
-import { Button, Card } from "@mui/material";
+import { Button, Card, Typography } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
-import EditIcon from "@mui/icons-material/Edit";
 import moment from "moment";
+import EditExpenseModal from "./EditExpenseModal";
 
 const styles = {
   card: {
@@ -31,16 +31,15 @@ const ExpenseListItem = ({
 }) => {
   const createdAtFormatted = moment(createdAt).format("MM/DD/YYYY");
   const dispatch = useDispatch();
+  const expense = { description, amount, createdAt, id, note, expenseType };
   return (
     <Card sx={styles.card} variant="elevation" elevation={4}>
-      <h1>{description}</h1>
-      <h2>Date: {createdAtFormatted}</h2>
-      <h2>Amount: {amount} PLN</h2>
-      <h3>{note}</h3>
-      <h4>{expenseType}</h4>
-      <Button variant="contained" color="primary" startIcon={<EditIcon />}>
-        Edit
-      </Button>
+      <Typography variant="h2">{description}</Typography>
+      <Typography variant="h2">Amount: {amount} PLN</Typography>
+      <Typography variant="h4">Date: {createdAtFormatted}</Typography>
+      <Typography variant="h5">Note: {note}</Typography>
+      <Typography variant="h5">Type: {expenseType}</Typography>
+      <EditExpenseModal expense={expense} />
       <Button
         variant="contained"
         color="error"
