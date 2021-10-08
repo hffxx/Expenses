@@ -13,14 +13,16 @@ import DatePicker from "@mui/lab/DatePicker";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import DateAdapter from "@mui/lab/AdapterMoment";
 import { useDispatch } from "react-redux";
-import { defaultFilterState } from "../redux/reducers/defaultExpensesState";
+import { defaultFilterState } from "../redux/defaultState/defaultState";
 import {
   setSortBy,
   setEndDate,
   setStartDate,
   setTextFilter,
   reset,
+  setExpensesType,
 } from "../redux/actions/filterActions";
+import RefreshIcon from "@mui/icons-material/Refresh";
 
 const styles = {
   filterList: {
@@ -46,6 +48,8 @@ const ExpenseListFilter = () => {
   const dispatch = useDispatch();
   const [filter, setFilter] = useState(defaultFilterState);
   const filters = useSelector((state) => state.filters);
+  const currstate = useSelector((state) => state.expenses);
+  console.log(currstate);
   console.log(filters);
   console.log(filter);
   return (
@@ -55,9 +59,9 @@ const ExpenseListFilter = () => {
         id="outlined-basic"
         label="Filter"
         variant="outlined"
-        value={filter.text}
+        value={filter.description}
         onChange={(e) => {
-          setFilter({ ...filter, text: e.target.value });
+          setFilter({ ...filter, description: e.target.value });
           dispatch(setTextFilter(e.target.value));
         }}
       ></TextField>
@@ -96,23 +100,23 @@ const ExpenseListFilter = () => {
           labelId="demo-simple-select-outlined-label"
           id="demo-simple-select-outlined"
           label="showExpensesType"
-          value={filter.showExpensesType}
+          value={filter.expensesType}
           onChange={(e) => {
             if (e.target.value === "all") {
-              setFilter({ ...filter, showExpensesType: e.target.value });
-              // dispatch(sortByDateNew(e.target.value));
-            } else if (e.target.value === "bill") {
-              setFilter({ ...filter, showExpensesType: e.target.value });
-              // dispatch(sortByDateOld(e.target.value));
-            } else if (e.target.value === "earning") {
-              setFilter({ ...filter, showExpensesType: e.target.value });
-              // dispatch(sortByAmountHigh(e.target.value));
+              setFilter({ ...filter, expensesType: e.target.value });
+              dispatch(setExpensesType(""));
+            } else if (e.target.value === "Bill") {
+              setFilter({ ...filter, expensesType: e.target.value });
+              dispatch(setExpensesType(e.target.value));
+            } else if (e.target.value === "Earning") {
+              setFilter({ ...filter, expensesType: e.target.value });
+              dispatch(setExpensesType(e.target.value));
             }
           }}
         >
           <MenuItem value="all">All</MenuItem>
-          <MenuItem value="bill">Bills</MenuItem>
-          <MenuItem value="earning">Earnings</MenuItem>
+          <MenuItem value="Bill">Bills</MenuItem>
+          <MenuItem value="Earning">Earnings</MenuItem>
         </Select>
       </FormControl>
       <LocalizationProvider dateAdapter={DateAdapter}>
@@ -144,7 +148,7 @@ const ExpenseListFilter = () => {
           dispatch(reset());
         }}
       >
-        Clear filters
+        <RefreshIcon />
       </Button>
     </Paper>
   );

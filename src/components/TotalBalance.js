@@ -32,9 +32,9 @@ const TotalBalance = () => {
   );
   const total = visibleExpenses
     .map(({ expenseType, amount }) => {
-      if (expenseType === "bill") {
+      if (expenseType === "Bill") {
         return -amount;
-      } else if (expenseType === "earning") {
+      } else if (expenseType === "Earning") {
         return amount;
       } else {
         return (amount = undefined);

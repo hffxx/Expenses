@@ -1,14 +1,19 @@
-const getVisibleExpenses = (expenses, { text, sortBy, startDate, endDate }) => {
+const getVisibleExpenses = (
+  expenses,
+  { description, sortBy, startDate, endDate, expensesType }
+) => {
   return expenses
     .filter((expense) => {
       const startDateMatch =
         typeof startDate !== "number" || expense.createdAt >= startDate;
       const endDateMatch =
         typeof endDate !== "number" || expense.createdAt <= endDate;
-      const textMatch = expense.description
-        .toLowerCase()
-        .includes(text.toLowerCase());
-      return startDateMatch && endDateMatch && textMatch;
+      const descriptionMatch = expense.description.includes(description);
+      const expensesTypeMatch =
+        expensesType === "" || expensesType === expense.expenseType;
+      return (
+        startDateMatch && endDateMatch && descriptionMatch && expensesTypeMatch
+      );
     })
     .sort((a, b) => {
       if (sortBy === "dateNew") {

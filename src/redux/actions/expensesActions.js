@@ -5,7 +5,7 @@ export const addExpense = ({
   note = "",
   amount = 0,
   createdAt = undefined,
-  expenseType = undefined,
+  expenseType = "Bill",
 } = {}) => ({
   type: "ADD_EXPENSE",
   expense: {

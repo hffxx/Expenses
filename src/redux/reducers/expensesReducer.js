@@ -1,4 +1,4 @@
-import { defaultExpensesState } from "./defaultExpensesState";
+import { defaultExpensesState } from "../defaultState/defaultState";
 const expensesReducer = (state = defaultExpensesState, action) => {
   switch (action.type) {
     // set expense
