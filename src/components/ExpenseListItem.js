@@ -35,7 +35,7 @@ const ExpenseListItem = ({ description, amount, createdAt, id, note }) => {
       </Button>
       <Button
         variant="contained"
-        color="secondary"
+        color="error"
         startIcon={<DeleteIcon />}
         onClick={() => dispatch(removeExpense(id))}
       >
