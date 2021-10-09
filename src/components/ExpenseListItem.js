@@ -21,17 +21,12 @@ const styles = {
   },
 };
 
-const ExpenseListItem = ({
-  description,
-  amount,
-  createdAt,
-  id,
-  note,
-  expenseType,
-}) => {
+const ExpenseListItem = (props) => {
+  const { description, amount, createdAt, id, note, expenseType } =
+    props.expense;
+  const expense = props.expense;
   const createdAtFormatted = moment(createdAt).format("MM/DD/YYYY");
   const dispatch = useDispatch();
-  const expense = { description, amount, createdAt, id, note, expenseType };
   return (
     <Card sx={styles.card} variant="elevation" elevation={4}>
       <Typography variant="h2">{description}</Typography>
