@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
 import {
   TextField,
   InputLabel,
@@ -47,11 +46,7 @@ const styles = {
 const ExpenseListFilter = () => {
   const dispatch = useDispatch();
   const [filter, setFilter] = useState(defaultFilterState);
-  const filters = useSelector((state) => state.filters);
-  const currstate = useSelector((state) => state.expenses);
-  console.log(currstate);
-  console.log(filters);
-  console.log(filter);
+
   return (
     <Paper sx={styles.filterList} variant="elevation" elevation={4}>
       <TextField

@@ -23,15 +23,11 @@ const styles = {
   },
 };
 
-const ExpenseEditForm = ({
-  handleClose,
-  description,
-  amount,
-  id,
-  createdAt,
-  note,
-  expenseType,
-}) => {
+const ExpenseEditForm = (props) => {
+  const { description, amount, createdAt, id, note, expenseType } =
+    props.expense;
+  const handleClose = props.handleClose;
+
   const [expense, setExpense] = useState({
     description,
     note,
@@ -42,7 +38,6 @@ const ExpenseEditForm = ({
   });
   const dispatch = useDispatch();
   const history = useHistory();
-  console.log(expense);
 
   const handleEditExpense = () => {
     const { description, amount } = expense;

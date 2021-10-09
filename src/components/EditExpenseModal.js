@@ -42,7 +42,7 @@ const EditExpenseModal = (props) => {
         aria-describedby="modal-modal-description"
       >
         <Box sx={styles.modal}>
-          <ExpenseEditForm handleClose={handleClose} {...expense} />
+          <ExpenseEditForm handleClose={handleClose} expense={expense} />
         </Box>
       </Modal>
     </div>

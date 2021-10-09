@@ -11,7 +11,7 @@ const ExpenseList = () => {
   return (
     <Container maxWidth="md">
       {visibleExpenses.map((expense) => (
-        <ExpenseListItem key={expense.id} {...expense} />
+        <ExpenseListItem key={expense.id} expense={expense} />
       ))}
     </Container>
   );
