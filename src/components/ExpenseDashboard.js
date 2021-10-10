@@ -3,7 +3,6 @@ import ExpenseListFilter from "./ExpenseListFilter";
 import { Grid } from "@mui/material";
 import React from "react";
 import SideMenu from "./SideMenu";
-
 const styles = {
   display: {
     display: "flex",
