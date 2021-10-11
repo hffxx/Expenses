@@ -47,29 +47,6 @@ function ExpenseForm({ handleClose }) {
     }
   };
 
-  const handleAddAmount = (e) => {
-    setExpense({ ...expense, amount: Number(e.target.value) });
-  };
-  const handleDescription = (e) => {
-    setExpense({ ...expense, description: e.target.value });
-  };
-  const handleNote = (e) => {
-    setExpense({ ...expense, note: e.target.value });
-  };
-  const handleExpenseType = (e) => {
-    setExpense({
-      ...expense,
-      expenseType: e.target.value,
-    });
-  };
-  const handleDateChange = (date) => {
-    setExpense({
-      ...expense,
-      todayDate: date,
-      createdAt: date.valueOf(),
-    });
-  };
-
   return (
     <Grid container align="center" justifyContent="center" spacing={2}>
       <Typography gutterBottom variant="h3" align="center">
@@ -81,7 +58,9 @@ function ExpenseForm({ handleClose }) {
             label="Description"
             placeholder="Enter an Description"
             variant="outlined"
-            onChange={handleDescription}
+            onChange={(e) =>
+              setExpense({ ...expense, description: e.target.value })
+            }
           ></TextField>
         </Grid>
         <Grid item lg={6} sx={styles.inputModal}>
@@ -89,7 +68,9 @@ function ExpenseForm({ handleClose }) {
             label="Amount"
             placeholder="Enter an Amount"
             variant="outlined"
-            onChange={handleAddAmount}
+            onChange={(e) =>
+              setExpense({ ...expense, amount: Number(e.target.value) })
+            }
             type="number"
           ></TextField>
         </Grid>
@@ -98,7 +79,7 @@ function ExpenseForm({ handleClose }) {
             label="Note"
             placeholder="Enter a Note"
             variant="outlined"
-            onChange={handleNote}
+            onChange={(e) => setExpense({ ...expense, note: e.target.value })}
           ></TextField>
         </Grid>
         <Grid item lg={6} sx={styles.inputModal}>
@@ -108,7 +89,12 @@ function ExpenseForm({ handleClose }) {
               aria-label="expenseType"
               name="row-radio-buttons-group"
               value={expense.expenseType}
-              onChange={handleExpenseType}
+              onChange={(e) =>
+                setExpense({
+                  ...expense,
+                  expenseType: e.target.value,
+                })
+              }
             >
               <FormControlLabel value="Bill" control={<Radio />} label="Bill" />
               <FormControlLabel
@@ -125,7 +111,11 @@ function ExpenseForm({ handleClose }) {
               label="Date"
               value={expense.todayDate}
               onChange={(date) => {
-                handleDateChange(date);
+                setExpense({
+                  ...expense,
+                  todayDate: date,
+                  createdAt: date.valueOf(),
+                });
               }}
               renderInput={(params) => <TextField {...params} />}
             />

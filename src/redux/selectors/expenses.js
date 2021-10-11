@@ -8,7 +8,9 @@ const getVisibleExpenses = (
         typeof startDate !== "number" || expense.createdAt >= startDate;
       const endDateMatch =
         typeof endDate !== "number" || expense.createdAt <= endDate;
-      const descriptionMatch = expense.description.includes(description);
+      const descriptionMatch = expense.description
+        .toLowerCase()
+        .includes(description.toLowerCase());
       const expensesTypeMatch =
         expensesType === "" || expensesType === expense.expenseType;
       return (
