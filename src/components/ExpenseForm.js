@@ -71,7 +71,6 @@ function ExpenseForm({ handleClose }) {
             onChange={(e) =>
               setExpense({ ...expense, amount: Number(e.target.value) })
             }
-            type="number"
           ></TextField>
         </Grid>
         <Grid item lg={6} sx={styles.inputModal}>
