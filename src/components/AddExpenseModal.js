@@ -17,6 +17,9 @@ const styles = {
     p: 4,
     borderRadius: "10px",
   },
+  item: {
+    width: "10rem",
+  },
 };
 
 const AddExpenseModal = () => {
@@ -25,7 +28,12 @@ const AddExpenseModal = () => {
   const handleClose = () => setOpen(false);
   return (
     <div>
-      <Button onClick={handleOpen} variant="outlined" color="success">
+      <Button
+        onClick={handleOpen}
+        variant="outlined"
+        color="success"
+        sx={styles.item}
+      >
         Add Balance
       </Button>
       <Modal

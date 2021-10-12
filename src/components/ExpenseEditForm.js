@@ -94,7 +94,6 @@ const ExpenseEditForm = (props) => {
             placeholder="Enter an Amount"
             variant="outlined"
             onChange={handleAddAmount}
-            type="number"
             value={expense.amount}
           ></TextField>
         </Grid>
