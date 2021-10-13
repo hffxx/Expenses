@@ -1,10 +1,11 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { removeExpense } from "../redux/actions/expensesActions";
 import { Button, Card, Typography } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import moment from "moment";
 import EditExpenseModal from "./EditExpenseModal";
+import { reset } from "../redux/actions/filterActions";
 
 const styles = {
   card: {
@@ -27,6 +28,7 @@ const ExpenseListItem = (props) => {
   const expense = props.expense;
   const createdAtFormatted = moment(createdAt).format("MM/DD/YYYY");
   const dispatch = useDispatch();
+  const expenses = useSelector((state) => state.expenses);
   return (
     <Card sx={styles.card} variant="elevation" elevation={4}>
       <Typography variant="h2">{description}</Typography>
@@ -39,7 +41,14 @@ const ExpenseListItem = (props) => {
         variant="contained"
         color="error"
         startIcon={<DeleteIcon />}
-        onClick={() => dispatch(removeExpense(id))}
+        onClick={() => {
+          if (expenses.length === 1) {
+            dispatch(reset());
+            dispatch(removeExpense(id));
+          } else {
+            dispatch(removeExpense(id));
+          }
+        }}
       >
         Delete
       </Button>
