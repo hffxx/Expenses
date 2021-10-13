@@ -43,9 +43,10 @@ const styles = {
   },
 };
 
-const ExpenseListFilter = () => {
+const ExpenseListFilter = (props) => {
   const dispatch = useDispatch();
   const [filter, setFilter] = useState(defaultFilterState);
+  const { isOpen } = props;
 
   return (
     <Paper sx={styles.filterList} variant="elevation" elevation={4}>
@@ -63,6 +64,7 @@ const ExpenseListFilter = () => {
       <FormControl variant="outlined" sx={styles.formControl}>
         <InputLabel id="demo-simple-select-outlined-label">Sort by</InputLabel>
         <Select
+          disabled={isOpen ? true : false}
           labelId="demo-simple-select-outlined-label"
           id="demo-simple-select-outlined"
           label="SortBy"
