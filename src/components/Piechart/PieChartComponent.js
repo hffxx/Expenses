@@ -1,10 +1,9 @@
 // import "./styles.css";
-import React, { useCallback, useState } from "react";
+import React from "react";
 import { PieChart, Pie, Cell, Tooltip, ToolTipContainerStyles } from "recharts";
 import { useSelector } from "react-redux";
-import getVisibleExpenses from "../redux/selectors/expenses";
+import getVisibleExpenses from "../../redux/selectors/expenses";
 import { Paper, Typography } from "@mui/material";
-import { typography } from "@mui/system";
 
 const styles = {
   pieChart: {
@@ -48,10 +47,10 @@ const renderCustomizedLabel = ({
   );
 };
 const PieChartComponent = () => {
-  const visibleExpenses = useSelector((state) =>
+  const data = useSelector((state) =>
     getVisibleExpenses(state.expenses, state.filters)
   );
-  const data = visibleExpenses;
+  const filters = useSelector((state) => state.filters);
   return (
     <Paper sx={styles.pieChart} variant="elevation" elevation={4}>
       <Typography variant="h3">Pie chart</Typography>

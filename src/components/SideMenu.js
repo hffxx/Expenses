@@ -20,7 +20,7 @@ const styles = {
 };
 
 const SideMenu = (props) => {
-  const { togglePieChart, isOpen } = props;
+  const { toggleView, isOpen } = props;
   return (
     <Paper sx={styles.sideMenu} variant="elevation" elevation={4}>
       <Typography variant="h6">Total Balance</Typography>
@@ -30,7 +30,7 @@ const SideMenu = (props) => {
         variant="outlined"
         color="secondary"
         sx={styles.item}
-        onClick={() => togglePieChart(!isOpen)}
+        onClick={() => toggleView(!isOpen)}
       >
         {isOpen ? "Toggle Table" : "Toggle Charts"}
       </Button>
