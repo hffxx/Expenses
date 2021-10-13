@@ -12,7 +12,9 @@ const getVisibleExpenses = (
         .toLowerCase()
         .includes(description.toLowerCase());
       const expensesTypeMatch =
-        expensesType === "" || expensesType === expense.expenseType;
+        expensesType === "" ||
+        expensesType === "all" ||
+        expensesType === expense.expenseType;
       return (
         startDateMatch && endDateMatch && descriptionMatch && expensesTypeMatch
       );

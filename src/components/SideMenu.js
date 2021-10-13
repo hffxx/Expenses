@@ -2,6 +2,8 @@ import React from "react";
 import { Paper, Typography, Button } from "@mui/material";
 import AddExpenseModal from "./AddExpenseModal";
 import TotalBalance from "./TotalBalance";
+import { setSortBy } from "../redux/actions/filterActions";
+import { useDispatch, useSelector } from "react-redux";
 
 const styles = {
   sideMenu: {
@@ -20,6 +22,8 @@ const styles = {
 };
 
 const SideMenu = (props) => {
+  const expenses = useSelector((state) => state.expenses);
+  const dispatch = useDispatch();
   const { toggleView, isOpen } = props;
   return (
     <Paper sx={styles.sideMenu} variant="elevation" elevation={4}>
@@ -27,10 +31,14 @@ const SideMenu = (props) => {
       <TotalBalance />
       <AddExpenseModal />
       <Button
+        disabled={!expenses.length}
         variant="outlined"
         color="secondary"
         sx={styles.item}
-        onClick={() => toggleView(!isOpen)}
+        onClick={() => {
+          dispatch(setSortBy("dateOld"));
+          toggleView(!isOpen);
+        }}
       >
         {isOpen ? "Toggle Table" : "Toggle Charts"}
       </Button>

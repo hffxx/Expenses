@@ -28,7 +28,6 @@ function ExpenseForm({ handleClose }) {
     description: "",
     note: "",
     amount: 0,
-    todayDate: moment(),
     createdAt: moment().valueOf(),
     expenseType: "Bill",
   });
@@ -43,7 +42,7 @@ function ExpenseForm({ handleClose }) {
       handleClose();
       history.push("/");
     } else {
-      window.alert("Invalid data");
+      window.alert("Invalid data, please fill again");
     }
   };
 
@@ -108,11 +107,10 @@ function ExpenseForm({ handleClose }) {
           <LocalizationProvider dateAdapter={DateAdapter}>
             <DatePicker
               label="Date"
-              value={expense.todayDate}
+              value={expense.createdAt}
               onChange={(date) => {
                 setExpense({
                   ...expense,
-                  todayDate: date,
                   createdAt: date.valueOf(),
                 });
               }}

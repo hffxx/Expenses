@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   TextField,
   InputLabel,
@@ -11,8 +11,7 @@ import {
 import DatePicker from "@mui/lab/DatePicker";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import DateAdapter from "@mui/lab/AdapterMoment";
-import { useDispatch } from "react-redux";
-import { defaultFilterState } from "../redux/defaultState/defaultState";
+import { useDispatch, useSelector } from "react-redux";
 import {
   setSortBy,
   setEndDate,
@@ -45,8 +44,8 @@ const styles = {
 
 const ExpenseListFilter = (props) => {
   const dispatch = useDispatch();
-  const [filter, setFilter] = useState(defaultFilterState);
   const { isOpen } = props;
+  const filtersState = useSelector((state) => state.filters);
 
   return (
     <Paper sx={styles.filterList} variant="elevation" elevation={4}>
@@ -55,9 +54,8 @@ const ExpenseListFilter = (props) => {
         id="outlined-basic"
         label="Filter"
         variant="outlined"
-        value={filter.description}
+        value={filtersState.description}
         onChange={(e) => {
-          setFilter({ ...filter, description: e.target.value });
           dispatch(setTextFilter(e.target.value));
         }}
       ></TextField>
@@ -68,19 +66,15 @@ const ExpenseListFilter = (props) => {
           labelId="demo-simple-select-outlined-label"
           id="demo-simple-select-outlined"
           label="SortBy"
-          value={filter.sortBy}
+          value={filtersState.sortBy}
           onChange={(e) => {
             if (e.target.value === "dateNew") {
-              setFilter({ ...filter, sortBy: e.target.value });
               dispatch(setSortBy(e.target.value));
             } else if (e.target.value === "dateOld") {
-              setFilter({ ...filter, sortBy: e.target.value });
               dispatch(setSortBy(e.target.value));
             } else if (e.target.value === "amountHigh") {
-              setFilter({ ...filter, sortBy: e.target.value });
               dispatch(setSortBy(e.target.value));
             } else if (e.target.value === "amountLow") {
-              setFilter({ ...filter, sortBy: e.target.value });
               dispatch(setSortBy(e.target.value));
             }
           }}
@@ -97,16 +91,13 @@ const ExpenseListFilter = (props) => {
           labelId="demo-simple-select-outlined-label"
           id="demo-simple-select-outlined"
           label="showExpensesType"
-          value={filter.expensesType}
+          value={filtersState.expensesType}
           onChange={(e) => {
             if (e.target.value === "all") {
-              setFilter({ ...filter, expensesType: e.target.value });
-              dispatch(setExpensesType(""));
+              dispatch(setExpensesType("all"));
             } else if (e.target.value === "Bill") {
-              setFilter({ ...filter, expensesType: e.target.value });
               dispatch(setExpensesType(e.target.value));
             } else if (e.target.value === "Earning") {
-              setFilter({ ...filter, expensesType: e.target.value });
               dispatch(setExpensesType(e.target.value));
             }
           }}
@@ -119,9 +110,8 @@ const ExpenseListFilter = (props) => {
       <LocalizationProvider dateAdapter={DateAdapter}>
         <DatePicker
           label="Start Date"
-          value={filter.startDate}
+          value={filtersState.startDate}
           onChange={(newStartDate) => {
-            setFilter({ ...filter, startDate: newStartDate });
             dispatch(setStartDate(newStartDate.startOf("day").valueOf()));
           }}
           renderInput={(params) => <TextField {...params} />}
@@ -129,9 +119,8 @@ const ExpenseListFilter = (props) => {
         />
         <DatePicker
           label="End Date"
-          value={filter.endDate}
+          value={filtersState.endDate}
           onChange={(newEndDate) => {
-            setFilter({ ...filter, endDate: newEndDate });
             dispatch(setEndDate(newEndDate.endOf("day").valueOf()));
           }}
           renderInput={(params) => <TextField {...params} />}
@@ -141,8 +130,12 @@ const ExpenseListFilter = (props) => {
         sx={styles.clearButton}
         variant="outlined"
         onClick={() => {
-          setFilter(defaultFilterState);
-          dispatch(reset());
+          if (isOpen) {
+            dispatch(reset());
+            dispatch(setSortBy("dateOld"));
+          } else {
+            dispatch(reset());
+          }
         }}
       >
         <RefreshIcon />
