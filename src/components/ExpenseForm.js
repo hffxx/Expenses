@@ -36,8 +36,8 @@ function ExpenseForm({ handleClose }) {
   const history = useHistory();
 
   const handleAddExpense = () => {
-    const { description, amount } = expense;
-    if (description && amount) {
+    const { description, amount, createdAt } = expense;
+    if (description && amount && moment(createdAt).isValid()) {
       dispatch(addExpense(expense));
       handleClose();
       history.push("/");
@@ -109,10 +109,12 @@ function ExpenseForm({ handleClose }) {
               label="Date"
               value={expense.createdAt}
               onChange={(date) => {
-                setExpense({
-                  ...expense,
-                  createdAt: date.valueOf(),
-                });
+                if (date) {
+                  setExpense({
+                    ...expense,
+                    createdAt: date.valueOf(),
+                  });
+                }
               }}
               renderInput={(params) => <TextField {...params} />}
             />
