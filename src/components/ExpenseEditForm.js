@@ -32,7 +32,6 @@ const ExpenseEditForm = (props) => {
     description,
     note,
     amount,
-    todayDate: moment(createdAt),
     createdAt,
     expenseType,
   });
@@ -40,8 +39,8 @@ const ExpenseEditForm = (props) => {
   const history = useHistory();
 
   const handleEditExpense = () => {
-    const { description, amount } = expense;
-    if (description && amount) {
+    const { description, amount, createdAt } = expense;
+    if (description && amount && moment(createdAt).isValid()) {
       dispatch(editExpense(id, expense));
       handleClose();
       history.push("/");
@@ -128,9 +127,11 @@ const ExpenseEditForm = (props) => {
           <LocalizationProvider dateAdapter={DateAdapter}>
             <DatePicker
               label="Date"
-              value={expense.todayDate}
+              value={expense.createdAt}
               onChange={(date) => {
-                handleDateChange(date);
+                if (date) {
+                  handleDateChange(date);
+                }
               }}
               renderInput={(params) => <TextField {...params} />}
             />
