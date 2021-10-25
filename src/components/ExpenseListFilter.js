@@ -28,6 +28,7 @@ const styles = {
     justifyContent: "space-between",
     padding: "15px",
     borderRadius: "10px",
+    marginBottom: "15px",
   },
   formControl: {
     minWidth: 100,

@@ -21,6 +21,9 @@ const styles = {
   inputModal: {
     margin: "5px",
   },
+  btnAdd: {
+    marginTop: "20px",
+  },
 };
 
 function ExpenseForm({ handleClose }) {
@@ -120,7 +123,7 @@ function ExpenseForm({ handleClose }) {
             />
           </LocalizationProvider>
         </Grid>
-        <Grid item lg={6} sx={styles.inputModal}>
+        <Grid item lg={6} sx={styles.btnAdd}>
           <Button onClick={handleAddExpense} variant="contained">
             Add Balance
           </Button>
