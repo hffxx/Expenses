@@ -21,6 +21,9 @@ const styles = {
   inputModal: {
     margin: "5px",
   },
+  btnAdd: {
+    marginTop: "20px",
+  },
 };
 
 const ExpenseEditForm = (props) => {
@@ -49,9 +52,6 @@ const ExpenseEditForm = (props) => {
     }
   };
 
-  const handleAddAmount = (e) => {
-    setExpense({ ...expense, amount: Number(e.target.value) });
-  };
   const handleDescription = (e) => {
     setExpense({ ...expense, description: e.target.value });
   };
@@ -92,7 +92,9 @@ const ExpenseEditForm = (props) => {
             label="Amount"
             placeholder="Enter an Amount"
             variant="outlined"
-            onChange={handleAddAmount}
+            onChange={(e) =>
+              setExpense({ ...expense, amount: Number(e.target.value) })
+            }
             value={expense.amount}
           ></TextField>
         </Grid>
@@ -137,7 +139,7 @@ const ExpenseEditForm = (props) => {
             />
           </LocalizationProvider>
         </Grid>
-        <Grid item lg={6} sx={styles.inputModal}>
+        <Grid item lg={6} sx={styles.btnAdd}>
           <Button onClick={handleEditExpense} variant="contained">
             Edit Balance
           </Button>

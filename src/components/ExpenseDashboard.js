@@ -5,6 +5,7 @@ import React from "react";
 import SideMenu from "./SideMenu";
 import ChartComponent from "./Charts/ChartComponent";
 import { useState } from "react";
+import ExpenseListTable from "./ExpenseListTable";
 
 const styles = {
   display: {
@@ -24,7 +25,7 @@ const ExpenseDashboardPage = () => {
       </Grid>
       <Grid item xs={9}>
         <ExpenseListFilter isOpen={isOpen} />
-        {isOpen ? <ChartComponent /> : <ExpenseList />}
+        {isOpen ? <ChartComponent /> : <ExpenseListTable />}
       </Grid>
     </Grid>
   );

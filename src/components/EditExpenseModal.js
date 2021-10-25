@@ -1,12 +1,11 @@
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
 import React, { useState } from "react";
 import ExpenseEditForm from "./ExpenseEditForm";
 import EditIcon from "@mui/icons-material/Edit";
 
 const styles = {
-  modal: {
+  modalForm: {
     position: "absolute",
     top: "50%",
     left: "50%",
@@ -18,6 +17,11 @@ const styles = {
     p: 4,
     borderRadius: "10px",
   },
+  modal: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
 };
 
 const EditExpenseModal = (props) => {
@@ -26,26 +30,19 @@ const EditExpenseModal = (props) => {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   return (
-    <div>
-      <Button
-        onClick={handleOpen}
-        variant="contained"
-        color="primary"
-        startIcon={<EditIcon />}
-      >
-        Edit
-      </Button>
+    <Box sx={styles.modal}>
+      <EditIcon onClick={handleOpen} />
       <Modal
         open={open}
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={styles.modal}>
+        <Box sx={styles.modalForm}>
           <ExpenseEditForm handleClose={handleClose} expense={expense} />
         </Box>
       </Modal>
-    </div>
+    </Box>
   );
 };
 
