@@ -1,7 +1,7 @@
 import React from "react";
 import { Paper, Typography, Button } from "@mui/material";
 import AddExpenseModal from "./AddExpenseModal";
-import TotalBalance from "./TotalBalance";
+import TotalBalance from "./Balance/TotalBalance";
 import { setSortBy } from "../redux/actions/filterActions";
 import { useDispatch, useSelector } from "react-redux";
 

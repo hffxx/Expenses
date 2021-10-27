@@ -2,8 +2,9 @@ import React from "react";
 import { PieChart, Pie, Cell, Tooltip } from "recharts";
 import { useSelector } from "react-redux";
 import getVisibleExpenses from "../../redux/selectors/expenses";
+import { Typography, Paper } from "@mui/material";
 
-const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
+const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "#008042"];
 
 const RADIAN = Math.PI / 180;
 const renderCustomizedLabel = ({
@@ -31,13 +32,35 @@ const renderCustomizedLabel = ({
     </text>
   );
 };
+
+const styles = {
+  tooltip: {
+    padding: "10px",
+    background: "rgba(255, 255, 255, 0.8)",
+  },
+  label: {
+    textAlign: "center",
+  },
+};
+
+const CustomTooltip = ({ active, payload, label }) => {
+  if (active) {
+    return (
+      <Paper sx={styles.tooltip}>
+        <Typography sx={styles.label}>{`${payload[0].name}`}</Typography>
+        <Typography sx={styles.label}>{`${payload[0].value} PLN`}</Typography>
+      </Paper>
+    );
+  }
+  return null;
+};
+
 const PieChartComponent = () => {
   const visibleExpenses = useSelector((state) =>
     getVisibleExpenses(state.expenses, state.filters)
   );
   return (
     <PieChart width={450} height={450}>
-      <Tooltip cursor={false} />
       <Pie
         data={visibleExpenses}
         cx={225}
@@ -57,6 +80,7 @@ const PieChartComponent = () => {
           <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
         ))}
       </Pie>
+      <Tooltip content={<CustomTooltip />} />
     </PieChart>
   );
 };

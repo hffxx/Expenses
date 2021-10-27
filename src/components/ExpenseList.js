@@ -1,15 +1,13 @@
 import React from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import getVisibleExpenses from "../redux/selectors/expenses";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
 import moment from "moment";
 import { Button, Typography } from "@mui/material";
-import DeleteIcon from "@mui/icons-material/Delete";
 import EditExpenseModal from "./EditExpenseModal";
-import { removeExpense } from "../redux/actions/expensesActions";
-import { reset } from "../redux/actions/filterActions";
+import Checkbox from "@mui/material/Checkbox";
 
 const styles = {
   btnContainer: {
@@ -28,12 +26,23 @@ const styles = {
   },
 };
 
-const ExpenseList = () => {
-  const expenses = useSelector((state) => state.expenses);
+const ExpenseList = (props) => {
   const visibleExpenses = useSelector((state) =>
     getVisibleExpenses(state.expenses, state.filters)
   );
-  const dispatch = useDispatch();
+
+  let deleteList = props.deleteList;
+  console.log(deleteList);
+  const handleDeleteList = (id) => {
+    if (deleteList.indexOf(id) > -1) {
+      deleteList = deleteList.filter((deleteId) => deleteId !== id);
+      console.log(deleteList);
+    } else {
+      deleteList = [...deleteList, id];
+      console.log(deleteList);
+    }
+  };
+
   return (
     <TableBody>
       {visibleExpenses.map((expense) => (
@@ -43,6 +52,13 @@ const ExpenseList = () => {
             "&:last-child td, &:last-child th": { border: 0 },
           }}
         >
+          <TableCell>
+            <Checkbox
+              onChange={() => {
+                handleDeleteList(expense.id);
+              }}
+            />
+          </TableCell>
           <TableCell component="th" scope="row">
             <Typography sx={styles.description}>
               {expense.description}
@@ -59,16 +75,6 @@ const ExpenseList = () => {
           <TableCell align="right" sx={{ paddingRight: "20px" }}>
             <Button sx={styles.button} variant="contained">
               <EditExpenseModal expense={expense} />
-              {/* <DeleteIcon
-                onClick={() => {
-                  if (expenses.length === 1) {
-                    dispatch(reset());
-                    dispatch(removeExpense(expense.id));
-                  } else {
-                    dispatch(removeExpense(expense.id));
-                  }
-                }}
-              /> */}
             </Button>
           </TableCell>
         </TableRow>

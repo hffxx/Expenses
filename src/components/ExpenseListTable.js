@@ -1,46 +1,129 @@
-import * as React from "react";
+import React, { useState } from "react";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
-import ExpenseList from "./ExpenseList";
+import { Button, Typography, Paper } from "@mui/material";
+import Checkbox from "@mui/material/Checkbox";
+import getVisibleExpenses from "../redux/selectors/expenses";
+import { useSelector } from "react-redux";
+import EditExpenseModal from "./EditExpenseModal";
+import moment from "moment";
 
 const styles = {
   table: {
     borderRadius: "10px",
   },
+  row: {},
+  btnContainer: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "flex-end",
+    alignItems: "center",
+  },
+  button: {
+    padding: "0px",
+    minWidth: "30px",
+    minHeight: "30px",
+  },
+  description: {
+    fontWeight: 500,
+  },
 };
 
-function createData(name, calories, fat, carbs, protein, type = "essa") {
-  return { name, calories, fat, carbs, protein, type };
-}
-
-const rows = [
-  createData("Frozen yoghurt", 159, 6.0, 24, 4.0),
-  createData("Ice cream sandwich", 237, 9.0, 37, 4.3),
-  createData("Eclair", 262, 16.0, 24, 6.0),
-  createData("Cupcake", 305, 3.7, 67, 4.3),
-  createData("Gingerbread", 356, 16.0, 49, 3.9),
+const heads = [
+  { field: "expensesList", headerName: "Expenses List", align: "left" },
+  { field: "amount", headerName: "Amount", align: "center" },
+  { field: "note", headerName: "Note", align: "center" },
+  { field: "createdAt", headerName: "Created At", align: "center" },
+  { field: "type", headerName: "Type", align: "center" },
+  { field: "action", headerName: "Action", align: "right" },
 ];
 
 export default function ExpenseListTable() {
+  const visibleExpenses = useSelector((state) =>
+    getVisibleExpenses(state.expenses, state.filters)
+  );
+
+  const [deleteList, setDeleteList] = useState([]);
+
+  console.log(deleteList);
+
+  const setDeleteListAll = () => {
+    if (deleteList.length === 0) {
+      setDeleteList(visibleExpenses.map((expense) => expense.id));
+    } else if (deleteList.length === visibleExpenses.length) {
+      setDeleteList([]);
+    }
+  };
+  const setDeleteListById = (id) => {
+    if (deleteList.indexOf(id) < 0) {
+      setDeleteList([...deleteList, id]);
+    } else {
+      setDeleteList(deleteList.filter((deleteListId) => deleteListId !== id));
+    }
+  };
   return (
     <TableContainer component={Paper} sx={styles.table} elevation={4}>
-      <Table sx={{ minWidth: 650 }} aria-label="simple table">
+      <Table sx={{ minWidth: 500 }} aria-label="simple table">
         <TableHead>
-          <TableRow>
-            <TableCell>Expenses List</TableCell>
-            <TableCell align="center">Amount</TableCell>
-            <TableCell align="center">Note</TableCell>
-            <TableCell align="center">Created At</TableCell>
-            <TableCell align="center">Type</TableCell>
-            <TableCell align="right">Action</TableCell>
+          <TableRow sx={styles.row}>
+            <TableCell>
+              <Checkbox
+                onChange={() => setDeleteListAll()}
+                indeterminate={
+                  deleteList.length > 0 &&
+                  deleteList.length !== visibleExpenses.length
+                }
+                checked={deleteList.length === visibleExpenses.length}
+              />
+            </TableCell>
+            {heads.map((head) => (
+              <TableCell key={head.field} align={head.align}>
+                <h2>{head.headerName}</h2>
+              </TableCell>
+            ))}
           </TableRow>
         </TableHead>
-        <ExpenseList></ExpenseList>
+        <TableBody>
+          {visibleExpenses.map((expense) => (
+            <TableRow
+              key={expense.id}
+              sx={{
+                "&:last-child td, &:last-child th": { border: 0 },
+              }}
+            >
+              <TableCell>
+                <Checkbox
+                  onChange={() => {
+                    setDeleteListById(expense.id);
+                  }}
+                  checked={deleteList.indexOf(expense.id) !== -1}
+                />
+              </TableCell>
+              <TableCell component="th" scope="row" align="left">
+                <Typography sx={styles.description}>
+                  {expense.description}
+                </Typography>
+              </TableCell>
+              <TableCell align="center">
+                <Typography variant="inherit">{`${expense.amount} PLN`}</Typography>
+              </TableCell>
+              <TableCell align="center">{expense.note}</TableCell>
+              <TableCell align="center">
+                {moment(expense.createdAt).format("MM/DD/YYYY")}
+              </TableCell>
+              <TableCell align="center">{expense.expenseType}</TableCell>
+              <TableCell align="right" sx={{ paddingRight: "20px" }}>
+                <Button sx={styles.button} variant="contained">
+                  <EditExpenseModal expense={expense} />
+                </Button>
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
       </Table>
     </TableContainer>
   );
