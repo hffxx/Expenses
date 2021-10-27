@@ -13,6 +13,9 @@ const styles = {
     padding: "10px",
     borderRadius: "15px",
   },
+  title: {
+    marginLeft: "20px",
+  },
 };
 
 const App = () => {
@@ -21,7 +24,9 @@ const App = () => {
     <Container maxWidth="xl">
       <BrowserRouter>
         <AppBar sx={styles.appBar} position="static" color="inherit">
-          <Typography variant="h2">{title}</Typography>
+          <Typography variant="h2" sx={styles.title}>
+            {title}
+          </Typography>
           <Navbar />
         </AppBar>
         <Switch>

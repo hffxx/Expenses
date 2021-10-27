@@ -1,19 +1,19 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import getVisibleExpenses from "../redux/selectors/expenses";
+import getVisibleExpenses from "../../redux/selectors/expenses";
 import { Container, Typography } from "@mui/material";
 
 const styles = {
-  balance: {
-    display: "flex",
-    justifyContent: "center",
-    padding: "10px",
-  },
   balanceMinus: {
     color: "red",
+    padding: "10px",
   },
   balancePlus: {
     color: "green",
+    padding: "10px",
+  },
+  balanceZero: {
+    padding: "10px",
   },
 };
 const balanceStyle = (total, styles) => {
@@ -23,6 +23,8 @@ const balanceStyle = (total, styles) => {
     return styles.balancePlus;
   } else if (total < 0) {
     return styles.balanceMinus;
+  } else {
+    return styles.balanceZero;
   }
 };
 
@@ -43,11 +45,9 @@ const TotalBalance = () => {
     .reduce((a, amount) => a + amount, 0);
 
   return (
-    <Container sx={styles.balance}>
-      <Typography variant="h6" sx={balanceStyle(total, styles)}>
-        {total} PLN
-      </Typography>
-    </Container>
+    <Typography variant="h6" sx={balanceStyle(total, styles)}>
+      {total} PLN
+    </Typography>
   );
 };
 
