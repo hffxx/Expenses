@@ -6,3 +6,4 @@ export const defaultFilterState = {
   endDate: null,
   expensesType: "",
 };
+export const defaultDeleteListState = [];

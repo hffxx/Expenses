@@ -4,6 +4,7 @@ import AddExpenseModal from "./AddExpenseModal";
 import TotalBalance from "./Balance/TotalBalance";
 import { setSortBy } from "../redux/actions/filterActions";
 import { useDispatch, useSelector } from "react-redux";
+import DeleteButton from "./Buttons/DeleteButton";
 
 const styles = {
   sideMenu: {
@@ -42,6 +43,7 @@ const SideMenu = (props) => {
       >
         {isOpen ? "Toggle Table" : "Toggle Charts"}
       </Button>
+      <DeleteButton />
     </Paper>
   );
 };
