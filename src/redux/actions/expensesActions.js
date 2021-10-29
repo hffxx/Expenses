@@ -22,7 +22,7 @@ export const editExpense = (id, updates) => ({
   id,
   updates,
 });
-export const removeExpense = (id = "") => ({
+export const removeExpense = (deleteList = []) => ({
   type: "REMOVE_EXPENSE",
-  id, //id:id
+  deleteList,
 });

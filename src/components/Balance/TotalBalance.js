@@ -17,9 +17,7 @@ const styles = {
   },
 };
 const balanceStyle = (total, styles) => {
-  if (total === 0) {
-    return undefined;
-  } else if (total > 0) {
+  if (total > 0) {
     return styles.balancePlus;
   } else if (total < 0) {
     return styles.balanceMinus;

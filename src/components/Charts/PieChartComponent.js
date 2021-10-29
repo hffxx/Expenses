@@ -72,7 +72,7 @@ const PieChartComponent = () => {
         nameKey="description"
         unit="%"
         labelLine={false}
-        label={renderCustomizedLabel}
+        // label={renderCustomizedLabel}
         animationBegin={100}
         animationDuration={800}
       >

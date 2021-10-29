@@ -8,9 +8,15 @@ import TableRow from "@mui/material/TableRow";
 import { Button, Typography, Paper } from "@mui/material";
 import Checkbox from "@mui/material/Checkbox";
 import getVisibleExpenses from "../redux/selectors/expenses";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import EditExpenseModal from "./EditExpenseModal";
 import moment from "moment";
+import {
+  addToDeleteListById,
+  removeFromDeleteListById,
+  addAllToDeleteList,
+  removeAllFromDeleteList,
+} from "../redux/actions/deleteListActions";
 
 const styles = {
   table: {
@@ -43,26 +49,29 @@ const heads = [
 ];
 
 export default function ExpenseListTable() {
+  const dispatch = useDispatch();
   const visibleExpenses = useSelector((state) =>
     getVisibleExpenses(state.expenses, state.filters)
   );
+  const expenses = useSelector((state) => state.expenses);
+  console.log(expenses);
+  const deleteListAll = visibleExpenses.map((expense) => expense.id);
 
-  const [deleteList, setDeleteList] = useState([]);
-
+  const deleteList = useSelector((state) => state.deleteList);
   console.log(deleteList);
 
-  const setDeleteListAll = () => {
-    if (deleteList.length === 0) {
-      setDeleteList(visibleExpenses.map((expense) => expense.id));
-    } else if (deleteList.length === visibleExpenses.length) {
-      setDeleteList([]);
+  const handleCheckBoxAll = () => {
+    if (deleteList.length === visibleExpenses.length) {
+      dispatch(removeAllFromDeleteList());
+    } else {
+      dispatch(addAllToDeleteList(deleteListAll));
     }
   };
-  const setDeleteListById = (id) => {
+  const handleCheckBoxId = (id) => {
     if (deleteList.indexOf(id) < 0) {
-      setDeleteList([...deleteList, id]);
+      dispatch(addToDeleteListById(id));
     } else {
-      setDeleteList(deleteList.filter((deleteListId) => deleteListId !== id));
+      dispatch(removeFromDeleteListById(id));
     }
   };
   return (
@@ -72,12 +81,15 @@ export default function ExpenseListTable() {
           <TableRow sx={styles.row}>
             <TableCell>
               <Checkbox
-                onChange={() => setDeleteListAll()}
+                onChange={() => handleCheckBoxAll()}
                 indeterminate={
                   deleteList.length > 0 &&
                   deleteList.length !== visibleExpenses.length
                 }
-                checked={deleteList.length === visibleExpenses.length}
+                checked={
+                  deleteList.length !== 0 &&
+                  deleteList.length === visibleExpenses.length
+                }
               />
             </TableCell>
             {heads.map((head) => (
@@ -98,7 +110,7 @@ export default function ExpenseListTable() {
               <TableCell>
                 <Checkbox
                   onChange={() => {
-                    setDeleteListById(expense.id);
+                    handleCheckBoxId(expense.id);
                   }}
                   checked={deleteList.indexOf(expense.id) !== -1}
                 />
