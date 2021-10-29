@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { removeExpense } from "../../redux/actions/expensesActions";
 import { removeAllFromDeleteList } from "../../redux/actions/deleteListActions";
 
-function DeleteButton() {
+const DeleteButton = () => {
   const dispatch = useDispatch();
   const deleteList = useSelector((state) => state.deleteList);
   return (
@@ -17,6 +17,6 @@ function DeleteButton() {
       Delete
     </Button>
   );
-}
+};
 
 export default DeleteButton;
