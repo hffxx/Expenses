@@ -92,6 +92,7 @@ const ExpenseEditForm = (props) => {
             label="Amount"
             placeholder="Enter an Amount"
             variant="outlined"
+            type="number"
             onChange={(e) =>
               setExpense({ ...expense, amount: Number(e.target.value) })
             }
