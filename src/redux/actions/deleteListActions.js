@@ -10,6 +10,6 @@ export const addAllToDeleteList = (deleteList = []) => ({
   type: "ADD_ALL",
   deleteList,
 });
-export const removeAllFromDeleteList = (deleteList = []) => ({
+export const removeAllFromDeleteList = () => ({
   type: "REMOVE_ALL",
 });

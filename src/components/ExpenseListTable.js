@@ -58,7 +58,6 @@ export default function ExpenseListTable() {
   const deleteListAll = visibleExpenses.map((expense) => expense.id);
 
   const deleteList = useSelector((state) => state.deleteList);
-  console.log(deleteList);
 
   const handleCheckBoxAll = () => {
     if (deleteList.length === visibleExpenses.length) {
