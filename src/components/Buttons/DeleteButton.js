@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Button } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { removeExpense } from "../../redux/actions/expensesActions";
-import { removeAllFromDeleteList } from "../../redux/actions/deleteListActions";
+import { removeFromDeleteList } from "../../redux/actions/deleteListActions";
 import getVisibleExpenses from "../../redux/selectors/expenses";
+import { reset } from "../../redux/actions/filterActions";
 
 const DeleteButton = () => {
   const dispatch = useDispatch();
+
   const deleteList = useSelector((state) => state.deleteList);
   const visibleExpenses = useSelector((state) =>
     getVisibleExpenses(state.expenses, state.filters)
@@ -16,11 +18,13 @@ const DeleteButton = () => {
   const deleteListFiltered = deleteList.filter((el) =>
     visibleExpensesIds.includes(el)
   );
-
+  useEffect(() => {
+    dispatch(reset());
+  }, [visibleExpensesIds.length === 0]);
   return (
     <Button
       onClick={() => {
-        dispatch(removeAllFromDeleteList());
+        dispatch(removeFromDeleteList(deleteListFiltered));
         dispatch(removeExpense(deleteListFiltered));
       }}
     >

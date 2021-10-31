@@ -53,11 +53,13 @@ export default function ExpenseListTable() {
   const visibleExpenses = useSelector((state) =>
     getVisibleExpenses(state.expenses, state.filters)
   );
-  const expenses = useSelector((state) => state.expenses);
-  console.log(expenses);
   const deleteListAll = visibleExpenses.map((expense) => expense.id);
 
   const deleteList = useSelector((state) => state.deleteList);
+
+  const deleteListFiltered = deleteList.filter((el) =>
+    deleteListAll.includes(el)
+  );
 
   const handleCheckBoxAll = () => {
     if (deleteList.length === visibleExpenses.length) {
@@ -82,12 +84,12 @@ export default function ExpenseListTable() {
               <Checkbox
                 onChange={() => handleCheckBoxAll()}
                 indeterminate={
-                  deleteList.length > 0 &&
-                  deleteList.length !== visibleExpenses.length
+                  deleteListFiltered.length > 0 &&
+                  deleteListFiltered.length !== visibleExpenses.length
                 }
                 checked={
-                  deleteList.length !== 0 &&
-                  deleteList.length === visibleExpenses.length
+                  deleteListFiltered.length !== 0 &&
+                  deleteListFiltered.length === visibleExpenses.length
                 }
               />
             </TableCell>
