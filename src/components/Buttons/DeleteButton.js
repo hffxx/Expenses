@@ -18,14 +18,15 @@ const DeleteButton = () => {
   const deleteListFiltered = deleteList.filter((el) =>
     visibleExpensesIds.includes(el)
   );
-  useEffect(() => {
-    dispatch(reset());
-  }, [visibleExpensesIds.length === 0]);
+
   return (
     <Button
       onClick={() => {
         dispatch(removeFromDeleteList(deleteListFiltered));
         dispatch(removeExpense(deleteListFiltered));
+        if (visibleExpensesIds.length === deleteListFiltered.length) {
+          dispatch(reset());
+        }
       }}
     >
       Delete
