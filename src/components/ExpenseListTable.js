@@ -15,7 +15,7 @@ import {
   addToDeleteListById,
   removeFromDeleteListById,
   addAllToDeleteList,
-  removeAllFromDeleteList,
+  removeFromDeleteList,
 } from "../redux/actions/deleteListActions";
 
 const styles = {
@@ -40,7 +40,7 @@ const styles = {
 };
 
 const heads = [
-  { field: "expensesList", headerName: "Expenses List", align: "left" },
+  { field: "title", headerName: "Title", align: "left" },
   { field: "amount", headerName: "Amount", align: "center" },
   { field: "note", headerName: "Note", align: "center" },
   { field: "createdAt", headerName: "Created At", align: "center" },
@@ -57,15 +57,17 @@ export default function ExpenseListTable() {
 
   const deleteList = useSelector((state) => state.deleteList);
 
-  const deleteListFiltered = deleteList.filter((el) =>
+  const visibleDeleteList = deleteList.filter((el) =>
     deleteListAll.includes(el)
   );
-
+  const deleteListMissingIdList = deleteListAll.filter(
+    (id) => !visibleDeleteList.includes(id)
+  );
   const handleCheckBoxAll = () => {
-    if (deleteList.length === visibleExpenses.length) {
-      dispatch(removeAllFromDeleteList());
+    if (visibleDeleteList.length === visibleExpenses.length) {
+      dispatch(removeFromDeleteList(visibleDeleteList));
     } else {
-      dispatch(addAllToDeleteList(deleteListAll));
+      dispatch(addAllToDeleteList(deleteListMissingIdList));
     }
   };
   const handleCheckBoxId = (id) => {
@@ -84,12 +86,12 @@ export default function ExpenseListTable() {
               <Checkbox
                 onChange={() => handleCheckBoxAll()}
                 indeterminate={
-                  deleteListFiltered.length > 0 &&
-                  deleteListFiltered.length !== visibleExpenses.length
+                  visibleDeleteList.length > 0 &&
+                  visibleDeleteList.length !== visibleExpenses.length
                 }
                 checked={
-                  deleteListFiltered.length !== 0 &&
-                  deleteListFiltered.length === visibleExpenses.length
+                  visibleDeleteList.length > 0 &&
+                  visibleDeleteList.length === visibleExpenses.length
                 }
               />
             </TableCell>

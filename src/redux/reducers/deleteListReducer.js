@@ -7,9 +7,7 @@ const deleteListReducer = (state = defaultDeleteListState, action) => {
     case "REMOVE_BY_ID":
       return state.filter((id) => id !== action.id);
     case "ADD_ALL":
-      return action.deleteList;
-    case "REMOVE_ALL":
-      return defaultDeleteListState;
+      return [...state, ...action.deleteList];
     case "REMOVE_VISIBLE":
       return state.filter((id) => !action.visibleDeleteList.includes(id));
     default:
