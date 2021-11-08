@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -50,6 +50,7 @@ const heads = [
 
 export default function ExpenseListTable() {
   const dispatch = useDispatch();
+
   const visibleExpenses = useSelector((state) =>
     getVisibleExpenses(state.expenses, state.filters)
   );
@@ -63,6 +64,7 @@ export default function ExpenseListTable() {
   const deleteListMissingIdList = deleteListAll.filter(
     (id) => !visibleDeleteList.includes(id)
   );
+
   const handleCheckBoxAll = () => {
     if (visibleDeleteList.length === visibleExpenses.length) {
       dispatch(removeFromDeleteList(visibleDeleteList));

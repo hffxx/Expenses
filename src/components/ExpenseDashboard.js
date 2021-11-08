@@ -4,8 +4,11 @@ import { Grid } from "@mui/material";
 import React from "react";
 import SideMenu from "./SideMenu";
 import ChartComponent from "./Charts/ChartComponent";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ExpenseListTable from "./ExpenseListTable";
+import { useDispatch } from "react-redux";
+import { setExpenses } from "../redux/actions/expensesActions";
+import { LS_EXPENSE } from "../config";
 
 const styles = {
   display: {
@@ -18,6 +21,20 @@ const styles = {
 
 const ExpenseDashboardPage = () => {
   const [isOpen, toggleView] = useState(false);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    const loadExpenses = () => {
+      let list = [];
+      try {
+        list = JSON.parse(localStorage.getItem(LS_EXPENSE) || "[]");
+        dispatch(setExpenses(list));
+      } catch (e) {
+        console.error("err");
+        localStorage.setItem(LS_EXPENSE, "[]");
+      }
+    };
+    loadExpenses();
+  }, []);
   return (
     <Grid container sx={styles.display} spacing={2}>
       <Grid item xs={3}>

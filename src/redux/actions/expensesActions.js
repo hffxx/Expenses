@@ -26,3 +26,7 @@ export const removeExpense = (deleteList = []) => ({
   type: "REMOVE_EXPENSE",
   deleteList,
 });
+export const setExpenses = (list = []) => ({
+  type: "SET_EXPENSES",
+  list,
+});
