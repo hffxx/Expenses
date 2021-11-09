@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { addExpense } from "../redux/actions/expensesActions";
 import { useHistory } from "react-router";
@@ -15,14 +15,27 @@ import {
   Typography,
   TextField,
   Grid,
+  Box,
 } from "@mui/material";
 
 const styles = {
   inputModal: {
     margin: "5px",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  radio: {
+    margin: "5px",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-around",
   },
   btnAdd: {
     marginTop: "20px",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
   },
 };
 
@@ -30,27 +43,30 @@ function ExpenseForm({ handleClose }) {
   const [expense, setExpense] = useState({
     description: "",
     note: "",
-    amount: 0,
+    amount: "",
     createdAt: moment().valueOf(),
     expenseType: "Bill",
   });
+
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    /^\d+(\.\d{1,2})?$/.test(expense.amount) || expense.amount === ""
+      ? setError("")
+      : setError("Number is not valid");
+  }, [expense.amount]);
 
   const dispatch = useDispatch();
   const history = useHistory();
 
   const handleAddExpense = () => {
-    const { description, amount, createdAt } = expense;
-    if (description && amount && moment(createdAt).isValid()) {
-      dispatch(addExpense(expense));
-      handleClose();
-      history.push("/");
-    } else {
-      window.alert("Invalid data, please fill again");
-    }
+    dispatch(addExpense(expense));
+    handleClose();
+    history.push("/");
   };
 
   return (
-    <Grid container align="center" justifyContent="center" spacing={2}>
+    <Box>
       <Typography gutterBottom variant="h3" align="center">
         Add Balance
       </Typography>
@@ -70,10 +86,16 @@ function ExpenseForm({ handleClose }) {
             label="Amount"
             placeholder="Enter an Amount"
             variant="outlined"
-            type="number"
-            onChange={(e) =>
-              setExpense({ ...expense, amount: Number(e.target.value) })
-            }
+            onChange={(e) => {
+              const { value } = e.target;
+              !isNaN(value) && setExpense({ ...expense, amount: value });
+            }}
+            value={expense.amount}
+            helperText={error}
+            error={!!error}
+            InputProps={{
+              endAdornment: <span>$</span>,
+            }}
           ></TextField>
         </Grid>
         <Grid item lg={6} sx={styles.inputModal}>
@@ -85,6 +107,22 @@ function ExpenseForm({ handleClose }) {
           ></TextField>
         </Grid>
         <Grid item lg={6} sx={styles.inputModal}>
+          <LocalizationProvider dateAdapter={DateAdapter}>
+            <DatePicker
+              value={expense.createdAt}
+              onChange={(date) => {
+                date !== null
+                  ? setExpense({
+                      ...expense,
+                      createdAt: date.valueOf(),
+                    })
+                  : console.log("Blad");
+              }}
+              renderInput={(params) => <TextField {...params} />}
+            />
+          </LocalizationProvider>
+        </Grid>
+        <Grid item lg={6} sx={styles.radio}>
           <FormControl component="fieldset">
             <RadioGroup
               row
@@ -107,30 +145,23 @@ function ExpenseForm({ handleClose }) {
             </RadioGroup>
           </FormControl>
         </Grid>
-        <Grid item lg={6} sx={styles.inputModal}>
-          <LocalizationProvider dateAdapter={DateAdapter}>
-            <DatePicker
-              label="Date"
-              value={expense.createdAt}
-              onChange={(date) => {
-                if (date) {
-                  setExpense({
-                    ...expense,
-                    createdAt: date.valueOf(),
-                  });
-                }
-              }}
-              renderInput={(params) => <TextField {...params} />}
-            />
-          </LocalizationProvider>
-        </Grid>
+
         <Grid item lg={6} sx={styles.btnAdd}>
-          <Button onClick={handleAddExpense} variant="contained">
+          <Button
+            onClick={handleAddExpense}
+            variant="contained"
+            disabled={
+              !!error ||
+              expense.description === "" ||
+              !moment(expense.createdAt).isValid()
+            }
+            size="large"
+          >
             Add Balance
           </Button>
         </Grid>
       </Grid>
-    </Grid>
+    </Box>
   );
 }
 

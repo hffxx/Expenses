@@ -32,7 +32,7 @@ const ExpenseListItem = (props) => {
   return (
     <Card sx={styles.card} variant="elevation" elevation={4}>
       <Typography variant="h2">{description}</Typography>
-      <Typography variant="h2">Amount: {amount} PLN</Typography>
+      <Typography variant="h2">Amount: {amount} $</Typography>
       <Typography variant="h4">Date: {createdAtFormatted}</Typography>
       <Typography variant="h5">Note: {note}</Typography>
       <Typography variant="h5">Type: {expenseType}</Typography>

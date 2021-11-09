@@ -1,4 +1,3 @@
-import ExpenseList from "./ExpenseList";
 import ExpenseListFilter from "./ExpenseListFilter";
 import { Grid } from "@mui/material";
 import React from "react";

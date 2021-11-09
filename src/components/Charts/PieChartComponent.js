@@ -57,7 +57,7 @@ const CustomTooltip = ({ active, payload, label }) => {
 
 const PieChartComponent = () => {
   const visibleExpenses = useSelector((state) =>
-    getVisibleExpenses(state.expenses, state.filters)
+    getVisibleExpenses(state.expenses.present, state.filters)
   );
   return (
     <PieChart width={450} height={450}>

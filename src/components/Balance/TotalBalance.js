@@ -4,16 +4,18 @@ import getVisibleExpenses from "../../redux/selectors/expenses";
 import { Container, Typography } from "@mui/material";
 
 const styles = {
+  balance: {},
   balanceMinus: {
     color: "red",
-    padding: "10px",
+    marginTop: "20px",
   },
   balancePlus: {
     color: "green",
-    padding: "10px",
+    marginTop: "20px",
   },
   balanceZero: {
-    padding: "10px",
+    color: "gray",
+    marginTop: "20px",
   },
 };
 const balanceStyle = (total, styles) => {
@@ -28,7 +30,7 @@ const balanceStyle = (total, styles) => {
 
 const TotalBalance = () => {
   const visibleExpenses = useSelector((state) =>
-    getVisibleExpenses(state.expenses, state.filters)
+    getVisibleExpenses(state.expenses.present, state.filters)
   );
   const total = visibleExpenses
     .map(({ expenseType, amount }) => {
@@ -43,8 +45,8 @@ const TotalBalance = () => {
     .reduce((a, amount) => a + amount, 0);
 
   return (
-    <Typography variant="h6" sx={balanceStyle(total, styles)}>
-      {total} PLN
+    <Typography variant="h4" sx={balanceStyle(total, styles)}>
+      {total} $
     </Typography>
   );
 };

@@ -2,9 +2,10 @@ import { createStore, combineReducers } from "redux";
 import expensesReducer from "../reducers/expensesReducer";
 import filtersReducer from "../reducers/filtersReducer";
 import deleteListReducer from "../reducers/deleteListReducer";
+import undoable from "redux-undo";
 
 const reducers = combineReducers({
-  expenses: expensesReducer,
+  expenses: undoable(expensesReducer),
   filters: filtersReducer,
   deleteList: deleteListReducer,
 });

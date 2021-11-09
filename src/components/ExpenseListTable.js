@@ -52,7 +52,7 @@ export default function ExpenseListTable() {
   const dispatch = useDispatch();
 
   const visibleExpenses = useSelector((state) =>
-    getVisibleExpenses(state.expenses, state.filters)
+    getVisibleExpenses(state.expenses.present, state.filters)
   );
   const deleteListAll = visibleExpenses.map((expense) => expense.id);
 
@@ -126,7 +126,7 @@ export default function ExpenseListTable() {
                 </Typography>
               </TableCell>
               <TableCell align="center">
-                <Typography variant="inherit">{`${expense.amount} PLN`}</Typography>
+                <Typography variant="inherit">{`${expense.amount} $`}</Typography>
               </TableCell>
               <TableCell align="center">{expense.note}</TableCell>
               <TableCell align="center">
