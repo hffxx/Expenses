@@ -1,9 +1,9 @@
 import React from "react";
-import { Paper, Typography, Button } from "@mui/material";
+import { Paper, Typography } from "@mui/material";
 
 import TotalBalance from "./Balance/TotalBalance";
-import { setSortBy } from "../redux/actions/filterActions";
-import { useDispatch, useSelector } from "react-redux";
+// import { setSortBy } from "../redux/actions/filterActions";
+// import { useDispatch, useSelector } from "react-redux";
 import ButtonsComponent from "./Buttons/ButtonsComponent";
 
 const styles = {
@@ -23,9 +23,9 @@ const styles = {
 };
 
 const SideMenu = (props) => {
-  const expenses = useSelector((state) => state.expenses.present);
-  const dispatch = useDispatch();
-  const { toggleView, isOpen } = props;
+  // const expenses = useSelector((state) => state.expenses.present);
+  // const dispatch = useDispatch();
+  // const { toggleView, isOpen } = props;
   return (
     <Paper sx={styles.sideMenu} variant="elevation" elevation={4}>
       <Typography variant="h4">Total Balance</Typography>

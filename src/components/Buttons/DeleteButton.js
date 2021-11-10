@@ -22,11 +22,13 @@ const DeleteButton = () => {
 
   const styles = {
     button: {
-      marginLeft: "10px",
-      height: 65,
-      width: 65,
-      borderRadius: 65 / 2,
-      backgroundColor: "#ff2b2b",
+      marginLeft: "5px",
+      width: "100px",
+      padding: "10px",
+      borderRadius: "20px",
+      display: "flex",
+      justifyContent: "space-around",
+      alignItems: "center",
     },
   };
 
@@ -43,6 +45,7 @@ const DeleteButton = () => {
         }
       }}
     >
+      <span>Delete</span>
       <DeleteIcon />
     </Button>
   );

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import ExpenseForm from "../ExpenseForm";
 import AddIcon from "@mui/icons-material/Add";
-import { Modal, Box, Container, Button } from "@mui/material";
+import { Modal, Box, Button } from "@mui/material";
 
 const styles = {
   modal: {
@@ -17,11 +17,13 @@ const styles = {
     borderRadius: "10px",
   },
   button: {
-    marginRight: "10px",
-    height: 65,
-    width: 65,
-    borderRadius: 65 / 2,
-    backgroundColor: "#00b02f",
+    display: "flex",
+    padding: "10px",
+    justifyContent: "space-around",
+    alignItems: "center",
+    marginRight: "5px",
+    width: "100px",
+    borderRadius: "20px",
   },
 };
 
@@ -38,6 +40,7 @@ const AddButton = () => {
         color="success"
       >
         <AddIcon />
+        <span>Add</span>
       </Button>
       <Modal
         open={open}

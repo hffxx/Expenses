@@ -6,24 +6,30 @@ import React from "react";
 import { Container } from "@mui/material";
 
 const styles = {
-  buttons: {
+  container: {
     display: "flex",
-    flexWrap: "wrap",
-    padding: "10px",
-    height: "200px",
-    width: "200px",
+    flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
+  },
+  test: {
+    margin: "5px",
+    display: "flex",
+    justifyContent: "center",
   },
 };
 
 function ButtonsComponent() {
   return (
-    <Container sx={styles.buttons}>
-      <AddButton />
-      <DeleteButton />
-      <Undo />
-      <Redo />
+    <Container sx={styles.container}>
+      <Container sx={styles.test}>
+        <AddButton />
+        <DeleteButton />
+      </Container>
+      <Container sx={styles.test}>
+        <Undo />
+        <Redo />
+      </Container>
     </Container>
   );
 }

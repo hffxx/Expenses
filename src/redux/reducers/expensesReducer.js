@@ -1,11 +1,11 @@
-import { defaultExpensesState } from "../defaultState/defaultState";
 import { LS_EXPENSE } from "../../config";
+import { loadExpenses } from "../defaultState/localStorage";
 
 const updateExpensesLocalStorage = (state) => {
   localStorage.setItem(LS_EXPENSE, JSON.stringify(state));
 };
 
-const expensesReducer = (state = defaultExpensesState, action) => {
+const expensesReducer = (state = loadExpenses(), action) => {
   let newState;
   switch (action.type) {
     case "ADD_EXPENSE":
@@ -27,9 +27,6 @@ const expensesReducer = (state = defaultExpensesState, action) => {
           return expense;
         }
       });
-      break;
-    case "SET_EXPENSES":
-      newState = action.list;
       break;
     default:
       return state;

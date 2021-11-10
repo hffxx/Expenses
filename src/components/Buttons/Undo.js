@@ -7,11 +7,13 @@ import { Button } from "@mui/material";
 
 const styles = {
   button: {
-    margin: 0,
-    height: 65,
-    width: 65,
-    borderRadius: 65 / 2,
-    marginRight: "10px",
+    display: "flex",
+    justifyContent: "space-around",
+    alignItems: "center",
+    marginRight: "5px",
+    width: "100px",
+    borderRadius: "20px",
+    padding: "10px",
   },
 };
 
@@ -24,9 +26,10 @@ function Undo() {
       variant="contained"
       sx={styles.button}
       onClick={() => dispatch(ActionCreators.undo())}
-      disabled={expensesPast.length < 0}
+      disabled={expensesPast.length === 0}
     >
       <UndoIcon />
+      <span>Undo</span>
     </Button>
   );
 }
