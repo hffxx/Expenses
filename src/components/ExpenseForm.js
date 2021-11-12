@@ -64,6 +64,7 @@ function ExpenseForm({ handleClose }) {
     handleClose();
     history.push("/");
   };
+  console.log(expense);
 
   return (
     <Box>
@@ -116,7 +117,7 @@ function ExpenseForm({ handleClose }) {
                       ...expense,
                       createdAt: date.valueOf(),
                     })
-                  : console.log("Blad");
+                  : console.log("Podaj date");
               }}
               renderInput={(params) => <TextField {...params} />}
             />

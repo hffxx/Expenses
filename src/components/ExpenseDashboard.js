@@ -5,8 +5,7 @@ import SideMenu from "./SideMenu";
 import ChartComponent from "./Charts/ChartComponent";
 import { useState, useEffect } from "react";
 import ExpenseListTable from "./ExpenseListTable";
-import { useDispatch } from "react-redux";
-import { setExpenses } from "../redux/actions/expensesActions";
+import { useSelector } from "react-redux";
 import { LS_EXPENSE } from "../config";
 
 const styles = {
@@ -20,20 +19,15 @@ const styles = {
 
 const ExpenseDashboardPage = () => {
   const [isOpen, toggleView] = useState(false);
-  const dispatch = useDispatch();
-  // useEffect(() => {
-  //   const loadExpenses = () => {
-  //     try {
-  //       dispatch(
-  //         setExpenses(JSON.parse(localStorage.getItem(LS_EXPENSE) || "[]"))
-  //       );
-  //     } catch (e) {
-  //       console.error("err");
-  //       localStorage.setItem(LS_EXPENSE, "[]");
-  //     }
-  //   };
-  //   loadExpenses();
-  // });
+
+  const expenses = useSelector((state) => state.expenses.present);
+
+  useEffect(() => {
+    const updateExpensesLocalStorage = (state) => {
+      localStorage.setItem(LS_EXPENSE, JSON.stringify(state));
+    };
+    updateExpensesLocalStorage(expenses);
+  }, [expenses]);
   return (
     <Grid container sx={styles.display} spacing={2}>
       <Grid item xs={3}>

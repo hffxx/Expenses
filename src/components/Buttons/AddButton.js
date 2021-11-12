@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import ExpenseForm from "../ExpenseForm";
 import AddIcon from "@mui/icons-material/Add";
-import { Modal, Box, Button } from "@mui/material";
+import { Modal, Box, Fab } from "@mui/material";
 
 const styles = {
   modal: {
@@ -17,13 +17,9 @@ const styles = {
     borderRadius: "10px",
   },
   button: {
-    display: "flex",
     padding: "10px",
-    justifyContent: "space-around",
-    alignItems: "center",
     marginRight: "5px",
     width: "100px",
-    borderRadius: "20px",
   },
 };
 
@@ -33,15 +29,10 @@ const AddButton = () => {
   const handleClose = () => setOpen(false);
   return (
     <Box>
-      <Button
-        onClick={handleOpen}
-        variant="contained"
-        sx={styles.button}
-        color="success"
-      >
+      <Fab onClick={handleOpen} variant="extended" sx={styles.button}>
         <AddIcon />
         <span>Add</span>
-      </Button>
+      </Fab>
       <Modal
         open={open}
         onClose={handleClose}

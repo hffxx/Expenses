@@ -1,11 +1,11 @@
 import React from "react";
-import { Button } from "@mui/material";
+import { Button, Fab, Typography } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { removeExpense } from "../../redux/actions/expensesActions";
 import { removeFromDeleteList } from "../../redux/actions/deleteListActions";
 import getVisibleExpenses from "../../redux/selectors/expenses";
 import { reset } from "../../redux/actions/filterActions";
-import DeleteIcon from "@mui/icons-material/Delete";
+import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 
 const DeleteButton = () => {
   const dispatch = useDispatch();
@@ -25,17 +25,16 @@ const DeleteButton = () => {
       marginLeft: "5px",
       width: "100px",
       padding: "10px",
-      borderRadius: "20px",
       display: "flex",
-      justifyContent: "space-around",
+      justifyContent: "center",
       alignItems: "center",
+      borderRadius: "20px",
     },
   };
 
   return (
-    <Button
-      variant="contained"
-      color="error"
+    <Fab
+      variant="extended"
       sx={styles.button}
       onClick={() => {
         dispatch(removeFromDeleteList(deleteListFiltered));
@@ -45,9 +44,9 @@ const DeleteButton = () => {
         }
       }}
     >
-      <span>Delete</span>
-      <DeleteIcon />
-    </Button>
+      <DeleteOutlineIcon sx={{ marginBottom: "2px" }} />
+      <Typography variant="string">Delete</Typography>
+    </Fab>
   );
 };
 

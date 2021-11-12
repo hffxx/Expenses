@@ -11,9 +11,10 @@ const styles = {
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
+    marginTop: "10px",
   },
-  test: {
-    margin: "5px",
+  buttons: {
+    margin: "10px",
     display: "flex",
     justifyContent: "center",
   },
@@ -22,11 +23,11 @@ const styles = {
 function ButtonsComponent() {
   return (
     <Container sx={styles.container}>
-      <Container sx={styles.test}>
+      <Container sx={styles.buttons}>
         <AddButton />
         <DeleteButton />
       </Container>
-      <Container sx={styles.test}>
+      <Container sx={styles.buttons}>
         <Undo />
         <Redo />
       </Container>

@@ -1,23 +1,13 @@
-import { LS_EXPENSE } from "../../config";
-import { loadExpenses } from "../defaultState/localStorage";
-
-const updateExpensesLocalStorage = (state) => {
-  localStorage.setItem(LS_EXPENSE, JSON.stringify(state));
-};
+import { LS_EXPENSE, loadExpenses } from "../../config";
 
 const expensesReducer = (state = loadExpenses(), action) => {
-  let newState;
   switch (action.type) {
     case "ADD_EXPENSE":
-      newState = [...state, action.expense];
-      break;
+      return [...state, action.expense];
     case "REMOVE_EXPENSE":
-      newState = state.filter(
-        (expense) => !action.deleteList.includes(expense.id)
-      );
-      break;
+      return state.filter((expense) => !action.deleteList.includes(expense.id));
     case "EDIT_EXPENSE":
-      newState = state.map((expense) => {
+      return state.map((expense) => {
         if (expense.id === action.id) {
           return {
             ...expense,
@@ -27,12 +17,9 @@ const expensesReducer = (state = loadExpenses(), action) => {
           return expense;
         }
       });
-      break;
     default:
       return state;
   }
-  updateExpensesLocalStorage(newState);
-  return newState;
 };
 
 export default expensesReducer;
