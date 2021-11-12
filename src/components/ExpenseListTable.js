@@ -4,21 +4,19 @@ import {
   Typography,
   Paper,
   TableRow,
-  TableHead,
   TableContainer,
   TableCell,
   TableBody,
   Table,
   Checkbox,
+  Box,
 } from "@mui/material";
 import {
   addToDeleteListById,
   removeFromDeleteListById,
-  addAllToDeleteList,
-  removeFromDeleteList,
 } from "../redux/actions/deleteListActions";
 import getVisibleExpenses from "../redux/selectors/expenses";
-
+import TableHeader from "./Table/TableHeader";
 import moment from "moment";
 import EditButton from "./Buttons/EditButton";
 import DeleteButtonTable from "./Buttons/DeleteButtonTable";
@@ -47,15 +45,10 @@ const styles = {
   tableCells: {
     "&:last-of-type": { width: "4.1rem" },
   },
+  buttons: {
+    display: "flex",
+  },
 };
-
-const heads = [
-  { field: "title", headerName: "Title", align: "center" },
-  { field: "amount", headerName: "Amount", align: "center" },
-  { field: "note", headerName: "Note", align: "center" },
-  { field: "createdAt", headerName: "Created At", align: "center" },
-  { field: "action", headerName: "", align: "center" },
-];
 
 export default function ExpenseListTable() {
   const dispatch = useDispatch();
@@ -71,17 +64,7 @@ export default function ExpenseListTable() {
   const visibleDeleteList = deleteList.filter((el) =>
     deleteListAll.includes(el)
   );
-  const deleteListMissingIdList = deleteListAll.filter(
-    (id) => !visibleDeleteList.includes(id)
-  );
 
-  const handleCheckBoxAll = () => {
-    if (visibleDeleteList.length === visibleExpenses.length) {
-      dispatch(removeFromDeleteList(visibleDeleteList));
-    } else {
-      dispatch(addAllToDeleteList(deleteListMissingIdList));
-    }
-  };
   const handleCheckBoxId = (id) => {
     if (deleteList.indexOf(id) < 0) {
       dispatch(addToDeleteListById(id));
@@ -92,32 +75,7 @@ export default function ExpenseListTable() {
   return (
     <TableContainer component={Paper} sx={styles.table} elevation={4}>
       <Table sx={{ minWidth: 500 }}>
-        <TableHead sx={styles.header}>
-          <TableRow>
-            <TableCell align="center" sx={styles.tableCell}>
-              <Checkbox
-                onChange={() => handleCheckBoxAll()}
-                indeterminate={
-                  visibleDeleteList.length > 0 &&
-                  visibleDeleteList.length !== visibleExpenses.length
-                }
-                checked={
-                  visibleDeleteList.length > 0 &&
-                  visibleDeleteList.length === visibleExpenses.length
-                }
-              />
-            </TableCell>
-            {heads.map((head) => (
-              <TableCell
-                key={head.field}
-                align={head.align}
-                sx={styles.tableCells}
-              >
-                <Typography variant="h6">{head.headerName}</Typography>
-              </TableCell>
-            ))}
-          </TableRow>
-        </TableHead>
+        <TableHeader />
         <TableBody>
           {visibleExpenses.map((expense) => (
             <TableRow key={expense.id} sx={styles.tableElement}>
@@ -146,8 +104,10 @@ export default function ExpenseListTable() {
                 </Typography>
               </TableCell>
               <TableCell align="right">
-                <EditButton expense={expense} />
-                <DeleteButtonTable id={expense.id} />
+                <Box sx={styles.buttons}>
+                  <EditButton expense={expense} />
+                  <DeleteButtonTable id={expense.id} />
+                </Box>
               </TableCell>
             </TableRow>
           ))}

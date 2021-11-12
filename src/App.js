@@ -7,7 +7,7 @@ import { Routes } from "./routes";
 const styles = {
   appBar: {
     flexDirection: "row",
-    justifyContent: "space-between",
+    justifyContent: "center",
     margin: "10px 0",
     alignItems: "center",
     padding: "10px",
@@ -19,7 +19,7 @@ const styles = {
 };
 
 const App = () => {
-  const title = "Expenses";
+  const title = "Expenses Calculator";
   return (
     <Container maxWidth="xl">
       <BrowserRouter>
@@ -27,7 +27,6 @@ const App = () => {
           <Typography variant="h2" sx={styles.title}>
             {title}
           </Typography>
-          <Navbar />
         </AppBar>
         <Switch>
           <Routes />

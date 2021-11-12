@@ -17,9 +17,8 @@ const styles = {
     borderRadius: "10px",
   },
   button: {
-    padding: "10px",
     marginRight: "5px",
-    width: "100px",
+    width: "110px",
   },
 };
 

@@ -1,25 +1,23 @@
 import React from "react";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { Button } from "@mui/material";
+import { Fab } from "@mui/material";
 import { useDispatch } from "react-redux";
 import { removeExpense } from "../../redux/actions/expensesActions";
 import { removeFromDeleteList } from "../../redux/actions/deleteListActions";
 
 const styles = {
   button: {
-    padding: "0px",
-    minWidth: "30px",
-    minHeight: "30px",
     marginLeft: "5px",
+    color: "white",
+    background: "red",
   },
 };
 
 function DeleteButtonTable({ id }) {
   const dispatch = useDispatch();
   return (
-    <Button
-      variant="contained"
-      color="error"
+    <Fab
+      size="small"
       sx={styles.button}
       onClick={() => {
         dispatch(removeFromDeleteList(id));
@@ -27,7 +25,7 @@ function DeleteButtonTable({ id }) {
       }}
     >
       <DeleteIcon />
-    </Button>
+    </Fab>
   );
 }
 

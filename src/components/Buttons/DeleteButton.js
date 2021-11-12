@@ -23,12 +23,10 @@ const DeleteButton = () => {
   const styles = {
     button: {
       marginLeft: "5px",
-      width: "100px",
-      padding: "10px",
       display: "flex",
       justifyContent: "center",
       alignItems: "center",
-      borderRadius: "20px",
+      width: "110px",
     },
   };
 
@@ -36,6 +34,7 @@ const DeleteButton = () => {
     <Fab
       variant="extended"
       sx={styles.button}
+      disabled={deleteList.length === 0}
       onClick={() => {
         dispatch(removeFromDeleteList(deleteListFiltered));
         dispatch(removeExpense(deleteListFiltered));
