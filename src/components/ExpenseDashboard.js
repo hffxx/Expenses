@@ -4,9 +4,9 @@ import React from "react";
 import SideMenu from "./SideMenu";
 import ChartComponent from "./Charts/ChartComponent";
 import { useState, useEffect } from "react";
-import ExpenseListTable from "./ExpenseListTable";
 import { useSelector } from "react-redux";
 import { LS_EXPENSE } from "../config";
+import TableComponent from "./Table/TableComponent";
 
 const styles = {
   display: {
@@ -35,7 +35,7 @@ const ExpenseDashboardPage = () => {
       </Grid>
       <Grid item xs={9}>
         <ExpenseListFilter isOpen={isOpen} />
-        {isOpen ? <ChartComponent /> : <ExpenseListTable />}
+        {isOpen ? <ChartComponent /> : <TableComponent />}
       </Grid>
     </Grid>
   );

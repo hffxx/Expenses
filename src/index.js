@@ -3,9 +3,7 @@ import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import "./index.css";
 import App from "./App";
-import { configureStore } from "./redux/store/configureStore";
-
-const store = configureStore();
+import { store } from "./redux/store/configureStore";
 
 ReactDOM.render(
   <Provider store={store}>

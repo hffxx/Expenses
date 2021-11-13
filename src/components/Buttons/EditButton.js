@@ -5,7 +5,11 @@ import { Button, Fab } from "@mui/material";
 const styles = {
   button: {
     color: "white",
-    background: "blue",
+    background: "#0066ff",
+    transition: "0.5s",
+    "&:hover": {
+      background: "#0047b3",
+    },
   },
 };
 

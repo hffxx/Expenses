@@ -92,7 +92,7 @@ function ExpenseForm({ handleClose }) {
               !isNaN(value) && setExpense({ ...expense, amount: value });
             }}
             value={expense.amount}
-            helperText={error}
+            // helperText={error}
             error={!!error}
             InputProps={{
               endAdornment: <span>$</span>,
@@ -117,7 +117,7 @@ function ExpenseForm({ handleClose }) {
                       ...expense,
                       createdAt: date.valueOf(),
                     })
-                  : console.log("Podaj date");
+                  : setExpense({ ...expense, createdAt: "" });
               }}
               renderInput={(params) => <TextField {...params} />}
             />

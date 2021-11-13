@@ -15,12 +15,10 @@ import {
 } from "@mui/material";
 import { heads } from "./config";
 import SettingsIcon from "@mui/icons-material/Settings";
+
 const styles = {
-  header: {
-    background: "",
-  },
   tableCell: {
-    "&:first-of-type": { width: "0rem" },
+    "&:first-of-type": { width: "2rem" },
   },
   tableCells: {
     "&:last-of-type": { width: "4.1rem" },
