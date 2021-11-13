@@ -19,6 +19,12 @@ const styles = {
   button: {
     marginRight: "5px",
     width: "110px",
+    background: "  #258e25",
+    color: "white",
+    transition: "0.5s",
+    "&:hover": {
+      background: "#1a651a",
+    },
   },
 };
 

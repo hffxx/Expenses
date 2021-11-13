@@ -9,7 +9,11 @@ const styles = {
   button: {
     marginLeft: "5px",
     color: "white",
-    background: "red",
+    background: "#e84434",
+    transition: "0.5s",
+    "&:hover": {
+      background: "#a11e12",
+    },
   },
 };
 

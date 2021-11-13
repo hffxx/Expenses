@@ -6,12 +6,15 @@ import { Typography } from "@mui/material";
 const styles = {
   balance: {},
   balanceMinus: {
+    marginTop: "10px",
     color: "red",
   },
   balancePlus: {
+    marginTop: "10px",
     color: "green",
   },
   balanceZero: {
+    marginTop: "10px",
     color: "gray",
   },
 };

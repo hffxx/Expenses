@@ -11,9 +11,10 @@ import {
   TableHead,
   TableCell,
   Checkbox,
+  Box,
 } from "@mui/material";
 import { heads } from "./config";
-
+import SettingsIcon from "@mui/icons-material/Settings";
 const styles = {
   header: {
     background: "",
@@ -24,6 +25,18 @@ const styles = {
   tableCells: {
     "&:last-of-type": { width: "4.1rem" },
   },
+  settings: {
+    display: "flex",
+    justifyContent: "flex-end",
+    alignItems: "center",
+    transition: "0.5s",
+    "&:hover": {
+      color: "gray",
+    },
+  },
+  lastRow: {
+    width: "20px",
+  },
 };
 
 function TableHeader() {
@@ -31,12 +44,12 @@ function TableHeader() {
   const visibleExpenses = useSelector((state) =>
     getVisibleExpenses(state.expenses.present, state.filters)
   );
-  const deleteListAll = visibleExpenses.map((expense) => expense.id);
   const deleteList = useSelector((state) => state.deleteList);
-
+  const deleteListAll = visibleExpenses.map((expense) => expense.id);
   const deleteListMissingIdList = deleteListAll.filter(
     (id) => !deleteList.includes(id)
   );
+
   const handleCheckBoxAll = () => {
     if (deleteList.length === visibleExpenses.length) {
       dispatch(removeFromDeleteList(deleteList));
@@ -66,6 +79,11 @@ function TableHeader() {
             <Typography variant="h6">{head.headerName}</Typography>
           </TableCell>
         ))}
+        <TableCell align="right" sx={styles.lastRow}>
+          <Box sx={styles.settings}>
+            <SettingsIcon />
+          </Box>
+        </TableCell>
       </TableRow>
     </TableHead>
   );

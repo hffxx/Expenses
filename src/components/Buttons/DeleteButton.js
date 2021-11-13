@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Fab, Typography } from "@mui/material";
+import { Fab, Typography } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { removeExpense } from "../../redux/actions/expensesActions";
 import { removeFromDeleteList } from "../../redux/actions/deleteListActions";
@@ -27,6 +27,12 @@ const DeleteButton = () => {
       justifyContent: "center",
       alignItems: "center",
       width: "110px",
+      color: "white",
+      background: "#e84434",
+      transition: "0.5s",
+      "&:hover": {
+        background: "#a11e12",
+      },
     },
   };
 
