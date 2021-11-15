@@ -8,7 +8,6 @@ function TablePaginationComponent({
   handleChangePage,
   handleChangeRowsPerPage,
 }) {
-  console.log();
   return (
     <TablePagination
       rowsPerPageOptions={[5, 10, 25]}
@@ -16,7 +15,7 @@ function TablePaginationComponent({
       count={rows.length}
       rowsPerPage={rowsPerPage}
       page={page}
-      onChangePage={handleChangePage}
+      onPageChange={handleChangePage}
       onRowsPerPageChange={handleChangeRowsPerPage}
     ></TablePagination>
   );
