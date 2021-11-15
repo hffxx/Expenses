@@ -1,6 +1,6 @@
-import { defaultExpensesState } from "../defaultState/defaultState";
+import { loadExpenses } from "../../config";
 
-const expensesReducer = (state = defaultExpensesState, action) => {
+const expensesReducer = (state = loadExpenses(), action) => {
   switch (action.type) {
     case "ADD_EXPENSE":
       return [...state, action.expense];

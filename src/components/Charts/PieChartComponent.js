@@ -6,32 +6,32 @@ import { Typography, Paper } from "@mui/material";
 
 const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "#008042"];
 
-const RADIAN = Math.PI / 180;
-const renderCustomizedLabel = ({
-  cx,
-  cy,
-  midAngle,
-  innerRadius,
-  outerRadius,
-  percent,
-  index,
-}) => {
-  const radius = innerRadius + (outerRadius - innerRadius) * 0.4;
-  const x = cx + radius * Math.cos(-midAngle * RADIAN);
-  const y = cy + radius * Math.sin(-midAngle * RADIAN);
+// const RADIAN = Math.PI / 180;
+// const renderCustomizedLabel = ({
+//   cx,
+//   cy,
+//   midAngle,
+//   innerRadius,
+//   outerRadius,
+//   percent,
+//   index,
+// }) => {
+//   const radius = innerRadius + (outerRadius - innerRadius) * 0.4;
+//   const x = cx + radius * Math.cos(-midAngle * RADIAN);
+//   const y = cy + radius * Math.sin(-midAngle * RADIAN);
 
-  return (
-    <text
-      x={x}
-      y={y}
-      fill="white"
-      textAnchor={x > cx ? "start" : "end"}
-      dominantBaseline="central"
-    >
-      {`${(percent * 100).toFixed(0)}%`}
-    </text>
-  );
-};
+//   return (
+//     <text
+//       x={x}
+//       y={y}
+//       fill="white"
+//       textAnchor={x > cx ? "start" : "end"}
+//       dominantBaseline="central"
+//     >
+//       {`${(percent * 100).toFixed(0)}%`}
+//     </text>
+//   );
+// };
 
 const styles = {
   tooltip: {
@@ -57,7 +57,7 @@ const CustomTooltip = ({ active, payload, label }) => {
 
 const PieChartComponent = () => {
   const visibleExpenses = useSelector((state) =>
-    getVisibleExpenses(state.expenses, state.filters)
+    getVisibleExpenses(state.expenses.present, state.filters)
   );
   return (
     <PieChart width={450} height={450}>

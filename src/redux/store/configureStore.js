@@ -2,25 +2,19 @@ import { createStore, combineReducers } from "redux";
 import expensesReducer from "../reducers/expensesReducer";
 import filtersReducer from "../reducers/filtersReducer";
 import deleteListReducer from "../reducers/deleteListReducer";
-import { persistStore, persistReducer } from "redux-persist";
-import storage from "redux-persist/lib/storage";
+import undoable from "redux-undo";
 
 const reducers = combineReducers({
-  expenses: expensesReducer,
+  expenses: undoable(expensesReducer),
   filters: filtersReducer,
   deleteList: deleteListReducer,
 });
 
-const persistConfig = {
-  key: "root",
-  storage,
-  blacklist: ["filters", "deleteList"],
+const configureStore = () => {
+  const store = createStore(
+    reducers,
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  );
+  return store;
 };
-
-const persistedReducer = persistReducer(persistConfig, reducers);
-
-export const configureStore = () => {
-  const store = createStore(persistedReducer);
-  const persistor = persistStore(store);
-  return { store, persistor };
-};
+export const store = configureStore();

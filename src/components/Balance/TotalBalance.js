@@ -1,19 +1,21 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import getVisibleExpenses from "../../redux/selectors/expenses";
-import { Container, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 
 const styles = {
+  balance: {},
   balanceMinus: {
+    marginTop: "10px",
     color: "red",
-    padding: "10px",
   },
   balancePlus: {
+    marginTop: "10px",
     color: "green",
-    padding: "10px",
   },
   balanceZero: {
-    padding: "10px",
+    marginTop: "10px",
+    color: "gray",
   },
 };
 const balanceStyle = (total, styles) => {
@@ -28,23 +30,24 @@ const balanceStyle = (total, styles) => {
 
 const TotalBalance = () => {
   const visibleExpenses = useSelector((state) =>
-    getVisibleExpenses(state.expenses, state.filters)
+    getVisibleExpenses(state.expenses.present, state.filters)
   );
   const total = visibleExpenses
     .map(({ expenseType, amount }) => {
       if (expenseType === "Bill") {
-        return -amount;
+        return Number(-amount);
       } else if (expenseType === "Earning") {
-        return amount;
+        return Number(amount);
       } else {
-        return (amount = undefined);
+        return (amount = 0);
       }
     })
-    .reduce((a, amount) => a + amount, 0);
+    .reduce((a, amount) => a + amount, 0)
+    .toFixed(2);
 
   return (
-    <Typography variant="h6" sx={balanceStyle(total, styles)}>
-      {total} PLN
+    <Typography variant="h4" sx={balanceStyle(total, styles)}>
+      {total} $
     </Typography>
   );
 };

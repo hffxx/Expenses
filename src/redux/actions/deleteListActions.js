@@ -14,3 +14,6 @@ export const removeFromDeleteList = (visibleDeleteList = []) => ({
   type: "REMOVE_VISIBLE",
   visibleDeleteList,
 });
+export const clearDeleteList = () => ({
+  type: "CLEAR_LIST",
+});

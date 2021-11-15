@@ -10,6 +10,8 @@ const deleteListReducer = (state = defaultDeleteListState, action) => {
       return [...state, ...action.deleteList];
     case "REMOVE_VISIBLE":
       return state.filter((id) => !action.visibleDeleteList.includes(id));
+    case "CLEAR_LIST":
+      return [];
     default:
       return state;
   }

@@ -1,8 +1,7 @@
-import Modal from "@mui/material/Modal";
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
 import React, { useState } from "react";
-import ExpenseForm from "../components/ExpenseForm";
+import ExpenseForm from "../ExpenseForm";
+import AddIcon from "@mui/icons-material/Add";
+import { Modal, Box, Fab } from "@mui/material";
 
 const styles = {
   modal: {
@@ -17,25 +16,28 @@ const styles = {
     p: 4,
     borderRadius: "10px",
   },
-  item: {
-    width: "10rem",
+  button: {
+    marginRight: "5px",
+    width: "110px",
+    background: "  #258e25",
+    color: "white",
+    transition: "0.5s",
+    "&:hover": {
+      background: "#1a651a",
+    },
   },
 };
 
-const AddExpenseModal = () => {
+const AddButton = () => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   return (
-    <div>
-      <Button
-        onClick={handleOpen}
-        variant="outlined"
-        color="success"
-        sx={styles.item}
-      >
-        Add Balance
-      </Button>
+    <Box>
+      <Fab onClick={handleOpen} variant="extended" sx={styles.button}>
+        <AddIcon />
+        <span>Add</span>
+      </Fab>
       <Modal
         open={open}
         onClose={handleClose}
@@ -46,8 +48,8 @@ const AddExpenseModal = () => {
           <ExpenseForm handleClose={handleClose} />
         </Box>
       </Modal>
-    </div>
+    </Box>
   );
 };
 
-export default AddExpenseModal;
+export default AddButton;
