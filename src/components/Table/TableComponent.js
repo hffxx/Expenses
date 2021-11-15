@@ -12,16 +12,20 @@ const styles = {
 };
 
 function TableComponent() {
-  const [page, setPage] = useState(1);
+  const rows = useSelector((state) =>
+    getVisibleExpenses(state.expenses.present, state.filters)
+  );
+  const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
   const handleChangeRowsPerPage = (e) => {
     setRowsPerPage(Number(e.target.value));
     setPage(0);
   };
-  const rows = useSelector((state) =>
-    getVisibleExpenses(state.expenses.present, state.filters)
-  );
+  const handleChangePage = (e) => {
+    console.log();
+    setPage(e);
+  };
   const emptyRows =
     rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
 
@@ -32,6 +36,7 @@ function TableComponent() {
     handleChangeRowsPerPage,
     emptyRows,
     rows,
+    handleChangePage,
   };
   return (
     <TableContainer component={Paper} sx={styles.table} elevation={4}>

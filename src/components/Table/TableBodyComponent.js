@@ -59,18 +59,28 @@ function TableBodyComponent({ page, rowsPerPage, emptyRows }) {
       dispatch(removeFromDeleteListById(id));
     }
   };
+
+  const isChecked = (id) => deleteList.indexOf(id) !== -1;
+
   return (
     <TableBody>
       {visibleExpenses
         .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
         .map((expense) => (
-          <TableRow key={expense.id} sx={styles.tableElement}>
+          <TableRow
+            key={expense.id}
+            sx={
+              isChecked(expense.id)
+                ? { transition: "0.1s", background: "rgba(63, 101, 191, 0.1)" }
+                : { transition: "0.1s" }
+            }
+          >
             <TableCell align="left">
               <Checkbox
                 onChange={() => {
                   handleCheckBoxId(expense.id);
                 }}
-                checked={deleteList.indexOf(expense.id) !== -1}
+                checked={isChecked(expense.id)}
               />
             </TableCell>
             <TableCell component="th" scope="row" align="center">
