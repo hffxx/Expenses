@@ -50,11 +50,11 @@ function ExpenseForm({ handleClose }) {
 
   const [error, setError] = useState("");
 
-  useEffect(() => {
-    /^\d+(\.\d{1,2})?$/.test(expense.amount) || expense.amount === ""
-      ? setError("")
-      : setError("Number is not valid");
-  }, [expense.amount]);
+  // useEffect(() => {
+  //   /^\d+(\.\d{1,2})?$/.test(expense.amount) || expense.amount === ""
+  //     ? setError("")
+  //     : setError("Number is not valid");
+  // }, [expense.amount]);
 
   const dispatch = useDispatch();
   const history = useHistory();
@@ -80,6 +80,7 @@ function ExpenseForm({ handleClose }) {
             onChange={(e) =>
               setExpense({ ...expense, description: e.target.value })
             }
+            inputProps={{ maxLength: 10 }}
           ></TextField>
         </Grid>
         <Grid item lg={6} sx={styles.inputModal}>
@@ -93,7 +94,8 @@ function ExpenseForm({ handleClose }) {
             }}
             value={expense.amount}
             // helperText={error}
-            error={!!error}
+            // error={!!error}
+            inputProps={{ maxLength: 10 }}
             InputProps={{
               endAdornment: <span>$</span>,
             }}
@@ -105,6 +107,7 @@ function ExpenseForm({ handleClose }) {
             placeholder="Enter a Note"
             variant="outlined"
             onChange={(e) => setExpense({ ...expense, note: e.target.value })}
+            inputProps={{ maxLength: 10 }}
           ></TextField>
         </Grid>
         <Grid item lg={6} sx={styles.inputModal}>

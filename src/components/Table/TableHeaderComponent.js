@@ -17,7 +17,7 @@ import { heads } from "./config";
 import SettingsIcon from "@mui/icons-material/Settings";
 
 const styles = {
-  tableCell: {
+  firstRow: {
     "&:first-of-type": { width: "2rem" },
   },
   tableCells: {
@@ -27,9 +27,12 @@ const styles = {
     display: "flex",
     justifyContent: "flex-end",
     alignItems: "center",
+  },
+  gear: {
     transition: "0.5s",
     "&:hover": {
       color: "gray",
+      cursor: "pointer",
     },
   },
   lastRow: {
@@ -37,7 +40,7 @@ const styles = {
   },
 };
 
-function TableHeader() {
+function TableHeaderComponent() {
   const dispatch = useDispatch();
   const visibleExpenses = useSelector((state) =>
     getVisibleExpenses(state.expenses.present, state.filters)
@@ -59,7 +62,7 @@ function TableHeader() {
   return (
     <TableHead sx={styles.header}>
       <TableRow>
-        <TableCell align="center" sx={styles.tableCell}>
+        <TableCell align="center" sx={styles.firstRow}>
           <Checkbox
             onChange={() => handleCheckBoxAll()}
             indeterminate={
@@ -79,7 +82,7 @@ function TableHeader() {
         ))}
         <TableCell align="right" sx={styles.lastRow}>
           <Box sx={styles.settings}>
-            <SettingsIcon />
+            <SettingsIcon sx={styles.gear} />
           </Box>
         </TableCell>
       </TableRow>
@@ -87,4 +90,4 @@ function TableHeader() {
   );
 }
 
-export default TableHeader;
+export default TableHeaderComponent;

@@ -7,6 +7,7 @@ import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { LS_EXPENSE } from "../config";
 import TableComponent from "./Table/TableComponent";
+import Table from "./Table/Table";
 
 const styles = {
   display: {

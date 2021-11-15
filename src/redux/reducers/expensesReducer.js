@@ -1,4 +1,4 @@
-import { LS_EXPENSE, loadExpenses } from "../../config";
+import { loadExpenses } from "../../config";
 
 const expensesReducer = (state = loadExpenses(), action) => {
   switch (action.type) {

@@ -32,9 +32,6 @@ const styles = {
   description: {
     fontWeight: "bold",
   },
-  tableElement: {
-    "&:last-child td, &:last-child th": { border: 0 },
-  },
   tableCell: {
     "&:first-of-type": { width: "0rem" },
   },
@@ -46,13 +43,12 @@ const styles = {
   },
 };
 
-function TableBodyComponent() {
+function TableBodyComponent({ page, rowsPerPage, emptyRows }) {
   const dispatch = useDispatch();
 
   const visibleExpenses = useSelector((state) =>
     getVisibleExpenses(state.expenses.present, state.filters)
   );
-  const deleteListAll = visibleExpenses.map((expense) => expense.id);
 
   const deleteList = useSelector((state) => state.deleteList);
 
@@ -63,43 +59,60 @@ function TableBodyComponent() {
       dispatch(removeFromDeleteListById(id));
     }
   };
-
   return (
     <TableBody>
-      {visibleExpenses.map((expense) => (
-        <TableRow key={expense.id} sx={styles.tableElement}>
-          <TableCell align="left">
-            <Checkbox
-              onChange={() => {
-                handleCheckBoxId(expense.id);
-              }}
-              checked={deleteList.indexOf(expense.id) !== -1}
-            />
-          </TableCell>
-          <TableCell component="th" scope="row" align="center">
-            <Typography sx={styles.description}>
-              {expense.description}
-            </Typography>
-          </TableCell>
-          <TableCell align="center">
-            <Typography variant="string">{`${expense.amount} $`}</Typography>
-          </TableCell>
-          <TableCell align="center">
-            <Typography variant="string">{expense.note}</Typography>
-          </TableCell>
-          <TableCell align="center">
-            <Typography variant="string">
-              {moment(expense.createdAt).format("MM/DD/YYYY")}
-            </Typography>
-          </TableCell>
-          <TableCell align="right">
-            <Box sx={styles.buttons}>
-              <EditButton expense={expense} />
-              <DeleteButtonTable id={expense.id} />
-            </Box>
-          </TableCell>
+      {visibleExpenses
+        .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+        .map((expense) => (
+          <TableRow key={expense.id} sx={styles.tableElement}>
+            <TableCell align="left">
+              <Checkbox
+                onChange={() => {
+                  handleCheckBoxId(expense.id);
+                }}
+                checked={deleteList.indexOf(expense.id) !== -1}
+              />
+            </TableCell>
+            <TableCell component="th" scope="row" align="center">
+              <Typography sx={styles.description}>
+                {expense.description}
+              </Typography>
+            </TableCell>
+            <TableCell
+              align="center"
+              sx={
+                expense.expenseType === "Bill"
+                  ? { color: "red" }
+                  : { color: "green" }
+              }
+            >
+              <Typography variant="string">
+                {expense.expenseType === "Bill"
+                  ? `- ${expense.amount}$`
+                  : `+ ${expense.amount}$`}
+              </Typography>
+            </TableCell>
+            <TableCell align="center">
+              <Typography variant="string">{expense.note}</Typography>
+            </TableCell>
+            <TableCell align="center">
+              <Typography variant="string">
+                {moment(expense.createdAt).format("MM/DD/YYYY")}
+              </Typography>
+            </TableCell>
+            <TableCell align="right">
+              <Box sx={styles.buttons}>
+                <EditButton expense={expense} />
+                <DeleteButtonTable id={expense.id} />
+              </Box>
+            </TableCell>
+          </TableRow>
+        ))}
+      {emptyRows > 0 && (
+        <TableRow style={{ height: 75 * emptyRows }}>
+          <TableCell colSpan={6} />
         </TableRow>
-      ))}
+      )}
     </TableBody>
   );
 }

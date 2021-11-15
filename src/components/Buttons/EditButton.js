@@ -1,6 +1,6 @@
 import React from "react";
 import EditExpenseModal from "../EditExpenseModal";
-import { Button, Fab } from "@mui/material";
+import { Fab } from "@mui/material";
 
 const styles = {
   button: {
