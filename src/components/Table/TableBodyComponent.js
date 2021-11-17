@@ -98,8 +98,8 @@ function TableBodyComponent({ page, rowsPerPage, emptyRows }) {
             >
               <Typography variant="string">
                 {expense.expenseType === "Bill"
-                  ? `- ${expense.amount}$`
-                  : `+ ${expense.amount}$`}
+                  ? `- $${expense.amount}`
+                  : `+ $${expense.amount}`}
               </Typography>
             </TableCell>
             <TableCell align="center">

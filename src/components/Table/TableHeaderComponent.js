@@ -15,7 +15,7 @@ import {
 } from "@mui/material";
 import { heads } from "./config";
 import SettingsIcon from "@mui/icons-material/Settings";
-
+import DeleteButton from "../Buttons/DeleteButton";
 const styles = {
   firstRow: {
     "&:first-of-type": { width: "2rem" },
@@ -50,10 +50,13 @@ function TableHeaderComponent() {
   const deleteListMissingIdList = deleteListAll.filter(
     (id) => !deleteList.includes(id)
   );
-
+  const visibleDeleteList = deleteList.filter((el) =>
+    deleteListAll.includes(el)
+  );
+  console.log(visibleDeleteList);
   const handleCheckBoxAll = () => {
-    if (deleteList.length === visibleExpenses.length) {
-      dispatch(removeFromDeleteList(deleteList));
+    if (visibleDeleteList.length === visibleExpenses.length) {
+      dispatch(removeFromDeleteList(visibleDeleteList));
     } else {
       dispatch(addAllToDeleteList(deleteListMissingIdList));
     }
@@ -66,12 +69,12 @@ function TableHeaderComponent() {
           <Checkbox
             onChange={() => handleCheckBoxAll()}
             indeterminate={
-              deleteList.length > 0 &&
-              deleteList.length !== visibleExpenses.length
+              visibleDeleteList.length > 0 &&
+              visibleDeleteList.length !== visibleExpenses.length
             }
             checked={
-              deleteList.length > 0 &&
-              deleteList.length === visibleExpenses.length
+              visibleDeleteList.length > 0 &&
+              visibleDeleteList.length === visibleExpenses.length
             }
           />
         </TableCell>
@@ -82,7 +85,11 @@ function TableHeaderComponent() {
         ))}
         <TableCell align="right" sx={styles.lastRow}>
           <Box sx={styles.settings}>
-            <SettingsIcon sx={styles.gear} />
+            {visibleDeleteList.length > 0 ? (
+              <DeleteButton />
+            ) : (
+              <SettingsIcon sx={styles.gear} />
+            )}
           </Box>
         </TableCell>
       </TableRow>

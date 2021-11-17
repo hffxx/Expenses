@@ -25,7 +25,6 @@ function ButtonsComponent() {
     <Container sx={styles.container}>
       <Container sx={styles.buttons}>
         <AddButton />
-        <DeleteButton />
       </Container>
       <Container sx={styles.buttons}>
         <Undo />
