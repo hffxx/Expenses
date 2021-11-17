@@ -22,9 +22,8 @@ function TableComponent() {
     setRowsPerPage(Number(e.target.value));
     setPage(0);
   };
-  const handleChangePage = (e) => {
-    console.log();
-    setPage(e);
+  const handleChangePage = (e, newPage) => {
+    setPage(newPage);
   };
   const emptyRows =
     rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);

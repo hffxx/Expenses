@@ -50,11 +50,11 @@ function ExpenseForm({ handleClose }) {
 
   const [error, setError] = useState("");
 
-  // useEffect(() => {
-  //   /^\d+(\.\d{1,2})?$/.test(expense.amount) || expense.amount === ""
-  //     ? setError("")
-  //     : setError("Number is not valid");
-  // }, [expense.amount]);
+  useEffect(() => {
+    /^\d+(\.\d{1,2})?$/.test(expense.amount) || expense.amount === ""
+      ? setError("")
+      : setError("Number is not valid");
+  }, [expense.amount]);
 
   const dispatch = useDispatch();
   const history = useHistory();
@@ -64,7 +64,6 @@ function ExpenseForm({ handleClose }) {
     handleClose();
     history.push("/");
   };
-  console.log(expense);
 
   return (
     <Box>
@@ -94,7 +93,7 @@ function ExpenseForm({ handleClose }) {
             }}
             value={expense.amount}
             // helperText={error}
-            // error={!!error}
+            error={!!error}
             inputProps={{ maxLength: 10 }}
             InputProps={{
               endAdornment: <span>$</span>,

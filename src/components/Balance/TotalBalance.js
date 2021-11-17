@@ -2,29 +2,16 @@ import React from "react";
 import { useSelector } from "react-redux";
 import getVisibleExpenses from "../../redux/selectors/expenses";
 import { Typography } from "@mui/material";
+import CountUp from "react-countup";
 
-const styles = {
-  balance: {},
-  balanceMinus: {
-    marginTop: "10px",
-    color: "red",
-  },
-  balancePlus: {
-    marginTop: "10px",
-    color: "green",
-  },
-  balanceZero: {
-    marginTop: "10px",
-    color: "gray",
-  },
-};
-const balanceStyle = (total, styles) => {
+const balanceStyle = (total) => {
+  let totalStyle = { marginTop: "10px" };
   if (total > 0) {
-    return styles.balancePlus;
+    return { ...totalStyle, color: "green" };
   } else if (total < 0) {
-    return styles.balanceMinus;
+    return { ...totalStyle, color: "red" };
   } else {
-    return styles.balanceZero;
+    return { ...totalStyle, color: "grey" };
   }
 };
 
@@ -33,21 +20,21 @@ const TotalBalance = () => {
     getVisibleExpenses(state.expenses.present, state.filters)
   );
   const total = visibleExpenses
-    .map(({ expenseType, amount }) => {
-      if (expenseType === "Bill") {
-        return Number(-amount);
-      } else if (expenseType === "Earning") {
-        return Number(amount);
-      } else {
-        return (amount = 0);
-      }
-    })
+    .map(({ expenseType, amount }) =>
+      expenseType === "Bill" ? Number(-amount) : Number(amount)
+    )
     .reduce((a, amount) => a + amount, 0)
     .toFixed(2);
-
   return (
-    <Typography variant="h4" sx={balanceStyle(total, styles)}>
-      {total} $
+    <Typography variant="h4" sx={balanceStyle(total)}>
+      <CountUp
+        end={total}
+        preserveValue={true}
+        duration={1}
+        prefix="$"
+        decimals={2}
+        useEasing={true}
+      ></CountUp>
     </Typography>
   );
 };

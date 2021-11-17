@@ -18,7 +18,6 @@ const styles = {
   },
   button: {
     marginRight: "5px",
-    width: "110px",
     background: "  #258e25",
     color: "white",
     transition: "0.5s",
@@ -36,7 +35,7 @@ const AddButton = () => {
     <Box>
       <Fab onClick={handleOpen} variant="extended" sx={styles.button}>
         <AddIcon />
-        <span>Add</span>
+        <span>Add Expense</span>
       </Fab>
       <Modal
         open={open}
