@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import moment from "moment";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -12,10 +12,12 @@ import {
   TableBody,
   Checkbox,
   Box,
+  Fade,
 } from "@mui/material";
 import getVisibleExpenses from "../../redux/selectors/expenses";
 import DeleteButtonTable from "../Buttons/DeleteButtonTable";
 import EditButton from "../Buttons/EditButton";
+import { TransitionGroup } from "react-transition-group";
 
 const styles = {
   header: {
@@ -44,6 +46,8 @@ const styles = {
 };
 
 function TableBodyComponent({ page, rowsPerPage, emptyRows }) {
+  const containerRef = useRef(null);
+
   const dispatch = useDispatch();
 
   const visibleExpenses = useSelector((state) =>
@@ -64,60 +68,64 @@ function TableBodyComponent({ page, rowsPerPage, emptyRows }) {
 
   return (
     <TableBody>
-      {visibleExpenses
-        .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-        .map((expense) => (
-          <TableRow
-            key={expense.id}
-            sx={
-              isChecked(expense.id)
-                ? { transition: "0.1s", background: "rgba(63, 101, 191, 0.1)" }
-                : { transition: "0.1s" }
-            }
-          >
-            <TableCell align="left">
-              <Checkbox
-                onChange={() => {
-                  handleCheckBoxId(expense.id);
-                }}
-                checked={isChecked(expense.id)}
-              />
-            </TableCell>
-            <TableCell component="th" scope="row" align="center">
-              <Typography sx={styles.description}>
-                {expense.description}
-              </Typography>
-            </TableCell>
-            <TableCell
-              align="center"
-              sx={
-                expense.expenseType === "Bill"
-                  ? { color: "red" }
-                  : { color: "green" }
-              }
-            >
-              <Typography variant="string">
-                {expense.expenseType === "Bill"
-                  ? `- $${expense.amount}`
-                  : `+ $${expense.amount}`}
-              </Typography>
-            </TableCell>
-            <TableCell align="center">
-              <Typography variant="string">{expense.note}</Typography>
-            </TableCell>
-            <TableCell align="center">
-              <Typography variant="string">
-                {moment(expense.createdAt).format("MM/DD/YYYY")}
-              </Typography>
-            </TableCell>
-            <TableCell align="right">
-              <Box sx={styles.buttons}>
-                <EditButton expense={expense} />
-                <DeleteButtonTable id={expense.id} />
-              </Box>
-            </TableCell>
-          </TableRow>
-        ))}
+      <TransitionGroup component={null}>
+        {visibleExpenses
+          .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+          .map((expense) => (
+            <Fade key={expense.id} in={expense.in}>
+              <TableRow
+                key={expense.id}
+                sx={
+                  isChecked(expense.id) && {
+                    background: "rgba(63, 101, 191, 0.1)",
+                  }
+                }
+              >
+                <TableCell align="left">
+                  <Checkbox
+                    onChange={() => {
+                      handleCheckBoxId(expense.id);
+                    }}
+                    checked={isChecked(expense.id)}
+                  />
+                </TableCell>
+                <TableCell component="th" scope="row" align="center">
+                  <Typography sx={styles.description}>
+                    {expense.description}
+                  </Typography>
+                </TableCell>
+                <TableCell
+                  align="center"
+                  sx={
+                    expense.expenseType === "Bill"
+                      ? { color: "red" }
+                      : { color: "green" }
+                  }
+                >
+                  <Typography variant="string">
+                    {expense.expenseType === "Bill"
+                      ? `- $${expense.amount}`
+                      : `+ $${expense.amount}`}
+                  </Typography>
+                </TableCell>
+                <TableCell align="center">
+                  <Typography variant="string">{expense.note}</Typography>
+                </TableCell>
+                <TableCell align="center">
+                  <Typography variant="string">
+                    {moment(expense.createdAt).format("MM/DD/YYYY")}
+                  </Typography>
+                </TableCell>
+                <TableCell align="right">
+                  <Box sx={styles.buttons}>
+                    <EditButton expense={expense} />
+                    <DeleteButtonTable id={expense.id} />
+                  </Box>
+                </TableCell>
+              </TableRow>
+            </Fade>
+          ))}
+      </TransitionGroup>
       {emptyRows > 0 && (
         <TableRow style={{ height: 75 * emptyRows }}>
           <TableCell colSpan={6} />

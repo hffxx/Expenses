@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import ExpenseForm from "../ExpenseForm";
 import AddIcon from "@mui/icons-material/Add";
-import { Modal, Box, Fab } from "@mui/material";
+import { Modal, Box, Fab, Typography } from "@mui/material";
 
 const styles = {
   modal: {
@@ -35,7 +35,7 @@ const AddButton = () => {
     <Box>
       <Fab onClick={handleOpen} variant="extended" sx={styles.button}>
         <AddIcon />
-        <span>Add Expense</span>
+        <Typography variant="string">Add Expense</Typography>
       </Fab>
       <Modal
         open={open}

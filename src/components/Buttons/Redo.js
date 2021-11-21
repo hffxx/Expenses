@@ -33,7 +33,7 @@ function Redo() {
       }}
       disabled={expensesFuture.length === 0}
     >
-      <span>Redo</span>
+      Redo
       <RedoIcon />
     </Fab>
   );
