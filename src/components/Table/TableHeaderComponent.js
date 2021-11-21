@@ -25,6 +25,10 @@ const styles = {
     "&:first-of-type": { width: "2rem" },
   },
   tableCells: {
+    userSelect: "none",
+    "&:hover": {
+      cursor: "pointer",
+    },
     "&:last-of-type": { width: "4.1rem" },
   },
   settings: {
@@ -74,9 +78,9 @@ function TableHeaderComponent() {
   const arrowIcon = (field) => {
     switch (field) {
       case "amount":
-        if (filters.sortBy === "amountHigh") {
+        if (filters.sortBy === "amountLow") {
           return <ArrowDropUpIcon />;
-        } else if (filters.sortBy === "amountLow") {
+        } else if (filters.sortBy === "amountHigh") {
           return <ArrowDropDownIcon />;
         } else {
           return null;
@@ -93,7 +97,28 @@ function TableHeaderComponent() {
         return;
     }
   };
-  const setSortBy = (field, filtersSortBy) => {};
+  const setSort = (field) => {
+    switch (field) {
+      case "amount":
+        if (filters.sortBy === "") {
+          return dispatch(setSortBy("amountLow"));
+        } else if (filters.sortBy === "amountLow") {
+          return dispatch(setSortBy("amountHigh"));
+        } else {
+          return dispatch(setSortBy(""));
+        }
+      case "createdAt":
+        if (filters.sortBy === "") {
+          return dispatch(setSortBy("dateNew"));
+        } else if (filters.sortBy === "dateNew") {
+          return dispatch(setSortBy("dateOld"));
+        } else {
+          return dispatch(setSortBy(""));
+        }
+      default:
+        return;
+    }
+  };
 
   return (
     <TableHead>
@@ -115,12 +140,12 @@ function TableHeaderComponent() {
           <TableCell
             key={head.field}
             align={head.align}
-            sx={styles.tableCells}
-            onClick={() => head.sort && setSortBy(head.field, filters.sortBy)}
+            sx={head.sort && styles.tableCells}
+            onClick={() => head.sort && setSort(head.field)}
           >
             <Typography variant="h6" sx={styles.typography}>
               {head.headerName}
-              {head.sort && arrowIcon(head.field)}
+              {arrowIcon(head.field)}
             </Typography>
           </TableCell>
         ))}

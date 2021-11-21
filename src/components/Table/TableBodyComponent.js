@@ -74,11 +74,7 @@ function TableBodyComponent({ page, rowsPerPage, emptyRows }) {
           .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
           .map((expense) => (
             <Fade key={expense.id} in={expense.in}>
-              <TableRow
-                onClick={() => handleCheckBoxId(expense.id)}
-                key={expense.id}
-                hover={true}
-              >
+              <TableRow key={expense.id} hover={true}>
                 <TableCell align="left">
                   <Checkbox
                     onChange={() => {
