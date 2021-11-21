@@ -13,6 +13,7 @@ import {
   Checkbox,
   Box,
   Fade,
+  Grow,
 } from "@mui/material";
 import getVisibleExpenses from "../../redux/selectors/expenses";
 import DeleteButtonTable from "../Buttons/DeleteButtonTable";
@@ -74,12 +75,9 @@ function TableBodyComponent({ page, rowsPerPage, emptyRows }) {
           .map((expense) => (
             <Fade key={expense.id} in={expense.in}>
               <TableRow
+                onClick={() => handleCheckBoxId(expense.id)}
                 key={expense.id}
-                sx={
-                  isChecked(expense.id) && {
-                    background: "rgba(63, 101, 191, 0.1)",
-                  }
-                }
+                hover={true}
               >
                 <TableCell align="left">
                   <Checkbox
@@ -89,7 +87,7 @@ function TableBodyComponent({ page, rowsPerPage, emptyRows }) {
                     checked={isChecked(expense.id)}
                   />
                 </TableCell>
-                <TableCell component="th" scope="row" align="center">
+                <TableCell align="center">
                   <Typography sx={styles.description}>
                     {expense.description}
                   </Typography>
