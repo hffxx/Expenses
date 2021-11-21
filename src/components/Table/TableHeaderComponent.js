@@ -16,11 +16,19 @@ import {
 import { heads } from "./config";
 import SettingsIcon from "@mui/icons-material/Settings";
 import DeleteButton from "../Buttons/DeleteButton";
+import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
+import { setSortBy } from "../../redux/actions/filterActions";
+
 const styles = {
   firstRow: {
     "&:first-of-type": { width: "2rem" },
   },
   tableCells: {
+    userSelect: "none",
+    "&:hover": {
+      cursor: "pointer",
+    },
     "&:last-of-type": { width: "4.1rem" },
   },
   settings: {
@@ -38,6 +46,11 @@ const styles = {
   lastRow: {
     width: "20px",
   },
+  typography: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
 };
 
 function TableHeaderComponent() {
@@ -53,7 +66,6 @@ function TableHeaderComponent() {
   const visibleDeleteList = deleteList.filter((el) =>
     deleteListAll.includes(el)
   );
-  console.log(visibleDeleteList);
   const handleCheckBoxAll = () => {
     if (visibleDeleteList.length === visibleExpenses.length) {
       dispatch(removeFromDeleteList(visibleDeleteList));
@@ -61,9 +73,55 @@ function TableHeaderComponent() {
       dispatch(addAllToDeleteList(deleteListMissingIdList));
     }
   };
+  const filters = useSelector((state) => state.filters);
+
+  const arrowIcon = (field) => {
+    switch (field) {
+      case "amount":
+        if (filters.sortBy === "amountLow") {
+          return <ArrowDropUpIcon />;
+        } else if (filters.sortBy === "amountHigh") {
+          return <ArrowDropDownIcon />;
+        } else {
+          return null;
+        }
+      case "createdAt":
+        if (filters.sortBy === "dateNew") {
+          return <ArrowDropUpIcon />;
+        } else if (filters.sortBy === "dateOld") {
+          return <ArrowDropDownIcon />;
+        } else {
+          return null;
+        }
+      default:
+        return;
+    }
+  };
+  const setSort = (field) => {
+    switch (field) {
+      case "amount":
+        if (filters.sortBy === "") {
+          return dispatch(setSortBy("amountLow"));
+        } else if (filters.sortBy === "amountLow") {
+          return dispatch(setSortBy("amountHigh"));
+        } else {
+          return dispatch(setSortBy(""));
+        }
+      case "createdAt":
+        if (filters.sortBy === "") {
+          return dispatch(setSortBy("dateNew"));
+        } else if (filters.sortBy === "dateNew") {
+          return dispatch(setSortBy("dateOld"));
+        } else {
+          return dispatch(setSortBy(""));
+        }
+      default:
+        return;
+    }
+  };
 
   return (
-    <TableHead sx={styles.header}>
+    <TableHead>
       <TableRow>
         <TableCell align="center" sx={styles.firstRow}>
           <Checkbox
@@ -79,8 +137,16 @@ function TableHeaderComponent() {
           />
         </TableCell>
         {heads.map((head) => (
-          <TableCell key={head.field} align={head.align} sx={styles.tableCells}>
-            <Typography variant="h6">{head.headerName}</Typography>
+          <TableCell
+            key={head.field}
+            align={head.align}
+            sx={head.sort && styles.tableCells}
+            onClick={() => head.sort && setSort(head.field)}
+          >
+            <Typography variant="h6" sx={styles.typography}>
+              {head.headerName}
+              {arrowIcon(head.field)}
+            </Typography>
           </TableCell>
         ))}
         <TableCell align="right" sx={styles.lastRow}>

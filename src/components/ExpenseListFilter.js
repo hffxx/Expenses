@@ -61,32 +61,6 @@ const ExpenseListFilter = (props) => {
         }}
       ></TextField>
       <FormControl variant="outlined" sx={styles.formControl}>
-        <InputLabel id="demo-simple-select-outlined-label">Sort by</InputLabel>
-        <Select
-          disabled={isOpen ? true : false}
-          labelId="demo-simple-select-outlined-label"
-          id="demo-simple-select-outlined"
-          label="SortBy"
-          value={filtersState.sortBy}
-          onChange={(e) => {
-            if (e.target.value === "dateNew") {
-              dispatch(setSortBy(e.target.value));
-            } else if (e.target.value === "dateOld") {
-              dispatch(setSortBy(e.target.value));
-            } else if (e.target.value === "amountHigh") {
-              dispatch(setSortBy(e.target.value));
-            } else if (e.target.value === "amountLow") {
-              dispatch(setSortBy(e.target.value));
-            }
-          }}
-        >
-          <MenuItem value="dateNew">Date Newest</MenuItem>
-          <MenuItem value="dateOld">Date Oldest</MenuItem>
-          <MenuItem value="amountHigh">Amount Highest</MenuItem>
-          <MenuItem value="amountLow">Amount Lowest</MenuItem>
-        </Select>
-      </FormControl>
-      <FormControl variant="outlined" sx={styles.formControl}>
         <InputLabel id="demo-simple-select-outlined-label">Show</InputLabel>
         <Select
           labelId="demo-simple-select-outlined-label"
