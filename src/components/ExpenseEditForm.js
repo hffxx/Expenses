@@ -26,6 +26,12 @@ const styles = {
   },
 };
 
+const getInitState = (expense) => {
+  return {
+    decription: expense?.description || "",
+  };
+};
+
 const ExpenseEditForm = (props) => {
   const { description, amount, createdAt, id, note, expenseType } =
     props.expense;

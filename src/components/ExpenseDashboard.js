@@ -2,7 +2,6 @@ import ExpenseListFilter from "./ExpenseListFilter";
 import { Grid } from "@mui/material";
 import React from "react";
 import SideMenu from "./SideMenu";
-import ChartComponent from "./Charts/ChartComponent";
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { LS_EXPENSE } from "../config";
@@ -34,8 +33,8 @@ const ExpenseDashboardPage = () => {
         <SideMenu toggleView={toggleView} isOpen={isOpen} />
       </Grid>
       <Grid item xs={9}>
+        <TableComponent />
         <ExpenseListFilter isOpen={isOpen} />
-        {isOpen ? <ChartComponent /> : <TableComponent />}
       </Grid>
     </Grid>
   );

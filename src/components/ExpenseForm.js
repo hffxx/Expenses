@@ -49,7 +49,6 @@ function ExpenseForm({ handleClose }) {
   });
 
   const [error, setError] = useState("");
-
   useEffect(() => {
     /^\d+(\.\d{1,2})?$/.test(expense.amount) || expense.amount === ""
       ? setError("")
@@ -89,7 +88,8 @@ function ExpenseForm({ handleClose }) {
             variant="outlined"
             onChange={(e) => {
               const { value } = e.target;
-              !isNaN(value) && setExpense({ ...expense, amount: value });
+              !isNaN(value) &&
+                setExpense({ ...expense, amount: Number(value) });
             }}
             value={expense.amount}
             // helperText={error}

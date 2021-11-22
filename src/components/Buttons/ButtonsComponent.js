@@ -1,5 +1,4 @@
 import AddButton from "./AddButton";
-import DeleteButton from "./DeleteButton";
 import Redo from "./Redo";
 import Undo from "./Undo";
 import React from "react";
