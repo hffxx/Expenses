@@ -1,8 +1,8 @@
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
 import React, { useState } from "react";
-import ExpenseEditForm from "./ExpenseEditForm";
 import EditIcon from "@mui/icons-material/Edit";
+import FormComponent from "../FormComponent.js/FormComponent";
 
 const styles = {
   modalForm: {
@@ -24,26 +24,25 @@ const styles = {
   },
 };
 
-const EditExpenseModal = (props) => {
+const EditExpense = (props) => {
   const expense = props.expense;
   const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   return (
     <Box sx={styles.modal}>
-      <EditIcon onClick={handleOpen} />
+      <EditIcon onClick={() => setOpen(true)} />
       <Modal
         open={open}
-        onClose={handleClose}
+        onClose={() => setOpen(false)}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
         <Box sx={styles.modalForm}>
-          <ExpenseEditForm handleClose={handleClose} expense={expense} />
+          <FormComponent handleClose={handleClose} expense={expense} />
         </Box>
       </Modal>
     </Box>
   );
 };
 
-export default EditExpenseModal;
+export default EditExpense;

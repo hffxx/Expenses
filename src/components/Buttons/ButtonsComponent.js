@@ -1,4 +1,4 @@
-import AddButton from "./AddButton";
+import AddExpense from "../Modals/AddExpense";
 import Redo from "./Redo";
 import Undo from "./Undo";
 import React from "react";
@@ -23,7 +23,7 @@ function ButtonsComponent() {
   return (
     <Container sx={styles.container}>
       <Container sx={styles.buttons}>
-        <AddButton />
+        <AddExpense />
       </Container>
       <Container sx={styles.buttons}>
         <Undo />

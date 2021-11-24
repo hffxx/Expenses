@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import ExpenseForm from "../ExpenseForm";
 import AddIcon from "@mui/icons-material/Add";
 import { Modal, Box, Fab, Typography } from "@mui/material";
-
+import FormComponent from "../FormComponent.js/FormComponent";
 const styles = {
   modal: {
     position: "absolute",
@@ -27,28 +26,27 @@ const styles = {
   },
 };
 
-const AddButton = () => {
+const AddExpense = () => {
   const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   return (
     <Box>
-      <Fab onClick={handleOpen} variant="extended" sx={styles.button}>
+      <Fab onClick={() => setOpen(true)} variant="extended" sx={styles.button}>
         <AddIcon />
         <Typography variant="string">Add Expense</Typography>
       </Fab>
       <Modal
         open={open}
-        onClose={handleClose}
+        onClose={() => setOpen(false)}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
         <Box sx={styles.modal}>
-          <ExpenseForm handleClose={handleClose} />
+          <FormComponent handleClose={handleClose} />
         </Box>
       </Modal>
     </Box>
   );
 };
 
-export default AddButton;
+export default AddExpense;

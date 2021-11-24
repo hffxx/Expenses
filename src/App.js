@@ -1,4 +1,5 @@
 import "./App.css";
+import React from "react";
 import { BrowserRouter, Switch } from "react-router-dom";
 import { AppBar, Typography, Container } from "@mui/material";
 import { Routes } from "./routes";
