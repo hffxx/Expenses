@@ -23,26 +23,10 @@ const styles = {
 };
 
 const SideMenu = (props) => {
-  // const expenses = useSelector((state) => state.expenses.present);
-  // const dispatch = useDispatch();
-  // const { toggleView, isOpen } = props;
   return (
     <Paper sx={styles.sideMenu} variant="elevation" elevation={4}>
       <Typography variant="h4">Total Balance</Typography>
       <TotalBalance />
-      {/* 
-      <Button
-        disabled={!expenses.length}
-        variant="outlined"
-        color="secondary"
-        sx={styles.item}
-        onClick={() => {
-          dispatch(setSortBy("dateOld"));
-          toggleView(!isOpen);
-        }}
-      >
-        {isOpen ? "Toggle Table" : "Toggle Charts"}
-      </Button> */}
       <ButtonsComponent />
     </Paper>
   );

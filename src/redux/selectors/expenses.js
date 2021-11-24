@@ -31,8 +31,6 @@ const getVisibleExpenses = (
       return getSortConditional(a.createdAt, b.createdAt, sortBy === "dateNew");
     } else if (["amountHigh", "amountLow"].indexOf(sortBy) > -1) {
       return getSortConditional(a.amount, b.amount, sortBy === "amountHigh");
-    } else {
-      return null;
     }
   };
 

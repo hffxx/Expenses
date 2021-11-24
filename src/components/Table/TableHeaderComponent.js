@@ -13,11 +13,9 @@ import {
   Checkbox,
   Box,
 } from "@mui/material";
-import { heads } from "./config";
+import { heads, config } from "./config";
 import SettingsIcon from "@mui/icons-material/Settings";
 import DeleteButton from "../Buttons/DeleteButton";
-import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
-import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import { setSortBy } from "../../redux/actions/filterActions";
 
 const styles = {
@@ -76,44 +74,26 @@ function TableHeaderComponent() {
   const filters = useSelector((state) => state.filters);
 
   const arrowIcon = (field) => {
-    switch (field) {
-      case "amount":
-        if (filters.sortBy === "amountLow") {
-          return <ArrowDropUpIcon />;
-        } else if (filters.sortBy === "amountHigh") {
-          return <ArrowDropDownIcon />;
-        } else {
-          return null;
-        }
-      case "createdAt":
-        if (filters.sortBy === "dateNew") {
-          return <ArrowDropUpIcon />;
-        } else if (filters.sortBy === "dateOld") {
-          return <ArrowDropDownIcon />;
-        } else {
-          return null;
-        }
-      default:
-        return;
-    }
+    const SortIcon = config[field]?.[filters.sortBy]?.component;
+    return SortIcon && <SortIcon />;
   };
   const setSort = (field) => {
     switch (field) {
       case "amount":
-        if (filters.sortBy === "") {
-          return dispatch(setSortBy("amountLow"));
-        } else if (filters.sortBy === "amountLow") {
-          return dispatch(setSortBy("amountHigh"));
-        } else {
+        if (filters.sortBy === "amountLow") {
           return dispatch(setSortBy(""));
+        } else if (filters.sortBy === "amountHigh") {
+          return dispatch(setSortBy("amountLow"));
+        } else {
+          return dispatch(setSortBy("amountHigh"));
         }
       case "createdAt":
-        if (filters.sortBy === "") {
-          return dispatch(setSortBy("dateNew"));
+        if (filters.sortBy === "dateOld") {
+          return dispatch(setSortBy(""));
         } else if (filters.sortBy === "dateNew") {
           return dispatch(setSortBy("dateOld"));
         } else {
-          return dispatch(setSortBy(""));
+          return dispatch(setSortBy("dateNew"));
         }
       default:
         return;
@@ -140,7 +120,7 @@ function TableHeaderComponent() {
           <TableCell
             key={head.field}
             align={head.align}
-            sx={head.sort && styles.tableCells}
+            sx={head.sort ? styles.tableCells : {}}
             onClick={() => head.sort && setSort(head.field)}
           >
             <Typography variant="h6" sx={styles.typography}>

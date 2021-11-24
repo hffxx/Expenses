@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Paper, TableContainer, Table, Fade } from "@mui/material";
+import { Paper, TableContainer, Table } from "@mui/material";
 import TableHeaderComponent from "./TableHeaderComponent";
 import TableBodyComponent from "./TableBodyComponent";
 import TablePaginationComponent from "./TablePaginationComponent";

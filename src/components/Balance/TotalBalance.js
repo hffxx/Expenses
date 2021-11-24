@@ -5,7 +5,7 @@ import { Typography } from "@mui/material";
 import CountUp from "react-countup";
 
 const balanceStyle = (total) => {
-  let totalStyle = { marginTop: "10px" };
+  let totalStyle = { marginTop: "10px", transition: "color 1s" };
   if (total > 0) {
     return { ...totalStyle, color: "green" };
   } else if (total < 0) {
@@ -21,10 +21,9 @@ const TotalBalance = () => {
   );
   const total = visibleExpenses
     .map(({ expenseType, amount }) =>
-      expenseType === "Bill" ? Number(-amount) : Number(amount)
+      expenseType === "Bill" ? -amount : amount
     )
-    .reduce((a, amount) => a + amount, 0)
-    .toFixed(2);
+    .reduce((a, amount) => a + amount, 0);
   return (
     <Typography variant="h4" sx={balanceStyle(total)}>
       <CountUp

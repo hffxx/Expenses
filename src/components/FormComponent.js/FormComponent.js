@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { addExpense } from "../redux/actions/expensesActions";
+import { addExpense } from "../../redux/actions/expensesActions";
+import { editExpense } from "../../redux/actions/expensesActions";
 import { useHistory } from "react-router";
 import { LocalizationProvider } from "@mui/lab";
 import DateAdapter from "@mui/lab/AdapterMoment";
@@ -39,17 +40,23 @@ const styles = {
   },
 };
 
-function ExpenseForm({ handleClose }) {
-  const [expense, setExpense] = useState({
-    description: "",
-    note: "",
-    amount: "",
-    createdAt: moment().valueOf(),
-    expenseType: "Bill",
-  });
+function FormComponent(props) {
+  const expenseProps = props.expense;
+  const handleClose = props.handleClose;
+  const getInitState = (expense) => {
+    return {
+      id: expense?.id || "",
+      description: expense?.description || "",
+      amount: Number(expense?.amount) || "",
+      createdAt: expense?.createdAt || moment().valueOf(),
+      note: expense?.note || "",
+      expenseType: expense?.expenseType || "Bill",
+    };
+  };
+
+  const [expense, setExpense] = useState(getInitState(expenseProps));
 
   const [error, setError] = useState("");
-
   useEffect(() => {
     /^\d+(\.\d{1,2})?$/.test(expense.amount) || expense.amount === ""
       ? setError("")
@@ -60,7 +67,9 @@ function ExpenseForm({ handleClose }) {
   const history = useHistory();
 
   const handleAddExpense = () => {
-    dispatch(addExpense(expense));
+    !!props.expense
+      ? dispatch(editExpense(expense.id, expense))
+      : dispatch(addExpense(expense));
     handleClose();
     history.push("/");
   };
@@ -68,11 +77,12 @@ function ExpenseForm({ handleClose }) {
   return (
     <Box>
       <Typography gutterBottom variant="h3" align="center">
-        Add Balance
+        {props.expense ? "Edit Expense" : "Add Expense"}
       </Typography>
       <Grid container alignItems="center" justifyContent="center">
         <Grid item lg={6} sx={styles.inputModal}>
           <TextField
+            value={expense.description}
             label="Description"
             placeholder="Enter an Description"
             variant="outlined"
@@ -102,6 +112,7 @@ function ExpenseForm({ handleClose }) {
         </Grid>
         <Grid item lg={6} sx={styles.inputModal}>
           <TextField
+            value={expense.note}
             label="Note"
             placeholder="Enter a Note"
             variant="outlined"
@@ -156,11 +167,12 @@ function ExpenseForm({ handleClose }) {
             disabled={
               !!error ||
               expense.description === "" ||
+              expense.amount === "" ||
               !moment(expense.createdAt).isValid()
             }
             size="large"
           >
-            Add Balance
+            {!!props.expense ? "Edit Expense" : "Add Expense"}
           </Button>
         </Grid>
       </Grid>
@@ -168,4 +180,4 @@ function ExpenseForm({ handleClose }) {
   );
 }
 
-export default ExpenseForm;
+export default FormComponent;

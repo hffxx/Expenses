@@ -1,5 +1,5 @@
 import React from "react";
-import EditExpenseModal from "../EditExpenseModal";
+import ExpenseModal from "../Modals/ExpenseModal";
 import { Fab } from "@mui/material";
 
 const styles = {
@@ -16,7 +16,7 @@ const styles = {
 function EditButton({ expense }) {
   return (
     <Fab size="small" sx={styles.button} variant="contained">
-      <EditExpenseModal expense={expense} />
+      <ExpenseModal expense={expense} />
     </Fab>
   );
 }
