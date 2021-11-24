@@ -47,7 +47,7 @@ function FormComponent(props) {
     return {
       id: expense?.id || "",
       description: expense?.description || "",
-      amount: expense?.amount || "",
+      amount: Number(expense?.amount) || "",
       createdAt: expense?.createdAt || moment().valueOf(),
       note: expense?.note || "",
       expenseType: expense?.expenseType || "Bill",
@@ -57,11 +57,11 @@ function FormComponent(props) {
   const [expense, setExpense] = useState(getInitState(expenseProps));
 
   const [error, setError] = useState("");
-  //   useEffect(() => {
-  //     /^\d+(\.\d{1,2})?$/.test(expense.amount) || expense.amount === ""
-  //       ? setError("")
-  //       : setError("Number is not valid");
-  //   }, [expense.amount]);
+  useEffect(() => {
+    /^\d+(\.\d{1,2})?$/.test(expense.amount) || expense.amount === ""
+      ? setError("")
+      : setError("Number is not valid");
+  }, [expense.amount]);
 
   const dispatch = useDispatch();
   const history = useHistory();
@@ -99,8 +99,7 @@ function FormComponent(props) {
             variant="outlined"
             onChange={(e) => {
               const { value } = e.target;
-              !isNaN(value) &&
-                setExpense({ ...expense, amount: Number(value) });
+              !isNaN(value) && setExpense({ ...expense, amount: value });
             }}
             value={expense.amount}
             // helperText={error}
@@ -168,6 +167,7 @@ function FormComponent(props) {
             disabled={
               !!error ||
               expense.description === "" ||
+              expense.amount === "" ||
               !moment(expense.createdAt).isValid()
             }
             size="large"

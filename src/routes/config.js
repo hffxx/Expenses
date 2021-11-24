@@ -1,6 +1,6 @@
 import ExpenseDashboardPage from "../components/ExpenseDashboard";
-import LoginPage from "../components/LoginPage";
 import HelpPage from "../components/HelpPage";
+// import NotFoundPage from "../components/NotFoundPage";
 
 export const routeConfig = [
   {
@@ -9,13 +9,9 @@ export const routeConfig = [
     path: "/",
   },
   {
-    component: LoginPage,
-    path: "/login",
-  },
-  {
     component: HelpPage,
     path: "/help",
   },
 
-  //   { exact: false, component: NotFoundPage },
+  // { exact: false, component: NotFoundPage },
 ];

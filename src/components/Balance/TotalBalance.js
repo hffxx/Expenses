@@ -23,8 +23,7 @@ const TotalBalance = () => {
     .map(({ expenseType, amount }) =>
       expenseType === "Bill" ? -amount : amount
     )
-    .reduce((a, amount) => a + amount, 0)
-    .toFixed(2);
+    .reduce((a, amount) => a + amount, 0);
   return (
     <Typography variant="h4" sx={balanceStyle(total)}>
       <CountUp
