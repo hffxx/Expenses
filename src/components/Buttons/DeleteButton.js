@@ -21,6 +21,7 @@ const DeleteButton = () => {
 
   const styles = {
     button: {
+      marginLeft: "10px",
       transition: "0.5s",
       "&:hover": {
         color: "gray",

@@ -1,36 +1,48 @@
-import Modal from "@mui/material/Modal";
-import Box from "@mui/material/Box";
 import React, { useState } from "react";
-import EditIcon from "@mui/icons-material/Edit";
-import FormComponent from "../FormComponent.js/FormComponent";
+import { Modal, Box } from "@mui/material";
+import ExpenseListFilter from "../Pages/ExpenseListFilter";
+import FilterListIcon from "@mui/icons-material/FilterList";
 
 const styles = {
   modalForm: {
     position: "absolute",
-    top: "50%",
+    top: "35%",
     left: "50%",
     transform: "translate(-50%, -50%)",
     width: 400,
     bgcolor: "background.paper",
-    border: "1px solid #000",
     boxShadow: 24,
     p: 4,
     borderRadius: "10px",
+    outline: "none",
   },
   modal: {
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
   },
+  button: {
+    marginRight: "5px",
+    background: "  #258e25",
+    color: "white",
+    transition: "0.5s",
+    "&:hover": {
+      background: "#1a651a",
+    },
+  },
+  gear: {
+    transition: "0.5s",
+    "&:hover": {
+      color: "gray",
+      cursor: "pointer",
+    },
+  },
 };
-
-const EditExpense = (props) => {
-  const expense = props.expense;
+function FiltersModal() {
   const [open, setOpen] = useState(false);
-  const handleClose = () => setOpen(false);
   return (
     <Box sx={styles.modal}>
-      <EditIcon onClick={() => setOpen(true)} />
+      <FilterListIcon sx={styles.gear} onClick={() => setOpen(true)} />
       <Modal
         open={open}
         onClose={() => setOpen(false)}
@@ -38,11 +50,11 @@ const EditExpense = (props) => {
         aria-describedby="modal-modal-description"
       >
         <Box sx={styles.modalForm}>
-          <FormComponent handleClose={handleClose} expense={expense} />
+          <ExpenseListFilter />
         </Box>
       </Modal>
     </Box>
   );
-};
+}
 
-export default EditExpense;
+export default FiltersModal;

@@ -4,6 +4,6 @@ export const defaultFilterState = {
   sortBy: "",
   startDate: null,
   endDate: null,
-  expensesType: "",
+  expensesType: "all",
 };
 export const defaultDeleteListState = [];
