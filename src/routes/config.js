@@ -1,5 +1,5 @@
-import ExpenseDashboardPage from "../components/ExpenseDashboard";
-import HelpPage from "../components/HelpPage";
+import ExpenseDashboardPage from "../components/Pages/ExpenseDashboard";
+import HelpPage from "../components/Pages/HelpPage";
 // import NotFoundPage from "../components/NotFoundPage";
 
 export const routeConfig = [

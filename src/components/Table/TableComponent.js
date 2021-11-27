@@ -16,7 +16,7 @@ function TableComponent() {
     getVisibleExpenses(state.expenses.present, state.filters)
   );
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
 
   const handleChangeRowsPerPage = (e) => {
     setRowsPerPage(Number(e.target.value));

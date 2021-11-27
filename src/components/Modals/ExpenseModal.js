@@ -7,12 +7,12 @@ import FormComponent from "../FormComponent.js/FormComponent";
 const styles = {
   modalForm: {
     position: "absolute",
-    top: "50%",
+    top: "35%",
     left: "50%",
     transform: "translate(-50%, -50%)",
     width: 400,
     bgcolor: "background.paper",
-    border: "1px solid #000",
+    outline: "none",
     boxShadow: 24,
     p: 4,
     borderRadius: "10px",
@@ -43,12 +43,13 @@ const ExpenseModal = (props) => {
         <EditIcon onClick={() => setOpen(true)} />
       ) : (
         <Fab
+          disableRipple={true}
           onClick={() => setOpen(true)}
           variant="extended"
           sx={styles.button}
         >
           <AddIcon />
-          <Typography variant="string">Add Expense</Typography>
+          <Typography variant="string">Add</Typography>
         </Fab>
       )}
       <Modal

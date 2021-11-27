@@ -47,7 +47,7 @@ function FormComponent(props) {
     return {
       id: expense?.id || "",
       description: expense?.description || "",
-      amount: Number(expense?.amount) || "",
+      amount: expense?.amount || "",
       createdAt: expense?.createdAt || moment().valueOf(),
       note: expense?.note || "",
       expenseType: expense?.expenseType || "Bill",
@@ -102,9 +102,8 @@ function FormComponent(props) {
               !isNaN(value) && setExpense({ ...expense, amount: value });
             }}
             value={expense.amount}
-            // helperText={error}
             error={!!error}
-            inputProps={{ maxLength: 10 }}
+            inputProps={{ maxLength: 15 }}
             InputProps={{
               endAdornment: <span>$</span>,
             }}
@@ -117,7 +116,7 @@ function FormComponent(props) {
             placeholder="Enter a Note"
             variant="outlined"
             onChange={(e) => setExpense({ ...expense, note: e.target.value })}
-            inputProps={{ maxLength: 10 }}
+            inputProps={{ maxLength: 15 }}
           ></TextField>
         </Grid>
         <Grid item lg={6} sx={styles.inputModal}>
@@ -130,7 +129,7 @@ function FormComponent(props) {
                       ...expense,
                       createdAt: date.valueOf(),
                     })
-                  : setExpense({ ...expense, createdAt: "" });
+                  : setExpense({ ...expense, createdAt: null });
               }}
               renderInput={(params) => <TextField {...params} />}
             />

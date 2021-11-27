@@ -14,9 +14,9 @@ import {
   Box,
 } from "@mui/material";
 import { heads, config } from "./config";
-import SettingsIcon from "@mui/icons-material/Settings";
 import DeleteButton from "../Buttons/DeleteButton";
 import { setSortBy } from "../../redux/actions/filterActions";
+import FiltersModal from "../Modals/FiltersModal";
 
 const styles = {
   firstRow: {
@@ -33,13 +33,6 @@ const styles = {
     display: "flex",
     justifyContent: "flex-end",
     alignItems: "center",
-  },
-  gear: {
-    transition: "0.5s",
-    "&:hover": {
-      color: "gray",
-      cursor: "pointer",
-    },
   },
   lastRow: {
     width: "20px",
@@ -74,7 +67,7 @@ function TableHeaderComponent() {
   const filters = useSelector((state) => state.filters);
 
   const arrowIcon = (field) => {
-    const SortIcon = config[field]?.[filters.sortBy]?.component;
+    let SortIcon = config[field]?.[filters.sortBy]?.component;
     return SortIcon && <SortIcon />;
   };
   const setSort = (field) => {
@@ -131,11 +124,8 @@ function TableHeaderComponent() {
         ))}
         <TableCell align="right" sx={styles.lastRow}>
           <Box sx={styles.settings}>
-            {visibleDeleteList.length > 0 ? (
-              <DeleteButton />
-            ) : (
-              <SettingsIcon sx={styles.gear} />
-            )}
+            <FiltersModal />
+            {visibleDeleteList.length > 0 && <DeleteButton />}
           </Box>
         </TableCell>
       </TableRow>

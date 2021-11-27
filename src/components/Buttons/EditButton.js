@@ -15,7 +15,12 @@ const styles = {
 
 function EditButton({ expense }) {
   return (
-    <Fab size="small" sx={styles.button} variant="contained">
+    <Fab
+      disableRipple={true}
+      size="small"
+      sx={styles.button}
+      variant="contained"
+    >
       <ExpenseModal expense={expense} />
     </Fab>
   );

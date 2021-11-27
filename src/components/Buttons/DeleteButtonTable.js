@@ -21,6 +21,7 @@ function DeleteButtonTable({ id }) {
   const dispatch = useDispatch();
   return (
     <Fab
+      disableRipple={true}
       size="small"
       sx={styles.button}
       onClick={() => {
