@@ -9,10 +9,11 @@ import DeleteIcon from "@mui/icons-material/Delete";
 const DeleteButton = () => {
   const dispatch = useDispatch();
 
-  const deleteList = useSelector((state) => state.deleteList);
-  const visibleExpenses = useSelector((state) =>
-    getVisibleExpenses(state.expenses.present, state.filters)
-  );
+  const { deleteList, visibleExpenses } = useSelector((state) => ({
+    deleteList: state.deleteList,
+    visibleExpenses: getVisibleExpenses(state.expenses.present, state.filters),
+  }));
+
   const visibleExpensesIds = visibleExpenses.map((expense) => expense.id);
 
   const deleteListFiltered = deleteList.filter((el) =>
@@ -30,18 +31,15 @@ const DeleteButton = () => {
     },
   };
 
-  return (
-    <DeleteIcon
-      sx={styles.button}
-      onClick={() => {
-        dispatch(removeFromDeleteList(deleteListFiltered));
-        dispatch(removeExpense(deleteListFiltered));
-        if (visibleExpensesIds.length === deleteListFiltered.length) {
-          dispatch(reset());
-        }
-      }}
-    />
-  );
+  const onDeleteClick = () => {
+    dispatch(removeFromDeleteList(deleteListFiltered));
+    dispatch(removeExpense(deleteListFiltered));
+    if (visibleExpensesIds.length === deleteListFiltered.length) {
+      dispatch(reset());
+    }
+  };
+
+  return <DeleteIcon sx={styles.button} onClick={onDeleteClick} />;
 };
 
 export default DeleteButton;

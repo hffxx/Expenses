@@ -40,34 +40,33 @@ const styles = {
   },
 };
 
-function FormComponent(props) {
-  const expenseProps = props.expense;
-  const handleClose = props.handleClose;
-  const getInitState = (expense) => {
-    return {
-      id: expense?.id || "",
-      description: expense?.description || "",
-      amount: expense?.amount || "",
-      createdAt: expense?.createdAt || moment().valueOf(),
-      note: expense?.note || "",
-      expenseType: expense?.expenseType || "Bill",
-    };
+const getInitState = (expense) => {
+  return {
+    id: expense?.id || "",
+    description: expense?.description || "",
+    amount: expense?.amount || "",
+    createdAt: expense?.createdAt || moment().valueOf(),
+    note: expense?.note || "",
+    expenseType: expense?.expenseType || "Bill",
   };
+};
 
+function FormComponent(props) {
+  const { handleClose, expense: expenseProps } = props;
+  const isEdit = !!props.expense;
+  const dispatch = useDispatch();
+  const history = useHistory();
   const [expense, setExpense] = useState(getInitState(expenseProps));
-
   const [error, setError] = useState("");
+
   useEffect(() => {
-    /^\d+(\.\d{1,2})?$/.test(expense.amount) || expense.amount === ""
+    expense.amount === "" || /^\d+(\.\d{1,2})?$/.test(expense.amount)
       ? setError("")
       : setError("Number is not valid");
   }, [expense.amount]);
 
-  const dispatch = useDispatch();
-  const history = useHistory();
-
   const handleAddExpense = () => {
-    !!props.expense
+    isEdit
       ? dispatch(editExpense(expense.id, expense))
       : dispatch(addExpense(expense));
     handleClose();
@@ -77,7 +76,7 @@ function FormComponent(props) {
   return (
     <Box>
       <Typography gutterBottom variant="h3" align="center">
-        {props.expense ? "Edit Expense" : "Add Expense"}
+        {isEdit ? "Edit Expense" : "Add Expense"}
       </Typography>
       <Grid container alignItems="center" justifyContent="center">
         <Grid item lg={6} sx={styles.inputModal}>
@@ -171,7 +170,7 @@ function FormComponent(props) {
             }
             size="large"
           >
-            {!!props.expense ? "Edit Expense" : "Add Expense"}
+            {isEdit ? "Edit Expense" : "Add Expense"}
           </Button>
         </Grid>
       </Grid>

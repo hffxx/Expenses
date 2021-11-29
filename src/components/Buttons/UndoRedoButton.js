@@ -24,8 +24,12 @@ const styles = {
 function UndoRedoButton(props) {
   const { type } = props;
   const dispatch = useDispatch();
-  const expensesFuture = useSelector((state) => state.expenses.future);
-  const expensesPast = useSelector((state) => state.expenses.past);
+
+  const { expensesFuture, expensesPast } = useSelector((state) => ({
+    expensesFuture: state.expenses.future,
+    expensesPast: state.expenses.past,
+  }));
+
   return (
     <Fab
       disableRipple={true}
@@ -33,16 +37,16 @@ function UndoRedoButton(props) {
       sx={styles.undoRedo}
       onClick={() => {
         dispatch(clearDeleteList());
-        type === "Undo" && dispatch(ActionCreators.undo());
-        type === "Redo" && dispatch(ActionCreators.redo());
+        // TODO mozna to zapisac tak jesli bedzie type z malych liter
+        //dispatch(ActionCreators[type]())
+        dispatch(ActionCreators[type]());
       }}
       disabled={
-        (type === "Undo" && expensesPast.length === 0) ||
-        (type === "Redo" && expensesFuture.length === 0)
+        (type === "undo" && expensesPast.length === 0) ||
+        (type === "redo" && expensesFuture.length === 0)
       }
     >
-      {(type === "Undo" && <UndoIcon></UndoIcon>) ||
-        (type === "Redo" && <RedoIcon></RedoIcon>)}
+      {(type === "undo" && <UndoIcon />) || (type === "redo" && <RedoIcon />)}
     </Fab>
   );
 }

@@ -23,7 +23,6 @@ const styles = {
     justifyContent: "center",
   },
   button: {
-    marginRight: "5px",
     background: "  #258e25",
     color: "white",
     transition: "0.5s",
@@ -37,9 +36,12 @@ const ExpenseModal = (props) => {
   const expense = props.expense;
   const [open, setOpen] = useState(false);
   const handleClose = () => setOpen(false);
+
+  const isEdit = !!expense;
+
   return (
-    <Box sx={!!expense ? styles.modal : {}}>
-      {!!expense ? (
+    <Box sx={isEdit ? styles.modal : {}}>
+      {isEdit ? (
         <EditIcon onClick={() => setOpen(true)} />
       ) : (
         <Fab

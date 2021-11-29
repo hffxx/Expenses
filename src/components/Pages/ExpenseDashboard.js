@@ -15,17 +15,19 @@ const styles = {
   },
 };
 
+const updateExpensesLocalStorage = (state) => {
+  localStorage.setItem(LS_EXPENSE, JSON.stringify(state));
+};
+
 const ExpenseDashboardPage = () => {
   const [isOpen, toggleView] = useState(false);
 
   const expenses = useSelector((state) => state.expenses.present);
 
   useEffect(() => {
-    const updateExpensesLocalStorage = (state) => {
-      localStorage.setItem(LS_EXPENSE, JSON.stringify(state));
-    };
     updateExpensesLocalStorage(expenses);
   }, [expenses]);
+
   return (
     <Grid container sx={styles.display} spacing={2}>
       <Grid item xs={3}>
