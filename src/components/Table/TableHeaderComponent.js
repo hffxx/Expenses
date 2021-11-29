@@ -46,17 +46,20 @@ const styles = {
 
 function TableHeaderComponent() {
   const dispatch = useDispatch();
-  const visibleExpenses = useSelector((state) =>
-    getVisibleExpenses(state.expenses.present, state.filters)
-  );
-  const deleteList = useSelector((state) => state.deleteList);
+
+  const { visibleExpenses, deleteList } = useSelector((state) => ({
+    visibleExpenses: getVisibleExpenses(state.expenses.present, state.filters),
+    deleteList: state.deleteList,
+  }));
   const deleteListAll = visibleExpenses.map((expense) => expense.id);
+
   const deleteListMissingIdList = deleteListAll.filter(
     (id) => !deleteList.includes(id)
   );
   const visibleDeleteList = deleteList.filter((el) =>
     deleteListAll.includes(el)
   );
+
   const handleCheckBoxAll = () => {
     if (visibleDeleteList.length === visibleExpenses.length) {
       dispatch(removeFromDeleteList(visibleDeleteList));
@@ -70,6 +73,7 @@ function TableHeaderComponent() {
     let SortIcon = config[field]?.[filters.sortBy]?.component;
     return SortIcon && <SortIcon />;
   };
+
   const setSort = (field) => {
     switch (field) {
       case "amount":
@@ -124,8 +128,8 @@ function TableHeaderComponent() {
         ))}
         <TableCell align="right" sx={styles.lastRow}>
           <Box sx={styles.settings}>
-            <FiltersModal />
             {visibleDeleteList.length > 0 && <DeleteButton />}
+            <FiltersModal />
           </Box>
         </TableCell>
       </TableRow>

@@ -18,7 +18,9 @@ import {
   setEndDate,
   setStartDate,
   setExpensesType,
+  setTextFilter,
 } from "../../redux/actions/filterActions";
+import ResetFilter from "../Buttons/ResetFilter";
 
 const styles = {
   filterList: {
@@ -43,6 +45,7 @@ const ExpenseListFilter = () => {
       <Typography gutterBottom variant="h3" align="center">
         Filters
       </Typography>
+
       <Grid item lg={6} sx={styles.filterListItem}>
         <FormControl component="fieldset">
           <FormLabel
@@ -79,6 +82,18 @@ const ExpenseListFilter = () => {
           </RadioGroup>
         </FormControl>
       </Grid>
+      <Grid item lg={6} sx={styles.filterListItem}>
+        <TextField
+          sx={styles.filter}
+          id="outlined-basic"
+          label="Title filter"
+          variant="outlined"
+          value={filtersState.description}
+          onChange={(e) => {
+            dispatch(setTextFilter(e.target.value));
+          }}
+        ></TextField>
+      </Grid>
       <LocalizationProvider dateAdapter={DateAdapter}>
         <Grid item lg={6} sx={styles.filterListItem}>
           <DatePicker
@@ -106,6 +121,10 @@ const ExpenseListFilter = () => {
           />
         </Grid>
       </LocalizationProvider>
+
+      <Grid item lg={6} sx={styles.filterListItem}>
+        <ResetFilter />
+      </Grid>
     </Box>
   );
 };

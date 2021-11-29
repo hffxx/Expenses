@@ -7,7 +7,7 @@ const getSortConditional = (value1, value2, isTrue) => {
 
 const getVisibleExpenses = (
   expenses,
-  { description, sortBy, startDate, endDate, expensesType }
+  { description = "", sortBy, startDate, endDate, expensesType }
 ) => {
   const filterFunc = (expense) => {
     const startDateMatch =

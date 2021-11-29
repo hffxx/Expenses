@@ -15,9 +15,9 @@ const styles = {
 function ButtonsComponent() {
   return (
     <Container sx={styles.container}>
-      <UndoRedoButton type={"Undo"} />
+      <UndoRedoButton type={"undo"} />
       <ExpenseModal />
-      <UndoRedoButton type={"Redo"} />
+      <UndoRedoButton type={"redo"} />
     </Container>
   );
 }

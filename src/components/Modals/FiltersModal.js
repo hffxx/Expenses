@@ -1,7 +1,9 @@
 import React, { useState } from "react";
-import { Modal, Box } from "@mui/material";
+import { useSelector } from "react-redux";
+import { Modal, Box, Badge } from "@mui/material";
 import ExpenseListFilter from "../Pages/ExpenseListFilter";
 import FilterListIcon from "@mui/icons-material/FilterList";
+import { defaultFilterState } from "../../redux/defaultState/defaultState";
 
 const styles = {
   modalForm: {
@@ -22,7 +24,6 @@ const styles = {
     justifyContent: "center",
   },
   button: {
-    marginRight: "5px",
     background: "  #258e25",
     color: "white",
     transition: "0.5s",
@@ -31,6 +32,7 @@ const styles = {
     },
   },
   gear: {
+    marginLeft: " 5px",
     transition: "0.5s",
     "&:hover": {
       color: "gray",
@@ -39,10 +41,18 @@ const styles = {
   },
 };
 function FiltersModal() {
+  const filtersState = useSelector((state) => state.filters);
   const [open, setOpen] = useState(false);
+
+  const invisible = () =>
+    JSON.stringify(defaultFilterState) === JSON.stringify(filtersState);
+
+  console.log(invisible());
   return (
     <Box sx={styles.modal}>
-      <FilterListIcon sx={styles.gear} onClick={() => setOpen(true)} />
+      <Badge color="primary" variant="dot" invisible={invisible()}>
+        <FilterListIcon sx={styles.gear} onClick={() => setOpen(true)} />
+      </Badge>
       <Modal
         open={open}
         onClose={() => setOpen(false)}
