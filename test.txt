@@ -1,9 +1,0 @@
-Redux hooks
-https://react-redux.js.org/api/hooks
-
-Hooki react router
-
-
-// Stworzyc dispatcher getPosts, a w nim call do api (w try/catch), jesli ok to wywolaj akcje updatePost, a w przeciwnym razie dispatchuj pusta liste
-// W komponencie gdzie korzystasz z tych postow, czytaj je ze store
-// mozna dodac parametr loading
