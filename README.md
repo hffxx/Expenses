@@ -1,8 +1,12 @@
 ## Table of contents
-
+- [Quick Start](#quick-start)
 - [General info](#general-info)
 - [Technologies](#technologies)
 - [Setup](#setup)
+
+## Quick start
+
+https://codesandbox.io/s/github/hffxx/Expenses
 
 ## General info
 
