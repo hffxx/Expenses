@@ -3,6 +3,7 @@
 - [General info](#general-info)
 - [Technologies](#technologies)
 - [Setup](#setup)
+- [Todo](#todo)
 
 ## Quick start
 
@@ -35,3 +36,6 @@ $ cd ../expenses
 $ npm install
 $ npm start
 ```
+## Todo
+
+- Responsive design
