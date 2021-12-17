@@ -47,7 +47,6 @@ function FiltersModal() {
   const invisible = () =>
     JSON.stringify(defaultFilterState) === JSON.stringify(filtersState);
 
-  console.log(invisible());
   return (
     <Box sx={styles.modal}>
       <Badge color="primary" variant="dot" invisible={invisible()}>
